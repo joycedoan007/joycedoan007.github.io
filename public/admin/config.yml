@@ -1,0 +1,74 @@
+# Decap CMS config for Joyce Doan portfolio
+# For Netlify: set backend to git-gateway and enable Identity + Git Gateway in Netlify UI
+# For local dev: run `npx decap-server` and use the proxy backend
+
+backend:
+  # --- Production (Netlify) ---
+  # name: git-gateway
+  # branch: main
+
+  # --- Local dev ---
+  name: proxy
+  proxy_url: http://localhost:8081/api/v1
+
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  # ─── Case studies / work ──────────────────────────────────────────────────
+  - name: work
+    label: Case Studies
+    folder: src/content/work
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { name: id, label: ID, widget: string, hint: "Unique slug, e.g. helio" }
+      - { name: title, label: Title, widget: string }
+      - { name: tag, label: Category tag, widget: string, hint: "e.g. Analytics platform" }
+      - { name: year, label: Year, widget: string }
+      - { name: role, label: Role, widget: string }
+      - { name: size, label: Team / duration, widget: string, hint: "e.g. 6 mo · 3 engs" }
+      - name: accent
+        label: Accent color
+        widget: select
+        options: [green, dark, gray]
+        default: dark
+      - { name: order, label: Display order, widget: number, default: 99 }
+      - name: featured
+        label: Featured (deep dive)
+        widget: boolean
+        default: false
+        required: false
+      - { name: summary, label: Summary headline, widget: string }
+      - { name: problem, label: Problem, widget: text }
+      - { name: approach, label: Approach, widget: text }
+      - { name: outcome, label: Outcome, widget: text }
+      - name: metrics
+        label: Metrics
+        widget: list
+        min: 1
+        max: 4
+        fields:
+          - { name: value, label: Value, widget: string, hint: "e.g. 71%" }
+          - { name: label, label: Label, widget: string, hint: "e.g. Faster time-to-insight" }
+      - name: body
+        label: Body (optional extended content)
+        widget: markdown
+        required: false
+
+  # ─── Writing / notes ──────────────────────────────────────────────────────
+  - name: writing
+    label: Writing
+    folder: src/content/writing
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: date, label: Date, widget: string, hint: "YYYY-MM-DD" }
+      - { name: readTime, label: Read time, widget: string, hint: "e.g. 8 min read" }
+      - { name: description, label: Description, widget: text }
+      - { name: notionUrl, label: Notion URL, widget: string }

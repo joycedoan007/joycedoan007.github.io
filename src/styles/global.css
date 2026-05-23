@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Abc design tokens — dark-mode native ─── */
+:root {
+  --bg-page:     #0B0E12;
+  --bg-surface:  #131920;
+  --bg-elevated: #1C2028;
+  --bg-hover:    #1E2530;
+
+  --text-bright:    #FFFFFF;
+  --text-primary:   #D4D4D5;
+  --text-secondary: #BABABB;
+  --text-disabled:  #6E6E70;
+  --text-accent:    #00D892;
+  --text-inverse:   #0B0E12;
+
+  --border-subtle:  rgba(255, 255, 255, 0.10);
+  --border-default: rgba(255, 255, 255, 0.18);
+  --border-strong:  rgba(255, 255, 255, 0.35);
+
+  --primary-500: #00D892;
+  --primary-700: #00A86B;
+
+  --radius-sm:   2px;
+  --radius-md:   4px;
+  --radius-lg:   8px;
+  --radius-xl:   12px;
+  --radius-full: 9999px;
+}
+
+/* ─── Light-mode overrides ─── */
+[data-theme="light"] {
+  --bg-page:     #F4F2EE;
+  --bg-surface:  #ECEAE4;
+  --bg-elevated: #E2DFD8;
+  --bg-hover:    #D9D5CC;
+
+  --text-bright:    #0B0E12;
+  --text-primary:   #3A3A3C;
+  --text-secondary: #6E6E70;
+  --text-disabled:  #9A9A9C;
+  --text-accent:    #007A3D;
+  --text-inverse:   #FFFFFF;
+
+  --border-subtle:  #C9D9CF;
+  --border-default: #B5B0A4;
+  --border-strong:  #0B0E12;
+
+  --primary-500: #00B871;
+  --primary-700: #007A3D;
+}
+
+/* ─── Base ─── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  font-family: 'Inter Tight', Inter, ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--primary-500);
+  color: var(--text-inverse);
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb {
+  background: var(--bg-elevated);
+  border-radius: 4px;
+}
+
+/* ─── Overline label ─── */
+.overline {
+  font: 500 11px / 16px 'JetBrains Mono', 'Inter Tight', monospace;
+  color: var(--text-secondary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ─── Scroll-reveal ─── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 700ms cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms),
+    transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms);
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}

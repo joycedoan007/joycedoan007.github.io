@@ -1,0 +1,79 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'Joyce Doan — UI/UX Designer',
+  description = 'UI/UX designer focused on data-driven products. Dashboards, complex interfaces, AI. Currently at Consortia Group.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description} />
+  <title>{title}</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Phosphor Icons -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css"
+  />
+
+  <style>
+    /* Prevent FOUC for dark/light theme */
+  </style>
+</head>
+<body>
+  <slot />
+
+  <!-- Theme persistence: runs before React hydrates -->
+  <script is:inline>
+    (function () {
+      var saved = typeof localStorage !== 'undefined' && localStorage.getItem('theme');
+      document.documentElement.setAttribute('data-theme', saved === 'light' ? 'light' : 'dark');
+    })();
+  </script>
+
+  <!-- Scroll-reveal watcher -->
+  <script>
+    function initReveal() {
+      const els = document.querySelectorAll('[data-reveal]');
+      if (!els.length) return;
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-visible');
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+      );
+      els.forEach((el) => io.observe(el));
+    }
+    // Run after DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initReveal);
+    } else {
+      initReveal();
+    }
+  </script>
+</body>
+</html>

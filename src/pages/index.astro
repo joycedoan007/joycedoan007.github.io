@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Marquee from '../components/Marquee.astro';
+import WorkPortfolio from '../components/WorkPortfolio';
+import About from '../components/About.astro';
+import Services from '../components/Services.astro';
+import Writing from '../components/Writing.astro';
+import Contact from '../components/Contact';
+import Footer from '../components/Footer.astro';
+import CustomCursor from '../components/CustomCursor';
+import '../styles/global.css';
+import { getCollection } from 'astro:content';
+
+const workEntries = await getCollection('work');
+const writingEntries = await getCollection('writing');
+
+const workItems = workEntries
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
+  .map((e) => e.data);
+
+const writingItems = writingEntries
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .map((e) => e.data);
+
+const featuredId = 'helio';
+
+const SITE = {
+  name: 'Joyce Doan',
+  role: 'UI/UX Designer',
+  company: 'Consortia Group',
+  email: 'joyce@joycedoan.com',
+  socials: [
+    { label: 'LinkedIn', icon: 'linkedin-logo', href: 'https://linkedin.com/in/joycedoan007' },
+    { label: 'X', icon: 'x-logo', href: 'https://x.com/joycedoan007' },
+    { label: 'Instagram', icon: 'instagram-logo', href: 'https://instagram.com/joycedoan007' },
+    { label: 'Notion', icon: 'notion-logo', href: 'https://joycedoan.notion.site' },
+  ],
+  stats: [
+    { n: '5 yrs', l: 'Designing software' },
+    { n: '30+', l: 'Shipped projects' },
+    { n: '08', l: 'Dashboards built' },
+    { n: '∞', l: 'Pixels nudged' },
+  ],
+};
+---
+
+<Layout title="Joyce Doan — UI/UX Designer" description="UI/UX designer focused on data-driven products. Dashboards, complex interfaces, AI.">
+  <CustomCursor client:load />
+  <Header />
+  <main>
+    <Hero stats={SITE.stats} company={SITE.company} />
+    <Marquee />
+    <WorkPortfolio
+      client:load
+      workItemsJson={JSON.stringify(workItems)}
+      featuredId={featuredId}
+    />
+    <About role={SITE.role} company={SITE.company} />
+    <Services />
+    <Writing items={writingItems} />
+    <Contact
+      client:load
+      email={SITE.email}
+      socials={SITE.socials}
+    />
+  </main>
+  <Footer />
+</Layout>

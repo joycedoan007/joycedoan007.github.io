@@ -1,0 +1,95 @@
+---
+interface WritingItem {
+  title: string;
+  date: string;
+  readTime: string;
+  description: string;
+  notionUrl: string;
+}
+interface Props {
+  items: WritingItem[];
+}
+const { items } = Astro.props;
+---
+
+<section id="writing" style="border-bottom: 1px solid var(--border-subtle);">
+  <div style="max-width: 1320px; margin: 0 auto; padding: 96px 48px;">
+    <div
+      data-reveal
+      style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; padding-bottom: 24px; border-bottom: 1px solid var(--border-subtle);"
+    >
+      <div>
+        <div class="overline" style="margin-bottom: 12px;">05 · Writing · From my Notion</div>
+        <h2
+          style="font: 500 64px/0.96 'Inter Tight', sans-serif; letter-spacing: -0.03em; color: var(--text-bright); margin: 0;"
+        >
+          Notes on the craft.
+        </h2>
+      </div>
+      <a
+        href="https://joycedoan.notion.site"
+        target="_blank"
+        rel="noopener"
+        data-cursor="hover"
+        style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: var(--radius-full); border: 1px solid var(--border-subtle); background: var(--bg-surface); color: var(--text-bright); text-decoration: none; font: 500 13px/20px 'Inter Tight', sans-serif;"
+      >
+        <i class="ph ph-notion-logo" style="font-size: 16px;"></i> Read on Notion
+        <i class="ph-bold ph-arrow-up-right" style="font-size: 13px;"></i>
+      </a>
+    </div>
+
+    {
+      items.map((w, i) => (
+        <a
+          href={w.notionUrl}
+          target="_blank"
+          rel="noopener"
+          data-cursor="hover"
+          data-reveal
+          style={`--reveal-delay: ${i * 40}ms; display: grid; grid-template-columns: 64px 200px 1fr 200px 32px; gap: 32px; align-items: center; padding: 28px 0; border-bottom: 1px solid var(--border-subtle); text-decoration: none; color: inherit; transition: background 200ms ease, padding 200ms ease;`}
+          class="writing-row"
+        >
+          <span
+            style="font: 500 14px/18px 'JetBrains Mono', monospace; color: var(--text-secondary);"
+          >
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <span
+            style="font: 500 13px/20px 'JetBrains Mono', monospace; color: var(--text-secondary);"
+          >
+            {new Date(w.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })} · {w.readTime}
+          </span>
+          <h3
+            style="font: 500 24px/30px 'Inter Tight', sans-serif; letter-spacing: -0.015em; color: var(--text-bright); margin: 0;"
+          >
+            {w.title}
+          </h3>
+          <p
+            style="font: 400 14px/20px 'Inter Tight', sans-serif; color: var(--text-primary); margin: 0;"
+          >
+            {w.description}
+          </p>
+          <i
+            class="ph-bold ph-arrow-up-right"
+            style="font-size: 18px; color: var(--text-secondary);"
+          />
+        </a>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.writing-row').forEach((el) => {
+    el.addEventListener('mouseenter', () => {
+      (el as HTMLElement).style.background = 'var(--bg-surface)';
+      (el as HTMLElement).style.paddingLeft = '16px';
+      (el as HTMLElement).style.paddingRight = '16px';
+    });
+    el.addEventListener('mouseleave', () => {
+      (el as HTMLElement).style.background = 'transparent';
+      (el as HTMLElement).style.paddingLeft = '0';
+      (el as HTMLElement).style.paddingRight = '0';
+    });
+  });
+</script>

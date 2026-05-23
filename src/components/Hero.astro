@@ -1,0 +1,119 @@
+---
+interface Props {
+  stats: { n: string; l: string }[];
+  company: string;
+}
+const { stats, company } = Astro.props;
+---
+
+<section id="top" style="border-bottom: 1px solid var(--border-subtle);">
+  <div style="max-width: 1320px; margin: 0 auto; padding: 64px 48px 48px;">
+    <!-- Eyebrow row -->
+    <div
+      style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 32px; margin-bottom: 56px; border-bottom: 1px solid var(--border-subtle); font: 500 12px/16px 'JetBrains Mono', monospace; color: var(--text-secondary);"
+    >
+      <span>Portfolio · 2022 — 2026</span>
+      <span>Edition 04</span>
+      <span>San Francisco / Remote</span>
+      <span id="hero-date"></span>
+    </div>
+
+    <!-- Name + info grid -->
+    <div style="display: grid; grid-template-columns: 1fr 320px; gap: 64px; align-items: flex-end;">
+      <!-- Big name -->
+      <div data-reveal>
+        <div class="overline" style="margin-bottom: 24px;">UI/UX Designer · {company}</div>
+        <h1
+          style="font: 500 clamp(96px, 13.5vw, 200px)/0.86 'Inter Tight', sans-serif; letter-spacing: -0.05em; color: var(--text-bright); margin: 0; text-wrap: balance;"
+        >
+          Joyce<br />Doan<span style="color: var(--text-accent);">.</span>
+        </h1>
+      </div>
+
+      <!-- Info column -->
+      <div data-reveal style="--reveal-delay: 120ms;">
+        <div style="display: flex; flex-direction: column; gap: 24px; padding-bottom: 12px;">
+          <p
+            style="font: 400 18px/28px 'Inter Tight', sans-serif; color: var(--text-primary); margin: 0;"
+          >
+            Designs dashboards and complex interfaces where clarity matters more than decoration.
+            Currently exploring the intersection of AI, UX, and product design.
+          </p>
+          <!-- Key-value pairs -->
+          <div
+            style="display: flex; flex-direction: column; gap: 12px; font: 500 13px/20px 'JetBrains Mono', monospace;"
+          >
+            {
+              [
+                ['Role', 'Senior UI/UX Designer'],
+                ['Co.', company],
+                ['Focus', 'Data UX · AI · Systems'],
+                ['Avail.', 'Select work Q3 2026'],
+              ].map(([k, v]) => (
+                <div
+                  style="display: grid; grid-template-columns: 64px 1fr; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);"
+                >
+                  <span style="color: var(--text-secondary);">{k}</span>
+                  <span style="color: var(--text-bright);">{v}</span>
+                </div>
+              ))
+            }
+          </div>
+          <!-- CTAs -->
+          <div style="display: flex; gap: 8px;">
+            <a
+              href="#work"
+              data-cursor="hover"
+              style="flex: 1; height: 44px; padding: 10px 16px; background: var(--primary-500); color: var(--text-inverse); border-radius: var(--radius-md); font: 600 14px/20px 'Inter Tight', sans-serif; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;"
+            >
+              See the work <i class="ph-bold ph-arrow-right" style="font-size: 14px;"></i>
+            </a>
+            <a
+              href="#contact"
+              data-cursor="hover"
+              style="height: 44px; width: 44px; border: 1px solid var(--border-default); color: var(--text-bright); border-radius: var(--radius-md); display: inline-flex; align-items: center; justify-content: center;"
+            >
+              <i class="ph ph-paper-plane-tilt" style="font-size: 16px;"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats row -->
+    <div
+      data-reveal
+      style="--reveal-delay: 200ms; margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--border-subtle); display: grid; grid-template-columns: repeat(4, 1fr);"
+    >
+      {
+        stats.map((s, i) => (
+          <div
+            style={`padding-left: ${i > 0 ? '24px' : '0'}; border-left: ${i > 0 ? '1px solid var(--border-subtle)' : 'none'};`}
+          >
+            <div
+              style="font: 500 13px/18px 'JetBrains Mono', monospace; color: var(--text-secondary); margin-bottom: 8px;"
+            >
+              {String(i + 1).padStart(2, '0')} · {s.l}
+            </div>
+            <div
+              style="font: 500 56px/60px 'Inter Tight', sans-serif; letter-spacing: -0.03em; color: var(--text-bright);"
+            >
+              {s.n}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const el = document.getElementById('hero-date');
+  if (el) {
+    el.textContent = new Date().toLocaleDateString('en-US', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    });
+  }
+</script>

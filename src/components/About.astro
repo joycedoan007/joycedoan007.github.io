@@ -1,0 +1,59 @@
+---
+interface Props {
+  role: string;
+  company: string;
+}
+const { role, company } = Astro.props;
+---
+
+<section id="about" style="border-bottom: 1px solid var(--border-subtle);">
+  <div style="max-width: 1320px; margin: 0 auto; padding: 96px 48px;">
+    <div
+      data-reveal
+      class="overline"
+      style="margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border-subtle);"
+    >
+      03 · About
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: flex-start;">
+      <div data-reveal>
+        <h2
+          style="font: 500 64px/0.96 'Inter Tight', sans-serif; letter-spacing: -0.03em; color: var(--text-bright); margin: 0; text-wrap: balance;"
+        >
+          I design tools that respect their users' time and intelligence.
+        </h2>
+      </div>
+      <div data-reveal style="--reveal-delay: 120ms; display: flex; flex-direction: column; gap: 20px;">
+        <p style="font: 400 19px/30px 'Inter Tight', sans-serif; color: var(--text-primary); margin: 0;">
+          I'm a UI/UX designer focused on data-driven products. I design dashboards and complex
+          interfaces where clarity matters more than decoration.
+        </p>
+        <p style="font: 400 19px/30px 'Inter Tight', sans-serif; color: var(--text-primary); margin: 0;">
+          Currently exploring the intersection of AI, UX, and product design — figuring out how
+          non-deterministic outputs can feel trustworthy in a high-stakes workflow.
+        </p>
+        <p style="font: 400 19px/30px 'Inter Tight', sans-serif; color: var(--text-primary); margin: 0;">
+          The best interfaces feel obvious in retrospect. Getting there usually means cutting more
+          than you add.
+        </p>
+        <div
+          style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; font: 500 13px/20px 'JetBrains Mono', monospace;"
+        >
+          {
+            [
+              ['Currently', `${role}, ${company}`],
+              ['Based', 'San Francisco / Remote'],
+              ['Tools', 'Figma, JetBrains, Notion'],
+              ['Open to', 'Senior / Staff IC roles'],
+            ].map(([k, v]) => (
+              <div style="padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);">
+                <div style="color: var(--text-secondary);">{k}</div>
+                <div style="color: var(--text-bright);">{v}</div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

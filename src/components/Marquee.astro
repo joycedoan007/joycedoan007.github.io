@@ -1,0 +1,36 @@
+---
+const items = [
+  'Data dashboards',
+  'Product UX',
+  'AI interfaces',
+  'Figma systems',
+  'Product thinking',
+  'Information design',
+  'Complex flows',
+];
+const doubled = [...items, ...items];
+---
+
+<section
+  style="border-bottom: 1px solid var(--border-subtle); padding: 24px 0; overflow: hidden;"
+>
+  <div
+    class="animate-marquee"
+    style="display: flex; gap: 64px; white-space: nowrap; width: max-content;"
+  >
+    {
+      doubled.map((t, i) => (
+        <span
+          style={`display: inline-flex; align-items: baseline; gap: 14px; font: ${i % 2 === 0 ? '500' : '400'} 32px/1 'Inter Tight', sans-serif; letter-spacing: -0.02em; color: ${i % 2 === 0 ? 'var(--text-bright)' : 'var(--text-secondary)'};`}
+        >
+          <span
+            style="font: 500 13px/1 'JetBrains Mono', monospace; color: var(--text-accent);"
+          >
+            {String((i % items.length) + 1).padStart(2, '0')}
+          </span>
+          {t}
+        </span>
+      ))
+    }
+  </div>
+</section>

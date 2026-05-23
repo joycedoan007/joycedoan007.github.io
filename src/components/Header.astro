@@ -1,0 +1,62 @@
+---
+import ThemeToggle from './ThemeToggle';
+---
+
+<header
+  style="position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg-page) 86%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-subtle);"
+>
+  <div
+    style="max-width: 1320px; margin: 0 auto; padding: 14px 48px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 32px;"
+  >
+    <!-- Logo / name -->
+    <a
+      href="#top"
+      style="text-decoration: none; display: inline-flex; align-items: center; gap: 12px;"
+    >
+      <span
+        style="font: 500 12px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.02em;"
+        >idx_002 ·</span
+      >
+      <span
+        style="font: 600 15px/20px 'Inter Tight', sans-serif; color: var(--text-bright); letter-spacing: -0.01em;"
+        >Joyce Doan</span
+      >
+    </a>
+
+    <!-- Nav -->
+    <nav style="display: flex; gap: 0; justify-self: center;">
+      {
+        [
+          ['Work', '#work'],
+          ['Featured', '#featured'],
+          ['About', '#about'],
+          ['Writing', '#writing'],
+          ['Contact', '#contact'],
+        ].map(([label, href]) => (
+          <a
+            href={href}
+            data-cursor="hover"
+            style="padding: 6px 14px; font: 500 13px/20px 'Inter Tight', sans-serif; color: var(--text-primary); text-decoration: none;"
+          >
+            {label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Right: availability + theme toggle -->
+    <div
+      style="display: flex; justify-content: flex-end; align-items: center; gap: 12px;"
+    >
+      <span
+        style="display: inline-flex; align-items: center; gap: 8px; font: 500 12px/16px 'JetBrains Mono', monospace; color: var(--text-secondary);"
+      >
+        <span
+          style="width: 6px; height: 6px; border-radius: 50%; background: var(--primary-500); box-shadow: 0 0 8px color-mix(in srgb, var(--primary-500) 60%, transparent);"
+        ></span>
+        Available · Q3
+      </span>
+      <ThemeToggle client:load />
+    </div>
+  </div>
+</header>
