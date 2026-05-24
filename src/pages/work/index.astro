@@ -45,26 +45,6 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 2);
 
       <div style="padding: 56px 72px 96px;">
 
-        <!-- Recent -->
-        <div style="margin-bottom: 56px;">
-          <h2 style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 20px;">Recent</h2>
-          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
-            {recent.map((e) => (
-              <a href={`/work/${e.slug}`} class="work-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 24px; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); background: var(--bg-surface); text-decoration: none; gap: 32px; transition: border-color 150ms ease;">
-                <div>
-                  <div class="overline" style="margin-bottom: 10px;">{e.data.subtitle}</div>
-                  <h3 style="font: 500 15px/1.4 'Poppins', sans-serif; color: var(--text-bright); margin: 0 0 8px;">{e.data.title}</h3>
-                  <p style="font: 400 13px/20px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0;">{e.data.description}</p>
-                </div>
-                <div style="display: flex; align-items: center; justify-content: space-between;">
-                  <span style="font: 400 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">{e.data.role} · {e.data.year}</span>
-                  <i class="ph-bold ph-arrow-up-right" style="font-size: 13px; color: var(--text-disabled);"></i>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-
         <!-- Featured -->
         <div style="margin-bottom: 56px;">
           <h2 style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 20px;">Featured</h2>
@@ -87,10 +67,23 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 2);
 
         <!-- All projects -->
         <div>
-          <h2 style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 20px;">All projects</h2>
-          <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+            <h2 style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; margin: 0;">All projects</h2>
+            <div id="work-filters" style="display: flex; gap: 6px;">
+              {['All', 'Product Design', 'Web Design', 'Branding'].map((cat) => (
+                <button
+                  data-filter={cat}
+                  class="filter-btn"
+                  style={`padding: 5px 12px; border-radius: var(--radius-full); border: 1px solid var(--border-subtle); background: ${cat === 'All' ? 'var(--primary-700)' : 'transparent'}; color: ${cat === 'All' ? 'var(--text-inverse)' : 'var(--text-secondary)'}; font: 500 11px/16px 'JetBrains Mono', monospace; letter-spacing: 0.04em; cursor: pointer; transition: all 150ms ease;`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div id="project-list">
             {sorted.map((e, i) => (
-              <a href={`/work/${e.slug}`} class="project-row" style="display: grid; grid-template-columns: 32px 1fr 180px 80px; gap: 24px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border-subtle); text-decoration: none; transition: padding 150ms ease;">
+              <a href={`/work/${e.slug}`} class="project-row" data-category={e.data.category ?? ''} style="display: grid; grid-template-columns: 32px 1fr 180px 80px; gap: 24px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border-subtle); text-decoration: none; transition: padding 150ms ease;">
                 <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">{String(i + 1).padStart(2, '0')}</span>
                 <span style="font: 500 14px/20px 'Poppins', sans-serif; color: var(--text-bright);">{e.data.title}</span>
                 <span style="font: 500 10px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.06em; text-transform: uppercase;">{e.data.category ?? ''}</span>
@@ -114,4 +107,28 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 2);
   .work-card:hover { border-color: var(--border-default) !important; }
   .work-card:hover i { color: var(--text-accent) !important; }
   .project-row:hover span:nth-child(2) { color: var(--text-accent) !important; }
+  .filter-btn:hover { border-color: var(--border-default) !important; color: var(--text-bright) !important; }
+  .filter-btn.active { background: var(--primary-700) !important; color: var(--text-inverse) !important; border-color: var(--primary-700) !important; }
 </style>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const rows = document.querySelectorAll<HTMLElement>('.project-row');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter ?? 'All';
+
+      buttons.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      rows.forEach((row) => {
+        const cat = row.dataset.category ?? '';
+        row.style.display = (filter === 'All' || cat === filter) ? 'grid' : 'none';
+      });
+    });
+  });
+
+  // Set "All" as active on load
+  document.querySelector<HTMLButtonElement>('.filter-btn[data-filter="All"]')?.classList.add('active');
+</script>

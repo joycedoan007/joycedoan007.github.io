@@ -156,7 +156,7 @@ function fmtDate(d: string) {
 <style is:global>
   /* ── Prose content ── */
   .prose {
-    max-width: 660px;
+    max-width: 720px;
     color: var(--text-primary);
     font: 400 15px/24px 'Poppins', sans-serif;
   }
@@ -221,8 +221,8 @@ function fmtDate(d: string) {
     color: var(--text-accent);
   }
   .prose pre {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
+    background: #1a1d23;
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: var(--radius-lg);
     padding: 20px 24px;
     overflow-x: auto;
@@ -232,14 +232,53 @@ function fmtDate(d: string) {
     background: none;
     border: none;
     padding: 0;
-    color: var(--text-primary);
+    color: #e2e4e9;
     font-size: 13px;
     line-height: 1.7;
+  }
+  [data-theme="light"] .prose pre {
+    background: #f0ede8 !important;
+    border: 1px solid var(--border-subtle);
+  }
+  [data-theme="light"] .prose pre code {
+    color: #2c2c2e !important;
+  }
+  [data-theme="light"] .prose pre code span {
+    color: #2c2c2e !important;
   }
   .prose hr {
     border: none;
     border-top: 1px solid var(--border-subtle);
     margin: 40px 0;
+  }
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 28px;
+    font: 400 13px/20px 'JetBrains Mono', monospace;
+  }
+  .prose thead {
+    border-bottom: 1px solid var(--border-default);
+  }
+  .prose th {
+    padding: 8px 12px;
+    text-align: left;
+    font: 500 11px/16px 'JetBrains Mono', monospace;
+    color: var(--text-disabled);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .prose td {
+    padding: 10px 12px;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: top;
+  }
+  .prose tr:last-child td {
+    border-bottom: none;
+  }
+  .prose tbody tr:hover td {
+    background: var(--bg-surface);
   }
 
   .nav-link:hover { border-color: var(--border-default) !important; }

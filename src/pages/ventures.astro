@@ -9,6 +9,7 @@ const products = [
   {
     id: '01',
     name: 'UnifyDesign',
+    company: 'UnifyDesign',
     category: 'Design Tooling · AI',
     year: '2025',
     tagline: 'The single source of truth for your design system.',
@@ -21,13 +22,13 @@ const products = [
       { label: 'AI Tools', desc: 'Exposes live design system context to Claude, Cursor, and Windsurf via MCP' },
       { label: 'Team & Settings', desc: 'Members, integrations, and permission management' },
     ],
-    workflow: ['Connect sources', 'Scan', 'Compare', 'Review drift', 'Approve / reject', 'Sync changes', 'Generate output'],
     url: '#',
     accent: 'green',
   },
   {
     id: '02',
     name: 'SocialCenter.ai',
+    company: 'SocialCenter.ai',
     category: 'AI · Content · Marketing',
     year: '2024',
     tagline: 'From idea to published — one platform for all your social content.',
@@ -41,13 +42,13 @@ const products = [
       { label: 'Brand Voice Cloning', desc: 'Learns writing style from past posts and applies it to new content' },
       { label: 'Agency Management', desc: 'Multi-tenant model with client sub-accounts and consolidated billing' },
     ],
-    workflow: ['Generate', 'Schedule', 'Approve', 'Publish', 'Analyze'],
     url: '#',
     accent: 'blue',
   },
   {
     id: '03',
     name: 'Marketing Center',
+    company: 'Marketing Center',
     category: 'Marketing · Multi-channel',
     year: '2023',
     tagline: 'Every marketing channel. One coherent platform.',
@@ -60,14 +61,13 @@ const products = [
       { label: 'AI Content', desc: 'AI-assisted copy generation across all channel types' },
       { label: 'Design System', desc: 'Cohesive component library adopted across all modules' },
     ],
-    workflow: ['Plan', 'Create', 'Target', 'Launch', 'Measure'],
     url: '#',
     accent: 'gray',
   },
 ];
 ---
 
-<Layout title="Ventures — Joyce Doan" description="Products designed and shipped at Consortia Group — UnifyDesign, SocialCenter.ai, and Marketing Center.">
+<Layout title="Ventures — Joyce Doan" description="Products I helped design across three companies — UnifyDesign, SocialCenter.ai, and Marketing Center.">
 
   <header style="position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg-page) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-subtle);">
     <div style="max-width: 1320px; margin: 0 auto; padding: 0 48px; height: 48px; display: flex; align-items: center; justify-content: space-between;">
@@ -87,19 +87,19 @@ const products = [
 
   <!-- Hero -->
   <div style="max-width: 1320px; margin: 0 auto; padding: 72px 48px 56px; border-bottom: 1px solid var(--border-subtle);">
-    <div class="overline" style="margin-bottom: 16px;">Consortia Group · 3 products</div>
+    <div class="overline" style="margin-bottom: 16px;">3 ventures · 3 companies</div>
     <h1 style="font: 500 clamp(36px, 5vw, 64px)/1.05 'Poppins', sans-serif; letter-spacing: -0.04em; color: var(--text-bright); margin: 0 0 20px; max-width: 700px;">
       Products I helped build.
     </h1>
     <p style="font: 400 16px/26px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0; max-width: 480px;">
-      Design work spanning AI tooling, social media automation, and multi-channel marketing — all shipped under Consortia Group.
+      Design work across three separate companies — spanning AI tooling, social media automation, and multi-channel marketing.
     </p>
   </div>
 
   <!-- Product list -->
   <div style="max-width: 1320px; margin: 0 auto; padding: 0 48px 120px;">
-    {products.map((p) => (
-      <div style="padding: 72px 0; border-bottom: 1px solid var(--border-subtle);">
+    {products.map((p, i) => (
+      <div style={`padding: 72px 0; ${i < products.length - 1 ? 'border-bottom: 1px solid var(--border-subtle);' : ''}`}>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: flex-start;">
 
           <!-- Left: identity -->
@@ -108,6 +108,9 @@ const products = [
               <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">{p.id}</span>
               <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.06em; text-transform: uppercase;">{p.category}</span>
               <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); margin-left: auto;">{p.year}</span>
+            </div>
+            <div style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px;">
+              {p.company}
             </div>
             <h2 style="font: 500 clamp(32px, 3.5vw, 48px)/1.05 'Poppins', sans-serif; letter-spacing: -0.03em; color: var(--text-bright); margin: 0 0 16px;">
               {p.name}
@@ -123,28 +126,11 @@ const products = [
             >
               Visit {p.name}
               <i class="ph-bold ph-arrow-up-right" style="font-size: 13px;"></i>
-              {p.url === '#' && <span style="font: 500 11px/16px 'JetBrains Mono', monospace; opacity: 0.8; margin-left: 2px;">· coming soon</span>}
             </a>
             <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0 0 32px;">
               {p.description}
             </p>
 
-            <!-- Workflow -->
-            <div style="margin-bottom: 0;">
-              <div class="overline" style="margin-bottom: 12px;">Workflow</div>
-              <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px;">
-                {p.workflow.map((step, i) => (
-                  <>
-                    <span style="font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-secondary); padding: 4px 12px; border-radius: var(--radius-full); border: 1px solid var(--border-subtle);">
-                      {step}
-                    </span>
-                    {i < p.workflow.length - 1 && (
-                      <span style="font: 400 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">→</span>
-                    )}
-                  </>
-                ))}
-              </div>
-            </div>
           </div>
 
           <!-- Right: features -->
