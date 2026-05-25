@@ -57,6 +57,16 @@ const next = idx < sorted.length - 1 ? sorted[idx + 1] : null;
         ))}
       </div>
 
+      {w.hasImage && (
+        <div style="margin-bottom: 56px;">
+          <img
+            src={`/work/${entry.slug.replace(/^\d+-/, '')}/cover.png`}
+            alt={w.title}
+            style="width: 100%; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); display: block;"
+          />
+        </div>
+      )}
+
       <div class="prose"><Content /></div>
 
       <!-- Prev/Next -->

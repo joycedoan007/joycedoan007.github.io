@@ -32,7 +32,7 @@ Before touching pixels, I mapped out who the users are and what they actually ne
 
 ## Flow Chart & Information Architecture
 
-![RinDB Information Architecture](/work/rindb/case-study.png)
+![RinDB Information Architecture](/work/rindb-website/case-study.png)
 
 The site structure was kept deliberately flat. Key sections: Hero → Why RinDB → Features → Where It Fits → How It Works → Try Without Code → Examples → FAQ → Learn More.
 
@@ -50,7 +50,7 @@ The site structure was kept deliberately flat. Key sections: Hero → Why RinDB 
 
 ## Final UI
 
-![RinDB Homepage — Desktop](/work/rindb/home-desktop.png)
+![RinDB Homepage — Desktop](/work/rindb-website/home-desktop.png)
 
 The hero leads with the product name and a one-line value prop: **"RinDB: A Lightweight, Embeddable Key-Value Database."** A 3D mesh graphic reinforces the technical nature without being decorative noise. Two CTAs — Get Started and View Docs — cover the two primary user intents.
 

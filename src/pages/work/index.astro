@@ -10,7 +10,7 @@ import '../../styles/global.css';
 const all = await getCollection('work');
 const sorted = all.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 const recent = sorted.slice(0, 2);
-const featured = sorted.filter(e => e.data.hasImage).slice(0, 2);
+const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
 ---
 
 <Layout title="Work — Joyce Doan" description="Selected UI/UX design work by Joyce Doan.">
@@ -48,17 +48,22 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 2);
         <!-- Featured -->
         <div style="margin-bottom: 56px;">
           <h2 style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 20px;">Featured</h2>
-          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
             {featured.map((e) => (
-              <a href={`/work/${e.slug}`} class="work-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 24px; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); background: var(--bg-surface); text-decoration: none; gap: 32px; transition: border-color 150ms ease;">
-                <div>
-                  <div class="overline" style="margin-bottom: 10px;">{e.data.subtitle}</div>
-                  <h3 style="font: 500 15px/1.4 'Poppins', sans-serif; color: var(--text-bright); margin: 0 0 8px;">{e.data.title}</h3>
-                  <p style="font: 400 13px/20px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0;">{e.data.description}</p>
+              <a href={`/work/${e.slug}`} class="work-card" style="display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); background: var(--bg-surface); text-decoration: none; overflow: hidden; transition: border-color 150ms ease;">
+                <div style="aspect-ratio: 16/9; overflow: hidden; background: var(--bg-elevated);">
+                  <img src={`/work/${e.slug.replace(/^\d+-/, '')}/cover.png`} alt={e.data.title} style="width: 100%; height: 100%; object-fit: cover; display: block;" />
                 </div>
-                <div style="display: flex; align-items: center; justify-content: space-between;">
-                  <span style="font: 400 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">{e.data.role} · {e.data.year}</span>
-                  <i class="ph-bold ph-arrow-up-right" style="font-size: 13px; color: var(--text-disabled);"></i>
+                <div style="padding: 20px 24px; display: flex; flex-direction: column; gap: 24px; flex: 1; justify-content: space-between;">
+                  <div>
+                    <div class="overline" style="margin-bottom: 10px;">{e.data.subtitle}</div>
+                    <h3 style="font: 500 15px/1.4 'Poppins', sans-serif; color: var(--text-bright); margin: 0 0 8px;">{e.data.title}</h3>
+                    <p style="font: 400 13px/20px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0;">{e.data.description}</p>
+                  </div>
+                  <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <span style="font: 400 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">{e.data.role} · {e.data.year}</span>
+                    <i class="ph-bold ph-arrow-up-right" style="font-size: 13px; color: var(--text-disabled);"></i>
+                  </div>
                 </div>
               </a>
             ))}
