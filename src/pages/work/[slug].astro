@@ -87,14 +87,16 @@ const next = idx < sorted.length - 1 ? sorted[idx + 1] : null;
     </main>
 
     <!-- Right sidebar -->
-    <aside style="position: sticky; top: 48px; height: fit-content; padding: 40px 24px; border-left: 1px solid var(--border-subtle);">
-      <div style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">Skills</div>
-      <div style="display: flex; flex-direction: column; gap: 8px;">
-        {w.skills.map(s => (
-          <span style="font: 400 12px/18px 'JetBrains Mono', monospace; color: var(--text-secondary);">{s}</span>
-        ))}
-      </div>
-    </aside>
+    <div style="border-left: 1px solid var(--border-subtle);">
+      <aside style="position: sticky; top: 48px; height: fit-content; padding: 40px 24px;">
+        <div style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">Skills</div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          {w.skills.map(s => (
+            <span style="font: 400 12px/18px 'JetBrains Mono', monospace; color: var(--text-secondary);">{s}</span>
+          ))}
+        </div>
+      </aside>
+    </div>
   </div>
   <ContactCTA />
   <Footer />

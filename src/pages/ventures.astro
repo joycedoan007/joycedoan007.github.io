@@ -1,4 +1,6 @@
 ---
+// PAGE HIDDEN — uncomment the template below and remove the redirect when ready to publish
+
 import Layout from '../layouts/Layout.astro';
 import ThemeToggle from '../components/ThemeToggle';
 import '../styles/global.css';
@@ -67,6 +69,13 @@ const products = [
 ];
 ---
 
+{/* Redirect visitors to home while page is in progress */}
+<meta http-equiv="refresh" content="0;url=/" />
+<script>window.location.replace('/');</script>
+
+{/* TO RESTORE: remove the two lines above and uncomment the Layout block below */}
+
+{/*
 <Layout title="Ventures — Joyce Doan" description="Products I helped design across three companies — UnifyDesign, SocialCenter.ai, and Marketing Center.">
 
   <header style="position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg-page) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-subtle);">
@@ -85,7 +94,6 @@ const products = [
     </div>
   </header>
 
-  <!-- Hero -->
   <div style="max-width: 1320px; margin: 0 auto; padding: 72px 48px 56px; border-bottom: 1px solid var(--border-subtle);">
     <div class="overline" style="margin-bottom: 16px;">3 ventures · 3 companies</div>
     <h1 style="font: 500 clamp(36px, 5vw, 64px)/1.05 'Poppins', sans-serif; letter-spacing: -0.04em; color: var(--text-bright); margin: 0 0 20px; max-width: 700px;">
@@ -96,13 +104,11 @@ const products = [
     </p>
   </div>
 
-  <!-- Product list -->
   <div style="max-width: 1320px; margin: 0 auto; padding: 0 48px 120px;">
     {products.map((p, i) => (
       <div style={`padding: 72px 0; ${i < products.length - 1 ? 'border-bottom: 1px solid var(--border-subtle);' : ''}`}>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: flex-start;">
 
-          <!-- Left: identity -->
           <div>
             <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 20px;">
               <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">{p.id}</span>
@@ -130,10 +136,8 @@ const products = [
             <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0 0 32px;">
               {p.description}
             </p>
-
           </div>
 
-          <!-- Right: features -->
           <div>
             <div class="overline" style="margin-bottom: 16px;">Key features</div>
             <div style="display: flex; flex-direction: column; gap: 0;">
@@ -154,3 +158,4 @@ const products = [
   <ContactCTA />
   <Footer />
 </Layout>
+*/}

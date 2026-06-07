@@ -22,11 +22,10 @@ import ThemeToggle from './ThemeToggle';
     </a>
 
     <!-- Nav -->
-    <nav style="display: flex; gap: 0; justify-self: center;">
+    <nav style="display: flex; gap: 0; justify-self: center; align-items: center;">
       {
         [
           ['Work', '/work'],
-          ['Ventures', '/ventures'],
           ['About', '/about'],
           ['Writing', '/writing'],
           ['Contact', '/contact'],
@@ -40,6 +39,10 @@ import ThemeToggle from './ThemeToggle';
           </a>
         ))
       }
+      <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-disabled); cursor: default;">
+        Ventures
+        <span style="font: 600 9px/12px 'JetBrains Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-accent); background: color-mix(in srgb, var(--primary-500) 12%, transparent); border: 1px solid color-mix(in srgb, var(--primary-500) 30%, transparent); border-radius: 4px; padding: 2px 6px;">Coming Soon</span>
+      </span>
     </nav>
 
     <!-- Right: availability + theme toggle -->

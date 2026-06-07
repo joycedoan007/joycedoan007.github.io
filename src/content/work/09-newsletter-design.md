@@ -6,6 +6,6 @@ skills: ["BRANDING", "WEB DESIGN", "WEBFLOW"]
 role: UI/UX Designer
 category: "Branding"
 year: "2023"
-hasImage: false
+hasImage: true
 order: 9
 ---
