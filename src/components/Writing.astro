@@ -35,7 +35,7 @@ const { items } = Astro.props;
           href={`/writing/${w.slug}`}
           data-cursor="hover"
           data-reveal
-          style={`--reveal-delay: ${i * 40}ms; display: grid; grid-template-columns: 64px 200px 1fr 200px 32px; gap: 32px; align-items: center; padding: 28px 0; border-bottom: 1px solid var(--border-subtle); text-decoration: none; color: inherit; transition: background 200ms ease, padding 200ms ease;`}
+          style={`--reveal-delay: ${i * 40}ms; display: grid; grid-template-columns: 64px 200px 1fr 200px 32px; gap: 32px; align-items: center; padding: 28px 0;${i < items.length - 1 ? ' border-bottom: 1px solid var(--border-subtle);' : ''} text-decoration: none; color: inherit; transition: background 200ms ease, padding 200ms ease;`}
           class="writing-row"
         >
           <span

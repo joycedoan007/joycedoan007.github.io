@@ -7,12 +7,12 @@ const { stats, company } = Astro.props;
 ---
 
 <section id="top" style="border-bottom: 1px solid var(--border-subtle);">
-  <div style="max-width: 1320px; margin: 0 auto; padding: 64px 48px 48px;">
+  <div style="max-width: 1320px; margin: 0 auto; padding: 64px 48px 48px; min-height: calc(100svh - var(--header-h, 64px) - 72px); display: flex; flex-direction: column;">
     <!-- Name + info grid -->
-    <div style="display: grid; grid-template-columns: 1fr 320px; gap: 64px; align-items: flex-end;">
+    <div style="flex: 1; display: grid; grid-template-columns: 1fr 320px; gap: 64px; align-items: flex-end; align-content: flex-end;">
       <!-- Big name -->
       <div data-reveal>
-        <div class="overline" style="margin-bottom: 24px;">UI/UX Designer · {company}</div>
+        <div class="overline" style="margin-bottom: 24px;">UI/UX Designer</div>
         <h1
           style="font: 500 clamp(72px, 10vw, 160px)/0.86 'Poppins', sans-serif; letter-spacing: -0.05em; color: var(--text-bright); margin: 0; text-wrap: balance;"
         >

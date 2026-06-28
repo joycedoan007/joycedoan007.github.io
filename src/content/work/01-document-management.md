@@ -10,6 +10,11 @@ hasImage: false
 order: 1
 ---
 
+<div style="background: var(--bg-surface); border-left: 2px solid var(--primary-500); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: 20px 24px; margin-bottom: 40px;">
+  <div class="overline" style="color: var(--text-accent); margin-bottom: 8px;">My Role</div>
+  <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">I handled the complete design system end-to-end — color tokens, typography scale, spacing, components, and all interactive states.</p>
+</div>
+
 <div style="margin: 0 0 20px;">
   <div class="overline" style="color: var(--text-accent); margin-bottom: 8px;">01 — Context</div>
   <h2 style="font: 600 22px/1.2 'Poppins', sans-serif; letter-spacing: -0.02em; color: var(--text-bright); margin: 0;">The Challenge</h2>

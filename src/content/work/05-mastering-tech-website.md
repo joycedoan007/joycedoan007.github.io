@@ -48,7 +48,7 @@ Aspiring developers and career switchers typically face three compounding proble
 
 <div style="background: var(--bg-surface); border-left: 2px solid var(--primary-500); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: 20px 24px; margin: 28px 0 56px;">
   <div class="overline" style="color: var(--text-accent); margin-bottom: 8px;">My Role</div>
-  <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">I led product UX strategy, information architecture, UX writing and content hierarchy, and UI design system application across all desktop layouts. This included designing primary and secondary flows, empty and success states, modal interactions, and reusable navigation and footer patterns across 10+ screens spanning marketing, conversion, content, legal, and account areas.</p>
+  <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">I led product UX strategy, information architecture, UX writing and content hierarchy, and UI design system application across all desktop layouts. This included designing primary and secondary flows, empty and success states, modal interactions, and reusable navigation and footer patterns across 10+ screens spanning marketing, conversion, content, legal, and account areas. I owned the complete design system — color tokens, typography scale, spacing, components, and all interactive states.</p>
 </div>
 
 <div style="margin: 0 0 20px;">

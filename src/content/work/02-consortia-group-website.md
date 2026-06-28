@@ -48,7 +48,7 @@ The redesign needed to serve four very different audiences simultaneously: busin
 
 <div style="background: var(--bg-surface); border-left: 2px solid var(--primary-500); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: 20px 24px; margin: 28px 0 56px;">
   <div class="overline" style="color: var(--text-accent); margin-bottom: 8px;">My Role</div>
-  <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">I led the end-to-end design of the full web ecosystem — from information architecture and conversion strategy through final Webflow delivery. This included the brand system, page templates, component library, and all 10 page designs: Home, Services, Portfolio, Career, About Us, Contact, Privacy Policy, Terms of Use, Cookie Policy, and a long-form Landing Page.</p>
+  <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">I led the end-to-end design of the full web ecosystem — from information architecture and conversion strategy through final Webflow delivery. This included the brand system, page templates, component library, and all 10 page designs: Home, Services, Portfolio, Career, About Us, Contact, Privacy Policy, Terms of Use, Cookie Policy, and a long-form Landing Page. I owned the complete design system — color tokens, typography scale, spacing, components, and all interactive states.</p>
 </div>
 
 <div style="margin: 0 0 20px;">

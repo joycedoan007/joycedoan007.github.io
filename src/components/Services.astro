@@ -52,7 +52,7 @@ const services = [
       services.map((s, i) => (
         <div
           data-reveal
-          style={`--reveal-delay: ${i * 50}ms; display: grid; grid-template-columns: 64px 320px 1fr 240px; gap: 32px; align-items: flex-start; padding: 36px 0; border-bottom: 1px solid var(--border-subtle);`}
+          style={`--reveal-delay: ${i * 50}ms; display: grid; grid-template-columns: 64px 320px 1fr 240px; gap: 32px; align-items: flex-start; padding: 36px 0;${i < services.length - 1 ? ' border-bottom: 1px solid var(--border-subtle);' : ''}`}
         >
           <span
             style="font: 500 14px/18px 'JetBrains Mono', monospace; color: var(--text-secondary);"

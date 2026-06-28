@@ -35,7 +35,7 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
 
       <!-- Hero -->
       <div style="padding: 56px 72px 48px; border-bottom: 1px solid var(--border-subtle);">
-        <div class="overline" style="margin-bottom: 16px;">UI/UX Designer · Consortia Group</div>
+        <div class="overline" style="margin-bottom: 16px;">UI/UX Designer</div>
         <h1 style="font: 500 48px/1.0 'Poppins', sans-serif; letter-spacing: -0.04em; color: var(--text-bright); margin: 0 0 12px;">Work</h1>
         <p style="font: 400 15px/24px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0; max-width: 480px;">
           Product UX and web design across analytics, AI, finance, and B2B SaaS.
@@ -87,7 +87,7 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
           </div>
           <div id="project-list">
             {sorted.map((e, i) => (
-              <a href={`/work/${e.slug}`} class="project-row" data-category={e.data.category ?? ''} style="display: grid; grid-template-columns: 32px 1fr 180px 80px; gap: 24px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border-subtle); text-decoration: none; transition: padding 150ms ease;">
+              <a href={`/work/${e.slug}`} class="project-row" data-category={e.data.category ?? ''} style={`display: grid; grid-template-columns: 32px 1fr 180px 80px; gap: 24px; align-items: center; padding: 16px 0;${i < sorted.length - 1 ? ' border-bottom: 1px solid var(--border-subtle);' : ''} text-decoration: none; transition: padding 150ms ease;`}>
                 <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">{String(i + 1).padStart(2, '0')}</span>
                 <span style="font: 500 14px/20px 'Poppins', sans-serif; color: var(--text-bright);">{e.data.title}</span>
                 <span style="font: 500 10px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.06em; text-transform: uppercase;">{e.data.category ?? ''}</span>

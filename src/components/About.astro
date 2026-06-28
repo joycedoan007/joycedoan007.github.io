@@ -45,8 +45,8 @@ const { role, company } = Astro.props;
               ['Based', 'Vietnam / Remote'],
               ['Tools', 'Figma, Claude, Codex, Illustrator'],
               ['Open to', 'Senior'],
-            ].map(([k, v]) => (
-              <div style="padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);">
+            ].map(([k, v], i, arr) => (
+              <div style={`padding-bottom: 12px;${i < arr.length - 2 ? ' border-bottom: 1px solid var(--border-subtle);' : ''}`}>
                 <div style="color: var(--text-secondary);">{k}</div>
                 <div style="color: var(--text-bright);">{v}</div>
               </div>

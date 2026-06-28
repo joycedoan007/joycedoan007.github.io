@@ -48,7 +48,7 @@ Many learners struggle to find Vietnamese programs that are practical, culturall
 
 <div style="background: var(--bg-surface); border-left: 2px solid var(--primary-500); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: 20px 24px; margin: 28px 0 56px;">
   <div class="overline" style="color: var(--text-accent); margin-bottom: 8px;">My Role</div>
-  <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">I collaborated with two designers who handled screen-level UI execution. My focus was on building the foundation: design system setup, interactive prototyping, responsive standards, iteration support during client feedback sessions, and pre-launch QA across usability, consistency, and responsiveness.</p>
+  <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">I collaborated with two designers who handled screen-level UI execution. My focus was on building the foundation: design system setup, interactive prototyping, responsive standards, iteration support during client feedback sessions, and pre-launch QA across usability, consistency, and responsiveness. I owned the complete design system — color tokens, typography, spacing, all components, and every interactive state.</p>
 </div>
 
 <div style="margin: 0 0 20px;">

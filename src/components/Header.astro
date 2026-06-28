@@ -3,6 +3,7 @@ import ThemeToggle from './ThemeToggle';
 ---
 
 <header
+  id="site-header"
   style="position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg-page) 86%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-subtle);"
 >
   <div
@@ -57,7 +58,115 @@ import ThemeToggle from './ThemeToggle';
         ></span>
         Available · Q3
       </span>
+
+      <!-- Language select (hidden for now — re-enable by removing display:none) -->
+      <div id="lang-select" style="position: relative; display: none;">
+        <button
+          id="lang-btn"
+          type="button"
+          data-cursor="hover"
+          aria-haspopup="listbox"
+          aria-expanded="false"
+          style="display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 10px; border: 1px solid var(--border-default); border-radius: var(--radius-md); background: transparent; font: 500 12px/16px 'JetBrains Mono', monospace; color: var(--text-primary); cursor: pointer;"
+        >
+          <span id="lang-current">ENG</span>
+          <i class="ph-bold ph-caret-down" style="font-size: 11px;"></i>
+        </button>
+        <div
+          id="lang-menu"
+          role="listbox"
+          style="position: absolute; top: calc(100% + 8px); right: 0; min-width: 150px; padding: 6px; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-md); box-shadow: 0 8px 24px color-mix(in srgb, var(--bg-page) 40%, rgba(0,0,0,0.25)); display: none; flex-direction: column; gap: 2px; z-index: 60;"
+        >
+          <button
+            type="button"
+            class="lang-option"
+            role="option"
+            data-lang="en"
+            data-code="ENG"
+            data-cursor="hover"
+            style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 10px; border: none; background: transparent; border-radius: var(--radius-sm); font: 500 13px/18px 'Poppins', sans-serif; color: var(--text-bright); cursor: pointer; text-align: left;"
+          >
+            English <span style="font: 500 11px/14px 'JetBrains Mono', monospace; color: var(--text-secondary);">ENG</span>
+          </button>
+          <button
+            type="button"
+            class="lang-option"
+            role="option"
+            data-lang="vi"
+            data-code="VIE"
+            data-cursor="hover"
+            style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 10px; border: none; background: transparent; border-radius: var(--radius-sm); font: 500 13px/18px 'Poppins', sans-serif; color: var(--text-bright); cursor: pointer; text-align: left;"
+          >
+            Tiếng Việt <span style="font: 500 11px/14px 'JetBrains Mono', monospace; color: var(--text-secondary);">VIE</span>
+          </button>
+        </div>
+      </div>
+
       <ThemeToggle client:load />
     </div>
   </div>
 </header>
+
+<script is:inline>
+  (function () {
+    var header = document.getElementById('site-header');
+    if (!header) return;
+    function setHeaderHeight() {
+      document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
+    }
+    setHeaderHeight();
+    window.addEventListener('resize', setHeaderHeight);
+  })();
+
+  (function () {
+    var wrap = document.getElementById('lang-select');
+    var btn = document.getElementById('lang-btn');
+    var menu = document.getElementById('lang-menu');
+    var current = document.getElementById('lang-current');
+    if (!wrap || !btn || !menu || !current) return;
+
+    function open() {
+      menu.style.display = 'flex';
+      btn.setAttribute('aria-expanded', 'true');
+    }
+    function close() {
+      menu.style.display = 'none';
+      btn.setAttribute('aria-expanded', 'false');
+    }
+    function isOpen() {
+      return menu.style.display === 'flex';
+    }
+
+    var saved = localStorage.getItem('lang') || 'en';
+    function apply(lang, code) {
+      current.textContent = code;
+      document.documentElement.setAttribute('lang', lang);
+      localStorage.setItem('lang', lang);
+    }
+    var savedBtn = menu.querySelector('.lang-option[data-lang="' + saved + '"]');
+    if (savedBtn) apply(saved, savedBtn.getAttribute('data-code'));
+
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      isOpen() ? close() : open();
+    });
+    menu.querySelectorAll('.lang-option').forEach(function (opt) {
+      opt.addEventListener('click', function () {
+        apply(opt.getAttribute('data-lang'), opt.getAttribute('data-code'));
+        close();
+      });
+      opt.addEventListener('mouseenter', function () {
+        opt.style.background = 'var(--bg-page)';
+      });
+      opt.addEventListener('mouseleave', function () {
+        opt.style.background = 'transparent';
+      });
+    });
+    document.addEventListener('click', function (e) {
+      if (isOpen() && !wrap.contains(e.target)) close();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && isOpen()) close();
+    });
+  })();
+</script>

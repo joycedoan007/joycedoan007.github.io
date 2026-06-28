@@ -48,7 +48,7 @@ The challenge was translating a technically sophisticated AI platform into a web
 
 <div style="background: var(--bg-surface); border-left: 2px solid var(--primary-500); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: 20px 24px; margin: 28px 0 56px;">
   <div class="overline" style="color: var(--text-accent); margin-bottom: 8px;">My Role</div>
-  <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">I was part of the in-house design team at Skalaview, working alongside marketing, development, and the founding team. My work covered the full design surface: brand identity, UI design, design system setup, and Webflow execution — including the bilingual (English and Vietnamese) site experience.</p>
+  <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">I was part of the in-house design team at Skalaview, working alongside marketing, development, and the founding team. My work covered the full design surface: brand identity, UI design, design system setup, and Webflow execution — including the bilingual (English and Vietnamese) site experience. I owned the complete design system end-to-end — color tokens, typography, spacing scale, components, and all interactive states.</p>
 </div>
 
 <div style="margin: 0 0 20px;">

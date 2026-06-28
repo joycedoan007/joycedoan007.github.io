@@ -48,7 +48,7 @@ The design challenge was twofold. First, the brand needed to be built from scrat
 
 <div style="background: var(--bg-surface); border-left: 2px solid var(--primary-500); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: 20px 24px; margin: 28px 0 56px;">
   <div class="overline" style="color: var(--text-accent); margin-bottom: 8px;">My Role</div>
-  <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">I owned the full design scope end-to-end: logo design, brand identity, wireframes, design system, and high-fidelity UI across desktop and mobile. This included all solution vertical pages, the pricing page, and the bilingual (English/Vietnamese) site structure delivered in Webflow.</p>
+  <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">I owned the full design scope end-to-end: logo design, brand identity, wireframes, design system, and high-fidelity UI across desktop and mobile. This included all solution vertical pages, the pricing page, and the bilingual (English/Vietnamese) site structure delivered in Webflow. I handled the complete design system — color tokens, typography, spacing, all components, and every interactive state.</p>
 </div>
 
 <div style="margin: 0 0 20px;">

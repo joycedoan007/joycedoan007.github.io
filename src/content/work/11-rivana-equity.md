@@ -48,7 +48,7 @@ The firm had strong fundamentals and an experienced team, but no web presence th
 
 <div style="background: var(--bg-surface); border-left: 2px solid var(--primary-500); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: 20px 24px; margin: 28px 0 56px;">
   <div class="overline" style="color: var(--text-accent); margin-bottom: 8px;">My Role</div>
-  <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">I was one of three designers. While two handled screen-level UI execution, I owned the design foundation — information architecture, design system, Figma file structure, responsive standards, and component quality. My job was to build the system the team worked within, not just individual screens.</p>
+  <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">I was one of three designers. While two handled screen-level UI execution, I owned the design foundation — information architecture, design system, Figma file structure, responsive standards, and component quality. My job was to build the system the team worked within, not just individual screens. I handled the complete design system end-to-end — color tokens, typography scale, spacing, all components, and every interactive state.</p>
 </div>
 
 <div style="margin: 0 0 20px;">

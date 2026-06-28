@@ -366,23 +366,38 @@ function WorkIndex({
             boxShadow: '0 24px 60px rgba(0,0,0,0.4)',
           }}
         >
-          <DashThumb accent={hoverItem.accent} />
-          <div
-            style={{
-              position: 'absolute',
-              bottom: 12,
-              left: 12,
-              padding: '4px 10px',
-              background: 'rgba(11,14,18,0.7)',
-              borderRadius: 'var(--radius-full)',
-              font: "600 11px/14px 'Poppins', sans-serif",
-              color: 'var(--text-bright)',
-              letterSpacing: '0.04em',
-              textTransform: 'uppercase',
-            }}
-          >
-            {hoverItem.tag}
-          </div>
+          {hoverItem.slug === '07-survival-vietnamese' ? (
+            <img
+              src="/work/survival-vietnamese/hover.png"
+              alt={hoverItem.title}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                display: 'block',
+              }}
+            />
+          ) : (
+            <DashThumb accent={hoverItem.accent} />
+          )}
+          {hoverItem.slug !== '07-survival-vietnamese' && (
+            <div
+              style={{
+                position: 'absolute',
+                bottom: 12,
+                left: 12,
+                padding: '4px 10px',
+                background: 'rgba(11,14,18,0.7)',
+                borderRadius: 'var(--radius-full)',
+                font: "600 11px/14px 'Poppins', sans-serif",
+                color: 'var(--text-bright)',
+                letterSpacing: '0.04em',
+                textTransform: 'uppercase',
+              }}
+            >
+              {hoverItem.tag}
+            </div>
+          )}
         </div>
       )}
     </section>

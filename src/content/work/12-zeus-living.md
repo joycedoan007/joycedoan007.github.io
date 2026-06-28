@@ -48,7 +48,7 @@ The brand had premium properties but no website — only a Facebook and Instagra
 
 <div style="background: var(--bg-surface); border-left: 2px solid var(--primary-500); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: 20px 24px; margin: 28px 0 56px;">
   <div class="overline" style="color: var(--text-accent); margin-bottom: 8px;">My Role</div>
-  <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">I was one of three designers. While two handled screen-level UI execution, I owned the design foundation — information architecture, design system, responsive standards, and quality consistency. I also set up and managed the entire Figma workspace: file structure, page naming, component organization, and handoff-ready layers. My decisions early on shaped everything the team built downstream.</p>
+  <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">I was one of three designers. While two handled screen-level UI execution, I owned the design foundation — information architecture, design system, responsive standards, and quality consistency. I also set up and managed the entire Figma workspace: file structure, page naming, component organization, and handoff-ready layers. My decisions early on shaped everything the team built downstream. I handled the complete design system — color tokens, typography, spacing scale, all components, and every interactive state.</p>
 </div>
 
 <div style="margin: 0 0 20px;">
