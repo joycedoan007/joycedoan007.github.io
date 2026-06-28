@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import DocDashboardMock from './DocDashboardMock';
 
 export interface WorkItem {
   id: string;
@@ -501,36 +502,50 @@ function Featured({
         </div>
 
         <div data-reveal style={{ '--reveal-delay': '140ms' } as React.CSSProperties}>
-          <div
-            style={{
-              aspectRatio: '21 / 9',
-              background:
-                'linear-gradient(135deg, #002923 0%, #005441 60%, color-mix(in srgb, var(--primary-500) 35%, #002923) 100%)',
-              borderRadius: 'var(--radius-lg)',
-              border: '1px solid var(--border-subtle)',
-              position: 'relative',
-              overflow: 'hidden',
-              marginBottom: 56,
-            }}
-          >
-            <BigDashboard />
+          {item.slug === '01-document-management' ? (
             <div
               style={{
-                position: 'absolute',
-                top: 24,
-                left: 24,
-                padding: '6px 12px',
-                background: 'rgba(11,14,18,0.7)',
-                borderRadius: 'var(--radius-full)',
-                font: "600 12px/16px 'Poppins', sans-serif",
-                color: 'var(--text-bright)',
-                letterSpacing: '0.04em',
-                textTransform: 'uppercase',
+                borderRadius: 'var(--radius-lg)',
+                border: '1px solid var(--border-subtle)',
+                overflow: 'hidden',
+                marginBottom: 56,
+                background: '#EEF1F4',
               }}
             >
-              {item.tag} · {item.title}
+              <DocDashboardMock />
             </div>
-          </div>
+          ) : (
+            <div
+              style={{
+                aspectRatio: '21 / 9',
+                background:
+                  'linear-gradient(135deg, #002923 0%, #005441 60%, color-mix(in srgb, var(--primary-500) 35%, #002923) 100%)',
+                borderRadius: 'var(--radius-lg)',
+                border: '1px solid var(--border-subtle)',
+                position: 'relative',
+                overflow: 'hidden',
+                marginBottom: 56,
+              }}
+            >
+              <BigDashboard />
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 24,
+                  left: 24,
+                  padding: '6px 12px',
+                  background: 'rgba(11,14,18,0.7)',
+                  borderRadius: 'var(--radius-full)',
+                  font: "600 12px/16px 'Poppins', sans-serif",
+                  color: 'var(--text-bright)',
+                  letterSpacing: '0.04em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                {item.tag} · {item.title}
+              </div>
+            </div>
+          )}
         </div>
 
         <div data-reveal style={{ '--reveal-delay': '200ms' } as React.CSSProperties}>

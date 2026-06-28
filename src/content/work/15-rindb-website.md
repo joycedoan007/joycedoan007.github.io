@@ -4,7 +4,8 @@ subtitle: Developer Tool · B2B
 description: End-to-end website design for RinDB, a lightweight embeddable key-value database — from design thinking and information architecture through wireframes, design system, and final UI.
 skills: ["WEB DESIGN", "BRANDING", "UI/UX", "FIGMA"]
 role: UI/UX Designer
-year: "2024"
+company: "Personal Project"
+year: "2025"
 hasImage: false
 order: 15
 category: "Web Design"

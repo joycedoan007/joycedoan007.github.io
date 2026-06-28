@@ -46,11 +46,14 @@ const next = idx < sorted.length - 1 ? sorted[idx + 1] : null;
 
     <!-- Main -->
     <main style="min-width: 0; padding: 56px 72px 120px;">
-      <div class="overline" style="margin-bottom: 16px;">{w.subtitle} · {w.role}</div>
+      <div class="overline" style="margin-bottom: 16px;">{w.subtitle} · {w.role} · {w.company}</div>
       <h1 style="font: 700 clamp(28px, 4vw, 48px)/1.1 'Poppins', sans-serif; letter-spacing: -0.03em; color: var(--text-bright); margin: 0 0 20px; max-width: 640px;">{w.title}</h1>
       <p style="font: 400 16px/26px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0 0 40px; max-width: 560px; padding-bottom: 40px; border-bottom: 1px solid var(--border-subtle);">{w.description}</p>
 
       <div style="display: flex; gap: 8px; margin-bottom: 48px; flex-wrap: wrap;">
+        <span style="display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: var(--radius-full); border: 1px solid color-mix(in srgb, var(--primary-500) 35%, transparent); background: color-mix(in srgb, var(--primary-500) 10%, transparent); font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-accent);">
+          <i class="ph-bold ph-buildings" style="font-size: 13px;"></i>{w.company}
+        </span>
         <span style="padding: 5px 14px; border-radius: var(--radius-full); border: 1px solid var(--border-default); font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-secondary);">{w.role}</span>
         {w.skills.map(s => (
           <span style="padding: 5px 14px; border-radius: var(--radius-full); border: 1px solid var(--border-subtle); font: 500 11px/18px 'JetBrains Mono', monospace; color: var(--text-disabled);">{s}</span>

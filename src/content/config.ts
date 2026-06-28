@@ -8,6 +8,7 @@ const work = defineCollection({
     description: z.string(),
     skills: z.array(z.string()),   // e.g. ["BRANDING", "WEB DESIGN", "WEBFLOW"]
     role: z.string().default('UI/UX Designer'),
+    company: z.string().default('Consortia Group'),
     year: z.string().optional(),
     category: z.string().optional(),
     hasImage: z.boolean().default(false),
