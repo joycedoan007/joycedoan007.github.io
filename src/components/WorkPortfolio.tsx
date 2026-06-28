@@ -18,6 +18,14 @@ export interface WorkItem {
   order: number;
 }
 
+// Public projects — hover card shows a "Public · live site" footer.
+// Everything else is treated as a confidential / internal project.
+const PUBLIC_SLUGS = new Set<string>([
+  '07-survival-vietnamese',
+  '02-consortia-group-website',
+  '03-skalaview-website',
+]);
+
 // ─── SVG dashboard thumbnail ─────────────────────────────────────────────────
 function DashThumb({ accent }: { accent: WorkItem['accent'] }) {
   const stroke = accent === 'green' ? 'rgba(0,216,146,0.6)' : 'rgba(255,255,255,0.4)';
@@ -366,38 +374,75 @@ function WorkIndex({
             boxShadow: '0 24px 60px rgba(0,0,0,0.4)',
           }}
         >
-          {hoverItem.slug === '07-survival-vietnamese' ? (
-            <img
-              src="/work/survival-vietnamese/hover.png"
-              alt={hoverItem.title}
+          {(() => {
+            const isPublic = !!(hoverItem.slug && PUBLIC_SLUGS.has(hoverItem.slug));
+            return (
+            /* Text summary card — public or confidential */
+            <div
               style={{
                 width: '100%',
                 height: '100%',
-                objectFit: 'cover',
-                display: 'block',
-              }}
-            />
-          ) : (
-            <DashThumb accent={hoverItem.accent} />
-          )}
-          {hoverItem.slug !== '07-survival-vietnamese' && (
-            <div
-              style={{
-                position: 'absolute',
-                bottom: 12,
-                left: 12,
-                padding: '4px 10px',
-                background: 'rgba(11,14,18,0.7)',
-                borderRadius: 'var(--radius-full)',
-                font: "600 11px/14px 'Poppins', sans-serif",
-                color: 'var(--text-bright)',
-                letterSpacing: '0.04em',
-                textTransform: 'uppercase',
+                padding: '20px 22px',
+                display: 'flex',
+                flexDirection: 'column',
+                boxSizing: 'border-box',
               }}
             >
-              {hoverItem.tag}
+              <div
+                style={{
+                  font: "600 10px/14px 'JetBrains Mono', monospace",
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  color: 'rgba(255,255,255,0.55)',
+                  marginBottom: 10,
+                }}
+              >
+                {hoverItem.tag}
+              </div>
+              <div
+                style={{
+                  font: "600 19px/24px 'Poppins', sans-serif",
+                  letterSpacing: '-0.02em',
+                  color: '#ffffff',
+                  marginBottom: 10,
+                }}
+              >
+                {hoverItem.title}
+              </div>
+              <p
+                style={{
+                  font: "400 12px/18px 'Poppins', sans-serif",
+                  color: 'rgba(255,255,255,0.66)',
+                  margin: 0,
+                  display: '-webkit-box',
+                  WebkitLineClamp: 3,
+                  WebkitBoxOrient: 'vertical',
+                  overflow: 'hidden',
+                }}
+              >
+                {hoverItem.summary}
+              </p>
+              <div
+                style={{
+                  marginTop: 'auto',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  font: "500 10px/14px 'JetBrains Mono', monospace",
+                  letterSpacing: '0.04em',
+                  textTransform: 'uppercase',
+                  color: 'rgba(255,255,255,0.45)',
+                }}
+              >
+                <i
+                  className={isPublic ? 'ph-bold ph-globe-simple' : 'ph-bold ph-lock-simple'}
+                  style={{ fontSize: 12 }}
+                />
+                {isPublic ? 'Public · live site' : 'Confidential · internal project'}
+              </div>
             </div>
-          )}
+            );
+          })()}
         </div>
       )}
     </section>
