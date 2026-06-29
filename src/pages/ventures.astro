@@ -10,6 +10,26 @@ import Footer from '../components/Footer.astro';
 const products = [
   {
     id: '01',
+    name: 'SocialCenter.ai',
+    company: 'SocialCenter.ai',
+    category: 'AI · Content · Marketing',
+    year: '2026',
+    tagline: 'From idea to published — one platform for all your social content.',
+    description: 'An AI-powered social media and content management platform that lets users generate, schedule, approve, publish, and analyze content across social media and blog platforms from a single dashboard.',
+    features: [
+      { label: 'AI Content Generation', desc: 'Platform-native drafts for LinkedIn, X, Instagram, Facebook' },
+      { label: 'Content Calendar', desc: 'FullCalendar-based scheduler with approval workflows and post queues' },
+      { label: 'Approval Chains', desc: 'Single and multi-stage workflows with deadline enforcement' },
+      { label: 'Engagement Engine', desc: 'Monitors comments/DMs, suggests replies, automation rules' },
+      { label: 'Image Generation', desc: 'DALL-E, Vertex AI, and Stable Diffusion via pluggable provider registry' },
+      { label: 'Brand Voice Cloning', desc: 'Learns writing style from past posts and applies it to new content' },
+      { label: 'Agency Management', desc: 'Multi-tenant model with client sub-accounts and consolidated billing' },
+    ],
+    url: 'https://socialcenter.ai/',
+    accent: 'blue',
+  },
+  {
+    id: '02',
     name: 'UnifyDesign',
     company: 'UnifyDesign',
     category: 'Design Tooling · AI',
@@ -26,26 +46,6 @@ const products = [
     ],
     url: '#',
     accent: 'green',
-  },
-  {
-    id: '02',
-    name: 'SocialCenter.ai',
-    company: 'SocialCenter.ai',
-    category: 'AI · Content · Marketing',
-    year: '2024',
-    tagline: 'From idea to published — one platform for all your social content.',
-    description: 'An AI-powered social media and content management platform that lets users generate, schedule, approve, publish, and analyze content across social media and blog platforms from a single dashboard.',
-    features: [
-      { label: 'AI Content Generation', desc: 'Platform-native drafts for LinkedIn, X, Instagram, Facebook' },
-      { label: 'Content Calendar', desc: 'FullCalendar-based scheduler with approval workflows and post queues' },
-      { label: 'Approval Chains', desc: 'Single and multi-stage workflows with deadline enforcement' },
-      { label: 'Engagement Engine', desc: 'Monitors comments/DMs, suggests replies, automation rules' },
-      { label: 'Image Generation', desc: 'DALL-E, Vertex AI, and Stable Diffusion via pluggable provider registry' },
-      { label: 'Brand Voice Cloning', desc: 'Learns writing style from past posts and applies it to new content' },
-      { label: 'Agency Management', desc: 'Multi-tenant model with client sub-accounts and consolidated billing' },
-    ],
-    url: '#',
-    accent: 'blue',
   },
   {
     id: '03',
@@ -69,13 +69,6 @@ const products = [
 ];
 ---
 
-{/* Redirect visitors to home while page is in progress */}
-<meta http-equiv="refresh" content="0;url=/" />
-<script>window.location.replace('/');</script>
-
-{/* TO RESTORE: remove the two lines above and uncomment the Layout block below */}
-
-{/*
 <Layout title="Ventures — Joyce Doan" description="Products I helped design across three companies — UnifyDesign, SocialCenter.ai, and Marketing Center.">
 
   <header style="position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg-page) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-subtle);">
@@ -158,4 +151,3 @@ const products = [
   <ContactCTA />
   <Footer />
 </Layout>
-*/}
