@@ -149,9 +149,9 @@ function BarChart({
 
 function StatBlock() {
   return (
-    <div style={{ marginBottom: 18 }}>
+    <div style={{ marginBottom: 10 }}>
       <div style={{ fontSize: 11, color: GRAY, marginBottom: 4 }}>Total of Documents</div>
-      <div style={{ fontSize: 30, fontWeight: 700, color: NAVY, lineHeight: 1, marginBottom: 6 }}>100000</div>
+      <div style={{ fontSize: 24, fontWeight: 700, color: NAVY, lineHeight: 1, marginBottom: 5 }}>100000</div>
       <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 11, color: GREEN, fontWeight: 600 }}>
         <i className="ph-bold ph-caret-up" style={{ fontSize: 11 }} />
         11.2% last week
@@ -182,7 +182,7 @@ const cardStyle: React.CSSProperties = {
   background: '#FFFFFF',
   border: '1px solid #E6EAF0',
   borderRadius: 12,
-  padding: '18px 20px',
+  padding: '13px 16px',
   boxShadow: '0 1px 3px rgba(16,33,64,0.05)',
 };
 
@@ -199,7 +199,7 @@ export default function DocDashboardMock() {
       }}
     >
       {/* ── Body ── */}
-      <div style={{ padding: 20 }}>
+      <div style={{ padding: 14 }}>
         {/* Two cards */}
         <div style={{ display: 'grid', gridTemplateColumns: '1.35fr 1fr', gap: 16, marginBottom: 16 }}>
           {/* TAG OVERVIEW */}
@@ -238,7 +238,7 @@ export default function DocDashboardMock() {
               colors={TAGS.map((t) => t.color)}
               yLabels={['1 000 000', '800 000', '600 000', '400 000', '200 000', '0']}
               xAxisLabel="2023"
-              height={190}
+              height={150}
             />
           </div>
 
@@ -268,7 +268,7 @@ export default function DocDashboardMock() {
               colors="#1BBEC0"
               yLabels={['1000', '800', '600', '400', '200', '0']}
               xLabels={['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']}
-              height={190}
+              height={150}
             />
           </div>
         </div>
@@ -282,7 +282,7 @@ export default function DocDashboardMock() {
               display: 'grid',
               gridTemplateColumns: '40px 1.4fr 1.2fr 0.9fr 1.1fr 1fr',
               gap: 12,
-              padding: '10px 14px',
+              padding: '8px 14px',
               background: '#F4F6F9',
               borderRadius: 8,
               fontSize: 11,
@@ -305,7 +305,7 @@ export default function DocDashboardMock() {
                 display: 'grid',
                 gridTemplateColumns: '40px 1.4fr 1.2fr 0.9fr 1.1fr 1fr',
                 gap: 12,
-                padding: '12px 14px',
+                padding: '8px 14px',
                 alignItems: 'center',
                 borderBottom: '1px solid #EDF0F4',
                 fontSize: 12,
@@ -320,7 +320,7 @@ export default function DocDashboardMock() {
                     color: '#FFFFFF',
                     fontSize: 12,
                     fontWeight: 600,
-                    padding: '7px 18px',
+                    padding: '6px 16px',
                     borderRadius: 8,
                     minWidth: 150,
                     textAlign: 'center',

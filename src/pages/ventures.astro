@@ -117,15 +117,29 @@ const products = [
             <p style="font: 400 15px/24px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0 0 24px; font-style: italic;">
               {p.tagline}
             </p>
-            <a
-              href={p.url}
-              target={p.url !== '#' ? '_blank' : undefined}
-              rel="noopener"
-              style={`display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 10px 16px; margin-bottom: 32px; border-radius: var(--radius-md); font: 600 14px/20px 'Poppins', sans-serif; text-decoration: none; transition: opacity 150ms ease; background: var(--primary-700); color: var(--text-inverse); ${p.url === '#' ? 'opacity: 0.4; cursor: not-allowed; pointer-events: none;' : ''}`}
-            >
-              Visit {p.name}
-              <i class="ph-bold ph-arrow-up-right" style="font-size: 13px;"></i>
-            </a>
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 32px; flex-wrap: wrap;">
+              <a
+                href={p.url}
+                target={p.url !== '#' ? '_blank' : undefined}
+                rel="noopener"
+                style={`display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 10px 16px; border-radius: var(--radius-md); font: 600 14px/20px 'Poppins', sans-serif; text-decoration: none; transition: opacity 150ms ease; background: var(--primary-700); color: var(--text-inverse); ${p.url === '#' ? 'opacity: 0.4; cursor: not-allowed; pointer-events: none;' : ''}`}
+              >
+                Visit {p.name}
+                <i class="ph-bold ph-arrow-up-right" style="font-size: 13px;"></i>
+              </a>
+              <button
+                class="like-btn"
+                type="button"
+                data-cursor="hover"
+                data-key={p.name}
+                aria-label={`Like ${p.name}`}
+                style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid var(--border-default); border-radius: var(--radius-md); background: transparent; cursor: pointer; color: var(--text-disabled); transition: color 150ms ease, border-color 150ms ease;"
+              >
+                <svg class="like-heart" width="18" height="18" viewBox="0 0 256 256" style="display: block; fill: none; stroke: currentColor; stroke-width: 18; stroke-linejoin: round;">
+                  <path d="M178,40c-20.65,0-38.73,8.88-50,23.89C116.73,48.88,98.65,40,78,40a62.07,62.07,0,0,0-62,62c0,70,103.79,126.66,108.21,129a8,8,0,0,0,7.58,0C136.21,228.66,240,172,240,102A62.07,62.07,0,0,0,178,40Z"/>
+                </svg>
+              </button>
+            </div>
             <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0 0 32px;">
               {p.description}
             </p>
@@ -151,3 +165,41 @@ const products = [
   <ContactCTA />
   <Footer />
 </Layout>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('.like-btn').forEach(function (btn) {
+      var heart = btn.querySelector('.like-heart');
+      var key = 'liked:venture:' + btn.getAttribute('data-key');
+      var liked = false;
+      try { liked = localStorage.getItem(key) === '1'; } catch (e) {}
+
+      function render() {
+        if (liked) {
+          heart.style.fill = '#E5484D';
+          heart.style.stroke = '#E5484D';
+          btn.style.color = '#E5484D';
+          btn.style.borderColor = 'color-mix(in srgb, #E5484D 45%, transparent)';
+        } else {
+          heart.style.fill = 'none';
+          heart.style.stroke = 'currentColor';
+          btn.style.color = 'var(--text-disabled)';
+          btn.style.borderColor = 'var(--border-default)';
+        }
+      }
+      render();
+
+      btn.addEventListener('click', function () {
+        liked = !liked;
+        try { localStorage.setItem(key, liked ? '1' : '0'); } catch (e) {}
+        if (heart.animate) {
+          heart.animate(
+            [{ transform: 'scale(1)' }, { transform: 'scale(1.35)' }, { transform: 'scale(1)' }],
+            { duration: 260, easing: 'ease-out' }
+          );
+        }
+        render();
+      });
+    });
+  })();
+</script>

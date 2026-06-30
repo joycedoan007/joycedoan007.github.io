@@ -42,11 +42,11 @@ import Footer from '../components/Footer.astro';
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 8px; font: 500 13px/20px 'JetBrains Mono', monospace;">
             {[
               ['Currently', 'Senior UI/UX Designer, Consortia Group'],
-              ['Based', 'San Francisco / Remote'],
+              ['Based', 'Viet Nam / Remote'],
               ['Tools', 'Figma · AI Tools · Notion'],
-              ['Open to', 'Senior / Staff IC roles'],
-            ].map(([k, v]) => (
-              <div style="padding: 12px 0; border-bottom: 1px solid var(--border-subtle);">
+              ['Open to', 'Senior'],
+            ].map(([k, v], i, arr) => (
+              <div style={`padding: 12px 0;${i < arr.length - 2 ? ' border-bottom: 1px solid var(--border-subtle);' : ''}`}>
                 <div style="color: var(--text-secondary); margin-bottom: 2px;">{k}</div>
                 <div style="color: var(--text-bright);">{v}</div>
               </div>
@@ -68,7 +68,7 @@ import Footer from '../components/Footer.astro';
         <div style="border-right: 1px solid var(--border-subtle); padding-top: 40px; padding-right: 40px;">
           <div class="timeline-entry timeline-active" data-job="1" style="padding-bottom: 32px; cursor: pointer;">
             <div style="font: 500 14px/20px 'Poppins', sans-serif; color: var(--text-bright); margin-bottom: 4px;">Jul 2023 – Present</div>
-            <div style="font: 400 13px/18px 'Poppins', sans-serif; color: var(--text-secondary);">2 yrs 6 mos</div>
+            <div style="font: 400 13px/18px 'Poppins', sans-serif; color: var(--text-secondary);">3 yrs</div>
           </div>
           <div style="border-top: 1px solid var(--border-subtle);"></div>
           <div class="timeline-entry" data-job="2" style="padding-top: 24px; cursor: pointer;">
@@ -83,17 +83,17 @@ import Footer from '../components/Footer.astro';
             <h3 style="font: 600 28px/1.2 'Poppins', sans-serif; letter-spacing: -0.02em; color: var(--text-bright); margin: 0 0 8px;">UI/UX Designer</h3>
             <div style="font: 400 14px/20px 'Poppins', sans-serif; color: var(--text-secondary); margin-bottom: 28px;">Consortia Group &nbsp;·&nbsp; United States – Vietnam</div>
             <p style="font: 400 16px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0 0 16px; max-width: 640px;">
-              I work across multiple product teams to design websites, brand identities, internal tools, and scalable design systems.
+              I lead UI/UX (User Interface / User Experience) design across multiple cross-functional product teams — owning websites, brand identity, internal tools, and scalable design systems for B2B SaaS, fintech, and AI products.
             </p>
             <p style="font: 400 16px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0 0 28px; max-width: 640px;">
-              My responsibilities include wireframing, user flow mapping, high-fidelity UI design, interaction design, documenting components for developers, and performing testing after deployment to ensure the product functions correctly and matches the intended design.
+              I drive the end-to-end product design process: user research, wireframing, user flow mapping, information architecture, high-fidelity UI design, interaction design, and interactive prototyping in Figma — then document component specifications and design tokens for engineering handoff and own design QA after deployment to ensure pixel-accurate, accessible, on-brand delivery.
             </p>
             <div style="font: 600 16px/24px 'Poppins', sans-serif; color: var(--text-bright); margin-bottom: 14px;">Key Accomplishments</div>
-            <ul style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; max-width: 640px;">
-              <li>Designed 10+ projects spanning websites, dashboards, and product interfaces across banking, AI-driven marketing, hospitality, and digital education.</li>
-              <li>Used AI tools to speed up ideation, content generation, layout exploration, and component documentation.</li>
-              <li>Built consistent and scalable design systems adopted across multiple products.</li>
-              <li>Communicated effectively with developers through shared understanding of component behavior and system constraints.</li>
+            <ul style="font: 400 16px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; max-width: 640px;">
+              <li>Designed and shipped 10+ products — dashboards, web platforms, and product interfaces — across banking/fintech, AI-driven marketing, hospitality, and digital education.</li>
+              <li>Established and scaled design systems (design tokens, component libraries, documentation) adopted across multiple products, improving consistency and speed to delivery.</li>
+              <li>Integrated AI tools into the design workflow to accelerate ideation, content generation, layout exploration, and component documentation.</li>
+              <li>Partnered with engineering through clear specifications and a shared understanding of component behavior and system constraints, reducing handoff ambiguity and rework.</li>
             </ul>
           </div>
           <div id="job-2" style="display: none;">
@@ -185,8 +185,8 @@ import Footer from '../components/Footer.astro';
             ['Data UX patterns', 'Researching dashboard interaction patterns that reduce cognitive load for analyst workflows.'],
             ['Design-to-code sync', 'Exploring tools and workflows that keep Figma and production code in sync — fewer handoff gaps, fewer surprises.'],
             ['Writing', 'Publishing short essays on product design thinking at the intersection of clarity, systems, and AI.'],
-          ].map(([title, desc]) => (
-            <div style="padding: 20px 0; border-bottom: 1px solid var(--border-subtle);">
+          ].map(([title, desc], i, arr) => (
+            <div style={`padding: 20px 0;${i < arr.length - 1 ? ' border-bottom: 1px solid var(--border-subtle);' : ''}`}>
               <div style="font: 500 14px/20px 'Poppins', sans-serif; color: var(--text-bright); margin-bottom: 4px;">{title}</div>
               <div style="font: 400 14px/22px 'Poppins', sans-serif; color: var(--text-secondary);">{desc}</div>
             </div>
