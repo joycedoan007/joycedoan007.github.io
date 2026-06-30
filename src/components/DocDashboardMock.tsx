@@ -38,8 +38,8 @@ const ROWS = [
   { name: 'Welcome Packet', color: '#3A3AC4', change: '40%', up: true },
 ];
 
-const NAVY = '#16335C';
-const GRAY = '#7B8794';
+const NAVY = 'var(--dd-text)';
+const GRAY = 'var(--dd-muted)';
 const GREEN = '#1FA971';
 const RED = '#E5484D';
 
@@ -70,7 +70,7 @@ function BarChart({
             justifyContent: 'space-between',
             height,
             fontSize: 9,
-            color: '#A6AFBC',
+            color: 'var(--dd-faint)',
             textAlign: 'right',
             minWidth: 48,
           }}
@@ -114,7 +114,7 @@ function BarChart({
                   justifyContent: 'flex-end',
                 }}
               >
-                <span style={{ fontSize: 9, fontWeight: 600, color: '#5B6677', marginBottom: 3 }}>{v}</span>
+                <span style={{ fontSize: 9, fontWeight: 600, color: 'var(--dd-barlabel)', marginBottom: 3 }}>{v}</span>
                 <div
                   style={{
                     width: '72%',
@@ -132,14 +132,14 @@ function BarChart({
       {xLabels && (
         <div style={{ display: 'flex', gap: 6, marginLeft: 56, marginTop: 6 }}>
           {xLabels.map((l, i) => (
-            <span key={i} style={{ flex: 1, textAlign: 'center', fontSize: 9, color: '#A6AFBC' }}>
+            <span key={i} style={{ flex: 1, textAlign: 'center', fontSize: 9, color: 'var(--dd-faint)' }}>
               {l}
             </span>
           ))}
         </div>
       )}
       {xAxisLabel && (
-        <div style={{ textAlign: 'center', marginLeft: 56, marginTop: 6, fontSize: 10, color: '#A6AFBC' }}>
+        <div style={{ textAlign: 'center', marginLeft: 56, marginTop: 6, fontSize: 10, color: 'var(--dd-faint)' }}>
           {xAxisLabel}
         </div>
       )}
@@ -179,8 +179,8 @@ function Dropdown({ label }: { label: string }) {
 }
 
 const cardStyle: React.CSSProperties = {
-  background: '#FFFFFF',
-  border: '1px solid #E6EAF0',
+  background: 'var(--dd-card)',
+  border: '1px solid var(--dd-card-border)',
   borderRadius: 12,
   padding: '13px 16px',
   boxShadow: '0 1px 3px rgba(16,33,64,0.05)',
@@ -189,9 +189,10 @@ const cardStyle: React.CSSProperties = {
 export default function DocDashboardMock() {
   return (
     <div
+      className="doc-dash"
       style={{
         width: '100%',
-        background: '#EEF1F4',
+        background: 'var(--dd-bg)',
         font: "400 13px/1.4 'Poppins', sans-serif",
         color: NAVY,
         boxSizing: 'border-box',
@@ -201,7 +202,7 @@ export default function DocDashboardMock() {
       {/* ── Body ── */}
       <div style={{ padding: 14 }}>
         {/* Two cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1.35fr 1fr', gap: 16, marginBottom: 16 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
           {/* TAG OVERVIEW */}
           <div style={cardStyle}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
@@ -220,7 +221,7 @@ export default function DocDashboardMock() {
                   gridTemplateColumns: 'repeat(4, 1fr)',
                   gap: '6px 10px',
                   fontSize: 10,
-                  color: '#445063',
+                  color: 'var(--dd-text-2)',
                   alignContent: 'start',
                 }}
               >
@@ -250,14 +251,14 @@ export default function DocDashboardMock() {
             </div>
             {/* Week / Month toggle */}
             <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 14 }}>
-              <div style={{ display: 'inline-flex', background: '#FFFFFF', border: '1px solid #E0E5EC', borderRadius: 8, padding: 3, boxShadow: '0 1px 2px rgba(16,33,64,0.06)' }}>
+              <div style={{ display: 'inline-flex', background: 'var(--dd-toggle-bg)', border: '1px solid var(--dd-toggle-border)', borderRadius: 8, padding: 3, boxShadow: '0 1px 2px rgba(16,33,64,0.06)' }}>
                 <span style={{ fontSize: 12, fontWeight: 600, color: GRAY, padding: '5px 16px' }}>Week</span>
                 <span style={{ fontSize: 12, fontWeight: 600, color: '#FFFFFF', background: '#0C5C8E', borderRadius: 6, padding: '5px 16px' }}>Month</span>
               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 4 }}>
               <StatBlock />
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 10, color: '#445063', marginTop: 4 }}>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 10, color: 'var(--dd-text-2)', marginTop: 4 }}>
                 <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#1BBEC0' }} />
                 Account Summary
               </span>
@@ -283,7 +284,7 @@ export default function DocDashboardMock() {
               gridTemplateColumns: '40px 1.4fr 1.2fr 0.9fr 1.1fr 1fr',
               gap: 12,
               padding: '8px 14px',
-              background: '#F4F6F9',
+              background: 'var(--dd-table-head)',
               borderRadius: 8,
               fontSize: 11,
               fontWeight: 600,
@@ -307,12 +308,12 @@ export default function DocDashboardMock() {
                 gap: 12,
                 padding: '8px 14px',
                 alignItems: 'center',
-                borderBottom: '1px solid #EDF0F4',
+                borderBottom: '1px solid var(--dd-row-border)',
                 fontSize: 12,
-                color: '#3C4759',
+                color: 'var(--dd-row-text)',
               }}
             >
-              <span style={{ color: GRAY }} />
+              <span style={{ color: GRAY, fontWeight: 600 }}>{i + 1}</span>
               <span style={{ display: 'flex', justifyContent: 'center' }}>
                 <span
                   style={{
@@ -338,7 +339,7 @@ export default function DocDashboardMock() {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: 5,
-                    background: r.up ? '#DCFAE9' : '#FDE6E6',
+                    background: r.up ? 'var(--dd-up-bg)' : 'var(--dd-down-bg)',
                     color: r.up ? GREEN : RED,
                     fontSize: 12,
                     fontWeight: 600,

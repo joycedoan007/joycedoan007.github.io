@@ -509,7 +509,7 @@ function Featured({
                 border: '1px solid var(--border-subtle)',
                 overflow: 'hidden',
                 marginBottom: 56,
-                background: '#EEF1F4',
+                background: 'transparent',
               }}
             >
               <DocDashboardMock />

@@ -102,3 +102,41 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ── Document Management dashboard mock — theme-adaptive palette ── */
+.doc-dash {
+  --dd-bg: #EEF1F4;
+  --dd-card: #FFFFFF;
+  --dd-card-border: #E6EAF0;
+  --dd-text: #16335C;
+  --dd-text-2: #445063;
+  --dd-muted: #7B8794;
+  --dd-faint: #A6AFBC;
+  --dd-grid: #E3E8EF;
+  --dd-barlabel: #5B6677;
+  --dd-table-head: #F4F6F9;
+  --dd-row-text: #3C4759;
+  --dd-row-border: #EDF0F4;
+  --dd-toggle-bg: #FFFFFF;
+  --dd-toggle-border: #E0E5EC;
+  --dd-up-bg: #DCFAE9;
+  --dd-down-bg: #FDE6E6;
+}
+[data-theme="dark"] .doc-dash {
+  --dd-bg: #0F141A;
+  --dd-card: #161D26;
+  --dd-card-border: rgba(255, 255, 255, 0.08);
+  --dd-text: #EAF0F6;
+  --dd-text-2: #B4BECB;
+  --dd-muted: #8893A2;
+  --dd-faint: #5E6878;
+  --dd-grid: rgba(255, 255, 255, 0.08);
+  --dd-barlabel: #B4BECB;
+  --dd-table-head: #1C2530;
+  --dd-row-text: #C5CDD8;
+  --dd-row-border: rgba(255, 255, 255, 0.06);
+  --dd-toggle-bg: #1C2530;
+  --dd-toggle-border: rgba(255, 255, 255, 0.12);
+  --dd-up-bg: rgba(31, 169, 113, 0.18);
+  --dd-down-bg: rgba(229, 72, 77, 0.18);
+}
