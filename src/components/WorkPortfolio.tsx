@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import DocDashboardMock from './DocDashboardMock';
 
+const SHOW_FEATURED_VISUAL = false;
 const SHOW_DOC_DASHBOARD_MOCK = false;
 
 export interface WorkItem {
@@ -504,7 +505,7 @@ function Featured({
         </div>
 
         <div data-reveal style={{ '--reveal-delay': '140ms' } as React.CSSProperties}>
-          {item.slug === '01-document-management' && SHOW_DOC_DASHBOARD_MOCK ? (
+          {SHOW_FEATURED_VISUAL && (item.slug === '01-document-management' && SHOW_DOC_DASHBOARD_MOCK ? (
             <div
               style={{
                 borderRadius: 'var(--radius-lg)',
@@ -547,7 +548,7 @@ function Featured({
                 {item.tag} · {item.title}
               </div>
             </div>
-          )}
+          ))}
         </div>
 
         <div data-reveal style={{ '--reveal-delay': '200ms' } as React.CSSProperties}>
