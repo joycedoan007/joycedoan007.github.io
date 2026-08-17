@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import DocDashboardMock from './DocDashboardMock';
 
+const SHOW_DOC_DASHBOARD_MOCK = false;
+
 export interface WorkItem {
   id: string;
   slug?: string;
@@ -502,7 +504,7 @@ function Featured({
         </div>
 
         <div data-reveal style={{ '--reveal-delay': '140ms' } as React.CSSProperties}>
-          {item.slug === '01-document-management' ? (
+          {item.slug === '01-document-management' && SHOW_DOC_DASHBOARD_MOCK ? (
             <div
               style={{
                 borderRadius: 'var(--radius-lg)',
