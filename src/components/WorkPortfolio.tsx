@@ -22,14 +22,6 @@ export interface WorkItem {
   order: number;
 }
 
-// Public projects — hover card shows a "Public · live site" footer.
-// Everything else is treated as a confidential / internal project.
-const PUBLIC_SLUGS = new Set<string>([
-  '07-survival-vietnamese',
-  '02-consortia-group-website',
-  '03-skalaview-website',
-]);
-
 // ─── SVG dashboard thumbnail ─────────────────────────────────────────────────
 function DashThumb({ accent }: { accent: WorkItem['accent'] }) {
   const stroke = accent === 'green' ? 'rgba(0,216,146,0.6)' : 'rgba(255,255,255,0.4)';
@@ -190,7 +182,7 @@ function WorkRow({
   item: WorkItem;
   idx: number;
   onOpen: (item: WorkItem) => void;
-  onHover: (item: WorkItem | null, e?: React.MouseEvent) => void;
+  onHover: (item: WorkItem | null) => void;
   isHovered: boolean;
 }) {
   const rowStyle: React.CSSProperties = {
@@ -243,9 +235,8 @@ function WorkRow({
     return (
       <a
         href={`/work/${item.slug}`}
-        onMouseEnter={(e) => onHover(item, e)}
+        onMouseEnter={() => onHover(item)}
         onMouseLeave={() => onHover(null)}
-        onMouseMove={(e) => onHover(item, e)}
         data-cursor="hover"
         style={rowStyle}
       >
@@ -256,9 +247,8 @@ function WorkRow({
 
   return (
     <div
-      onMouseEnter={(e) => onHover(item, e)}
+      onMouseEnter={() => onHover(item)}
       onMouseLeave={() => onHover(null)}
-      onMouseMove={(e) => onHover(item, e)}
       onClick={() => onOpen(item)}
       data-cursor="hover"
       style={rowStyle}
@@ -277,10 +267,8 @@ function WorkIndex({
   onOpen: (item: WorkItem) => void;
 }) {
   const [hoverItem, setHoverItem] = useState<WorkItem | null>(null);
-  const [hoverPos, setHoverPos] = useState({ x: 0, y: 0 });
 
-  function handleHover(item: WorkItem | null, e?: React.MouseEvent) {
-    if (item && e) setHoverPos({ x: e.clientX, y: e.clientY });
+  function handleHover(item: WorkItem | null) {
     setHoverItem(item);
   }
 
@@ -313,14 +301,6 @@ function WorkIndex({
               Selected work, indexed.
             </h2>
           </div>
-          <span
-            style={{
-              font: "500 13px/20px 'JetBrains Mono', monospace",
-              color: 'var(--text-secondary)',
-            }}
-          >
-            Hover · click to open
-          </span>
         </div>
 
         {/* Table header */}
@@ -356,99 +336,6 @@ function WorkIndex({
           />
         ))}
       </div>
-
-      {/* Floating thumbnail */}
-      {hoverItem && (
-        <div
-          style={{
-            position: 'fixed',
-            top: hoverPos.y - 140,
-            left: hoverPos.x + 32,
-            width: 320,
-            height: 220,
-            borderRadius: 'var(--radius-lg)',
-            border: '1px solid var(--border-subtle)',
-            background:
-              hoverItem.accent === 'green'
-                ? 'linear-gradient(135deg, #002923 0%, #005441 60%, color-mix(in srgb, var(--primary-500) 40%, #002923) 100%)'
-                : 'linear-gradient(135deg, #0B0E12 0%, #1A1A1A 100%)',
-            pointerEvents: 'none',
-            zIndex: 100,
-            overflow: 'hidden',
-            boxShadow: '0 24px 60px rgba(0,0,0,0.4)',
-          }}
-        >
-          {(() => {
-            const isPublic = !!(hoverItem.slug && PUBLIC_SLUGS.has(hoverItem.slug));
-            return (
-            /* Text summary card — public or confidential */
-            <div
-              style={{
-                width: '100%',
-                height: '100%',
-                padding: '20px 22px',
-                display: 'flex',
-                flexDirection: 'column',
-                boxSizing: 'border-box',
-              }}
-            >
-              <div
-                style={{
-                  font: "600 10px/14px 'JetBrains Mono', monospace",
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  color: 'rgba(255,255,255,0.55)',
-                  marginBottom: 10,
-                }}
-              >
-                {hoverItem.tag}
-              </div>
-              <div
-                style={{
-                  font: "600 19px/24px 'Poppins', sans-serif",
-                  letterSpacing: '-0.02em',
-                  color: '#ffffff',
-                  marginBottom: 10,
-                }}
-              >
-                {hoverItem.title}
-              </div>
-              <p
-                style={{
-                  font: "400 12px/18px 'Poppins', sans-serif",
-                  color: 'rgba(255,255,255,0.66)',
-                  margin: 0,
-                  display: '-webkit-box',
-                  WebkitLineClamp: 3,
-                  WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden',
-                }}
-              >
-                {hoverItem.summary}
-              </p>
-              <div
-                style={{
-                  marginTop: 'auto',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 6,
-                  font: "500 10px/14px 'JetBrains Mono', monospace",
-                  letterSpacing: '0.04em',
-                  textTransform: 'uppercase',
-                  color: 'rgba(255,255,255,0.45)',
-                }}
-              >
-                <i
-                  className={isPublic ? 'ph-bold ph-globe-simple' : 'ph-bold ph-lock-simple'}
-                  style={{ fontSize: 12 }}
-                />
-                {isPublic ? 'Public · live site' : 'Confidential · internal project'}
-              </div>
-            </div>
-            );
-          })()}
-        </div>
-      )}
     </section>
   );
 }
