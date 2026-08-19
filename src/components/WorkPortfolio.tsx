@@ -341,13 +341,7 @@ function WorkIndex({
 }
 
 // ─── Featured section ─────────────────────────────────────────────────────────
-function Featured({
-  item,
-  onOpen,
-}: {
-  item: WorkItem;
-  onOpen: (item: WorkItem) => void;
-}) {
+function Featured({ item }: { item: WorkItem }) {
   return (
     <section
       id="featured"
@@ -436,96 +430,6 @@ function Featured({
               </div>
             </div>
           ))}
-        </div>
-
-        <div data-reveal style={{ '--reveal-delay': '200ms' } as React.CSSProperties}>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr 1fr',
-              gap: 48,
-              paddingTop: 32,
-              borderTop: '1px solid var(--border-subtle)',
-            }}
-          >
-            {(
-              [
-                ['Problem', item.problem],
-                ['Approach', item.approach],
-                ['Outcome', item.outcome],
-              ] as [string, string][]
-            ).map(([h, body]) => (
-              <div key={h}>
-                <div className="overline" style={{ marginBottom: 12 }}>
-                  {h}
-                </div>
-                <p
-                  style={{
-                    font: "400 15px/24px 'Poppins', sans-serif",
-                    color: 'var(--text-primary)',
-                    margin: 0,
-                  }}
-                >
-                  {body}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div data-reveal style={{ '--reveal-delay': '260ms' } as React.CSSProperties}>
-          <div
-            style={{
-              marginTop: 48,
-              display: 'grid',
-              gridTemplateColumns: `repeat(${item.metrics.length}, 1fr) auto`,
-              gap: 0,
-              border: '1px solid var(--border-subtle)',
-              borderRadius: 'var(--radius-lg)',
-              background: 'var(--bg-page)',
-            }}
-          >
-            {item.metrics.map(({ value, label }) => (
-              <div
-                key={label}
-                style={{
-                  padding: 24,
-                  borderRight: '1px solid var(--border-subtle)',
-                }}
-              >
-                <div className="overline" style={{ marginBottom: 8 }}>
-                  {label}
-                </div>
-                <div
-                  style={{
-                    font: "500 48px/52px 'Poppins', sans-serif",
-                    letterSpacing: '-0.025em',
-                    color: 'var(--text-accent)',
-                  }}
-                >
-                  {value}
-                </div>
-              </div>
-            ))}
-            <button
-              onClick={() => onOpen(item)}
-              data-cursor="hover"
-              style={{
-                padding: '24px 32px',
-                background: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-                color: 'var(--text-bright)',
-                font: "600 15px/20px 'Poppins', sans-serif",
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 12,
-              }}
-            >
-              Read full case
-              <i className="ph-bold ph-arrow-right" style={{ fontSize: 16 }} />
-            </button>
-          </div>
         </div>
       </div>
     </section>
@@ -742,7 +646,7 @@ export default function WorkPortfolio({
   return (
     <>
       <WorkIndex items={items} onOpen={setOpenItem} />
-      <Featured item={featured} onOpen={setOpenItem} />
+      <Featured item={featured} />
       <CaseModal item={openItem} onClose={() => setOpenItem(null)} />
     </>
   );
