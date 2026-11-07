@@ -6,92 +6,275 @@ interface Props {
 const { stats, company } = Astro.props;
 ---
 
-<section id="top" style="border-bottom: 1px solid var(--border-subtle);">
-  <div style="max-width: 1320px; margin: 0 auto; padding: 64px 48px 48px; min-height: calc(100svh - var(--header-h, 64px) - 72px); display: flex; flex-direction: column;">
-    <!-- Name + info grid -->
-    <div style="flex: 1; display: grid; grid-template-columns: 1fr 320px; gap: 64px; align-items: flex-end; align-content: flex-end;">
-      <!-- Big name -->
-      <div data-reveal>
-        <div class="overline" style="margin-bottom: 24px;">UI/UX Designer</div>
-        <h1
-          style="font: 500 clamp(72px, 10vw, 160px)/0.86 'Poppins', sans-serif; letter-spacing: -0.05em; color: var(--text-bright); margin: 0; text-wrap: balance;"
-        >
-          Joyce<br />Doan<span style="color: var(--text-accent);">.</span>
-        </h1>
+<section id="top" class="hero">
+  <div class="hero__inner">
+    <!-- Left: message -->
+    <div data-reveal class="hero__text">
+      <div class="hero__chip">
+        <span class="hero__avatar"><img src="/joyce.jpg" alt="" width="44" height="44" /></span>
+        <span>Joyce Doan · UI/UX Designer</span>
+      </div>
+      <h1 class="hero__title">
+        I turn repetitive work into automated<span style="color: var(--text-accent);"> workflows.</span>
+      </h1>
+      <p class="hero__tagline">
+        I'm always researching and testing AI-powered tools, then applying them across design,
+        research and everyday tasks, so more of my time goes to work that needs a human.
+      </p>
+      <div class="hero__actions">
+        <a href="/work" data-cursor="hover" class="hero__cta">
+          See the work <i class="ph-bold ph-arrow-right" style="font-size: 14px;"></i>
+        </a>
+        <a href="/contact" data-cursor="hover" class="hero__link">
+          Get in touch <i class="ph ph-arrow-up-right" style="font-size: 14px;"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: manual -> automated demo -->
+    <div data-reveal style="--reveal-delay: 120ms;" class="flow" id="flow" aria-hidden="true">
+      <div class="flow__head">
+        <span class="flow__title">Weekly workflow</span>
+        <div class="flow__toggle" data-toggle>
+          <span class="flow__thumb"></span>
+          <span data-mode="manual">Manual</span>
+          <span data-mode="auto">Automated</span>
+        </div>
       </div>
 
-      <!-- Info column -->
-      <div data-reveal style="--reveal-delay: 120ms;">
-        <div style="display: flex; flex-direction: column; gap: 24px; padding-bottom: 12px;">
-          <p
-            style="font: 400 14px/22px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;"
-          >
-            Designs dashboards and complex interfaces where clarity matters more than decoration.
-            Currently exploring the intersection of AI, UX, and product design.
-          </p>
-          <!-- Key-value pairs -->
-          <div
-            style="display: flex; flex-direction: column; gap: 12px; font: 500 13px/20px 'JetBrains Mono', monospace;"
-          >
-            {
-              [
-                ['Role', 'UI/UX Designer'],
-                ['Co.', company],
-                ['Focus', 'Data UX · AI · Systems'],
-              ].map(([k, v]) => (
-                <div
-                  style="display: grid; grid-template-columns: 64px 1fr; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);"
-                >
-                  <span style="color: var(--text-secondary);">{k}</span>
-                  <span style="color: var(--text-bright);">{v}</span>
-                </div>
-              ))
-            }
-          </div>
-          <!-- CTAs -->
-          <div style="display: flex; gap: 8px;">
-            <a
-              href="/work"
-              data-cursor="hover"
-              style="flex: 1; height: 44px; padding: 10px 16px; background: var(--primary-700); color: var(--text-inverse); border-radius: var(--radius-md); font: 600 14px/20px 'Poppins', sans-serif; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;"
-            >
-              See the work <i class="ph-bold ph-arrow-right" style="font-size: 14px;"></i>
-            </a>
-            <a
-              href="/contact"
-              data-cursor="hover"
-              style="height: 44px; width: 44px; border: 1px solid var(--border-default); color: var(--text-bright); border-radius: var(--radius-md); display: inline-flex; align-items: center; justify-content: center;"
-            >
-              <i class="ph ph-paper-plane-tilt" style="font-size: 16px;"></i>
-            </a>
-          </div>
+      <ul class="flow__list">
+        {
+          [
+            ['ph-notebook', 'Summarise research & meeting notes', '40 min', '2 min'],
+            ['ph-folder-simple', 'Export, rename & organise assets', '25 min', '1 min'],
+            ['ph-file-text', 'Draft handoff specs & docs', '50 min', '3 min'],
+            ['ph-chart-line-up', 'Compile weekly report & follow-ups', '30 min', '2 min'],
+          ].map(([icon, label, manual, auto]) => (
+            <li class="flow__row" data-row>
+              <span class="flow__status"><i class={`ph ${icon} flow__icon`}></i><i class="ph-bold ph-check flow__check"></i><span class="flow__spin"></span></span>
+              <span class="flow__label">{label}</span>
+              <span class="flow__time"><s>{manual}</s><b>{auto}</b></span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="flow__foot">
+        <div class="flow__bar"><span data-bar></span></div>
+        <div class="flow__saved">
+          <span>Time saved</span>
+          <strong data-saved>0h 00m</strong>
         </div>
       </div>
     </div>
-
-    <!-- Stats row -->
-    <div
-      data-reveal
-      style="--reveal-delay: 200ms; margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--border-subtle); display: grid; grid-template-columns: repeat(4, 1fr);"
-    >
-      {
-        stats.map((s, i) => (
-          <div
-            style={`padding-left: ${i > 0 ? '24px' : '0'}; border-left: ${i > 0 ? '1px solid var(--border-subtle)' : 'none'};`}
-          >
-            <div
-              style="font: 500 13px/18px 'JetBrains Mono', monospace; color: var(--text-secondary); margin-bottom: 8px;"
-            >
-              {String(i + 1).padStart(2, '0')} · {s.l}
-            </div>
-            <div
-              style="font: 500 56px/60px 'Poppins', sans-serif; letter-spacing: -0.03em; color: var(--text-bright);"
-            >
-              {s.n}
-            </div>
-          </div>
-        ))
-      }
-    </div>
   </div>
 </section>
+
+<script>
+  const flow = document.getElementById('flow');
+  if (flow) {
+    const rows = [...flow.querySelectorAll<HTMLElement>('[data-row]')];
+    const bar = flow.querySelector<HTMLElement>('[data-bar]')!;
+    const saved = flow.querySelector<HTMLElement>('[data-saved]')!;
+    const toggle = flow.querySelector<HTMLElement>('[data-toggle]')!;
+    const TOTAL_SAVED = 137; // minutes: 145 manual - 8 automated
+    const fmt = (m: number) => `${Math.floor(m / 60)}h ${String(Math.round(m % 60)).padStart(2, '0')}m`;
+    const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+    const setSaved = (v: number) => (saved.textContent = fmt(v));
+    const countTo = (to: number, ms: number) =>
+      new Promise<void>((resolve) => {
+        const t0 = performance.now();
+        const tick = (t: number) => {
+          const k = Math.min((t - t0) / ms, 1);
+          setSaved(to * (1 - Math.pow(1 - k, 3)));
+          k < 1 ? requestAnimationFrame(tick) : resolve();
+        };
+        requestAnimationFrame(tick);
+      });
+
+    const reset = () => {
+      toggle.dataset.state = 'manual';
+      rows.forEach((r) => (r.className = 'flow__row'));
+      bar.style.width = '0%';
+      setSaved(0);
+    };
+
+    const showFinal = () => {
+      toggle.dataset.state = 'auto';
+      rows.forEach((r) => (r.className = 'flow__row is-done'));
+      bar.style.width = '100%';
+      setSaved(TOTAL_SAVED);
+    };
+
+    const loop = async () => {
+      while (true) {
+        reset();
+        await wait(1800);
+        toggle.dataset.state = 'auto';
+        await wait(500);
+        for (let i = 0; i < rows.length; i++) {
+          rows[i].classList.add('is-running');
+          await wait(750);
+          rows[i].classList.remove('is-running');
+          rows[i].classList.add('is-done');
+          bar.style.width = `${((i + 1) / rows.length) * 100}%`;
+        }
+        await countTo(TOTAL_SAVED, 900);
+        await wait(3200);
+      }
+    };
+
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) showFinal();
+    else loop();
+  }
+</script>
+
+<style>
+  .hero { border-bottom: 1px solid var(--border-subtle); }
+  .hero__inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 64px 48px;
+    min-height: calc(100svh - var(--header-h, 64px) - 72px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 520px);
+    gap: 80px;
+    align-items: center;
+  }
+  .hero__text { display: flex; flex-direction: column; align-items: flex-start; gap: 28px; }
+  .hero__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 16px 6px 6px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    font: 500 12px/16px 'JetBrains Mono', monospace;
+    color: var(--text-secondary);
+  }
+  .hero__avatar { position: relative; width: 36px; height: 36px; border-radius: 50%; overflow: hidden; }
+  .hero__avatar img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; display: block; }
+  .hero__avatar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.35;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  .hero__title {
+    font: 500 clamp(36px, 4.3vw, 64px)/1.05 'Poppins', sans-serif;
+    letter-spacing: -0.045em;
+    color: var(--text-bright);
+    margin: 0;
+    text-wrap: balance;
+  }
+  .hero__tagline {
+    font: 400 17px/28px 'Poppins', sans-serif;
+    color: var(--text-primary);
+    max-width: 520px;
+    margin: 0;
+  }
+  .hero__actions { display: flex; align-items: center; gap: 28px; }
+  .hero__cta {
+    height: 48px;
+    padding: 10px 22px;
+    background: var(--primary-700);
+    color: var(--text-inverse);
+    border-radius: var(--radius-md);
+    font: 600 14px/20px 'Poppins', sans-serif;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero__link {
+    font: 500 14px/20px 'Poppins', sans-serif;
+    color: var(--text-bright);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1px solid var(--border-default);
+    padding-bottom: 2px;
+  }
+
+  /* Automation demo */
+  .flow {
+    border: 1px solid var(--border-default);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: var(--bg-surface, transparent);
+  }
+  .flow__head { display: flex; align-items: center; justify-content: space-between; }
+  .flow__title { font: 500 12px/16px 'JetBrains Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); }
+  .flow__toggle {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 3px;
+    border: 1px solid var(--border-default);
+    border-radius: 999px;
+    font: 500 12px/16px 'JetBrains Mono', monospace;
+  }
+  .flow__toggle span[data-mode] { position: relative; z-index: 1; padding: 6px 14px; text-align: center; color: var(--text-secondary); transition: color 0.3s; }
+  .flow__thumb { position: absolute; top: 3px; bottom: 3px; left: 3px; width: calc(50% - 3px); border-radius: 999px; background: var(--text-bright); transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+  .flow__toggle[data-state='manual'] [data-mode='manual'],
+  .flow__toggle[data-state='auto'] [data-mode='auto'] { color: var(--bg-page, #fff); }
+  .flow__toggle[data-state='auto'] .flow__thumb { transform: translateX(100%); }
+
+  .flow__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .flow__row {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .flow__row.is-running { border-color: var(--text-accent); }
+  .flow__row.is-done { border-color: var(--border-subtle); background: color-mix(in srgb, var(--text-accent) 6%, transparent); }
+  .flow__status {
+    position: relative;
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    border: 1px solid var(--border-subtle);
+    display: grid; place-items: center;
+    color: var(--text-secondary);
+    font-size: 18px;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+  }
+  .flow__status > * { grid-area: 1 / 1; transition: opacity 0.2s, transform 0.3s; }
+  .flow__check, .flow__spin { opacity: 0; transform: scale(0.6); }
+  .flow__spin { width: 16px; height: 16px; border: 2px solid var(--border-default); border-top-color: var(--text-accent); border-radius: 50%; }
+  .flow__row.is-running .flow__icon { opacity: 0; }
+  .flow__row.is-running .flow__spin { opacity: 1; transform: none; animation: flow-spin 0.7s linear infinite; }
+  .flow__row.is-done .flow__icon { opacity: 0; }
+  .flow__row.is-done .flow__check { opacity: 1; transform: none; }
+  .flow__row.is-done .flow__status { background: var(--primary-700); border-color: var(--primary-700); color: var(--text-inverse); }
+  .flow__label { font: 500 14px/20px 'Poppins', sans-serif; color: var(--text-bright); }
+  .flow__time { display: grid; justify-items: end; font: 500 12px/16px 'JetBrains Mono', monospace; }
+  .flow__time > * { grid-area: 1 / 1; transition: opacity 0.3s, transform 0.3s; }
+  .flow__time s { color: var(--text-secondary); }
+  .flow__time b { color: var(--text-accent); font-weight: 600; opacity: 0; transform: translateY(6px); }
+  .flow__row.is-done .flow__time s { opacity: 0; transform: translateY(-6px); }
+  .flow__row.is-done .flow__time b { opacity: 1; transform: none; }
+
+  .flow__foot { display: flex; align-items: center; gap: 20px; padding-top: 4px; }
+  .flow__bar { flex: 1; height: 4px; border-radius: 4px; background: var(--border-subtle); overflow: hidden; }
+  .flow__bar span { display: block; height: 100%; width: 0; background: var(--text-accent); transition: width 0.5s ease; }
+  .flow__saved { display: flex; align-items: baseline; gap: 10px; font: 500 12px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); }
+  .flow__saved strong { font: 500 24px/28px 'Poppins', sans-serif; letter-spacing: -0.02em; color: var(--text-bright); font-variant-numeric: tabular-nums; }
+
+  @keyframes flow-spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 900px) {
+    .hero__inner { grid-template-columns: 1fr; gap: 40px; padding: 32px 24px 48px; }
+  }
+</style>
