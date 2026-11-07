@@ -2,12 +2,17 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import ThemeToggle from '../../components/ThemeToggle';
+import LangSwitch from '../../components/LangSwitch.astro';
 import WorkSidebar from '../../components/WorkSidebar.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
+import L from '../../components/L.astro';
 import '../../styles/global.css';
 
 const all = await getCollection('work');
 const sorted = all.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+const allVi = await getCollection('work-vi');
+const vd = (e: (typeof sorted)[number]) => allVi.find((v) => v.slug === e.slug)?.data ?? e.data;
+const catVi: Record<string, string> = { 'Branding': 'Thương hiệu', 'Product Design': 'Thiết kế sản phẩm', 'Web Design': 'Thiết kế web', 'All': 'Tất cả' };
 const recent = sorted.slice(0, 2);
 const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
 ---
@@ -21,9 +26,12 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
           <img src="/logo.svg" alt="Joyce Doan" height="18" style="display: block; filter: var(--logo-filter);" />
         </a>
         <span style="font: 400 12px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">/</span>
-        <a href="/work" style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-bright); text-decoration: none;">Work</a>
+        <a href="/work" style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-bright); text-decoration: none;"><L en="Work" vi="Dự án" /></a>
       </div>
-      <ThemeToggle client:load />
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <LangSwitch />
+        <ThemeToggle client:load />
+      </div>
     </div>
   </header>
 
@@ -35,10 +43,10 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
 
       <!-- Hero -->
       <div style="padding: 56px 72px 48px; border-bottom: 1px solid var(--border-subtle);">
-        <div class="overline" style="margin-bottom: 16px;">UI/UX Designer</div>
-        <h1 style="font: 500 48px/1.0 'Poppins', sans-serif; letter-spacing: -0.04em; color: var(--text-bright); margin: 0 0 12px;">Work</h1>
+        <div class="overline" style="margin-bottom: 16px;" data-i18n>UI/UX Designer</div>
+        <h1 style="font: 500 48px/1.0 'Poppins', sans-serif; letter-spacing: -0.04em; color: var(--text-bright); margin: 0 0 12px;"><L en="Work" vi="Dự án" /></h1>
         <p style="font: 400 15px/24px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0; max-width: 480px;">
-          Product UX and web design across analytics, AI, finance, and B2B SaaS.
+          <L en="Product UX and web design across analytics, AI, finance, and B2B SaaS." vi="Thiết kế UX sản phẩm và thiết kế web trong các lĩnh vực analytics, AI, tài chính và B2B SaaS." />
         </p>
       </div>
 
@@ -46,7 +54,7 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
 
         <!-- Featured -->
         <div style="margin-bottom: 56px;">
-          <h2 style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 20px;">Featured</h2>
+          <h2 style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 20px;"><L en="Featured" vi="Nổi bật" /></h2>
           <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
             {featured.map((e) => (
               <a href={`/work/${e.slug}`} class="work-card" style="display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); background: var(--bg-surface); text-decoration: none; overflow: hidden; transition: border-color 150ms ease;">
@@ -55,12 +63,12 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
                 </div>
                 <div style="padding: 20px 24px; display: flex; flex-direction: column; gap: 24px; flex: 1; justify-content: space-between;">
                   <div>
-                    <div class="overline" style="margin-bottom: 10px;">{e.data.subtitle}</div>
-                    <h3 style="font: 500 15px/1.4 'Poppins', sans-serif; color: var(--text-bright); margin: 0 0 8px;">{e.data.title}</h3>
-                    <p style="font: 400 13px/20px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0;">{e.data.description}</p>
+                    <div class="overline" style="margin-bottom: 10px;"><L en={e.data.subtitle} vi={vd(e).subtitle} /></div>
+                    <h3 style="font: 500 15px/1.4 'Poppins', sans-serif; color: var(--text-bright); margin: 0 0 8px;"><L en={e.data.title} vi={vd(e).title} /></h3>
+                    <p style="font: 400 13px/20px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0;"><L en={e.data.description} vi={vd(e).description} /></p>
                   </div>
                   <div style="display: flex; align-items: center; justify-content: space-between;">
-                    <span style="font: 400 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">{e.data.role} · {e.data.year}</span>
+                    <span style="font: 400 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);"><L en={e.data.role} vi={vd(e).role} /> · {e.data.year}</span>
                     <i class="ph-bold ph-arrow-up-right" style="font-size: 13px; color: var(--text-disabled);"></i>
                   </div>
                 </div>
@@ -72,7 +80,7 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
         <!-- All projects -->
         <div>
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
-            <h2 style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; margin: 0;">All projects</h2>
+            <h2 style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; margin: 0;"><L en="All projects" vi="Tất cả dự án" /></h2>
             <div id="work-filters" style="display: flex; gap: 6px;">
               {['All', 'Product Design', 'Web Design', 'Branding'].map((cat) => (
                 <button
@@ -80,7 +88,7 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
                   class="filter-btn"
                   style={`padding: 5px 12px; border-radius: var(--radius-full); border: 1px solid var(--border-subtle); background: ${cat === 'All' ? 'var(--primary-700)' : 'transparent'}; color: ${cat === 'All' ? 'var(--text-inverse)' : 'var(--text-secondary)'}; font: 500 11px/16px 'JetBrains Mono', monospace; letter-spacing: 0.04em; cursor: pointer; transition: all 150ms ease;`}
                 >
-                  {cat}
+                  <L en={cat} vi={catVi[cat] ?? cat} />
                 </button>
               ))}
             </div>
@@ -89,8 +97,8 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
             {sorted.map((e, i) => (
               <a href={`/work/${e.slug}`} class="project-row" data-category={e.data.category ?? ''} style={`display: grid; grid-template-columns: 32px 1fr 180px 80px; gap: 24px; align-items: center; padding: 16px 0;${i < sorted.length - 1 ? ' border-bottom: 1px solid var(--border-subtle);' : ''} text-decoration: none; transition: padding 150ms ease;`}>
                 <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">{String(i + 1).padStart(2, '0')}</span>
-                <span style="font: 500 14px/20px 'Poppins', sans-serif; color: var(--text-bright);">{e.data.title}</span>
-                <span style="font: 500 10px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.06em; text-transform: uppercase;">{e.data.category ?? ''}</span>
+                <span style="font: 500 14px/20px 'Poppins', sans-serif; color: var(--text-bright);"><L en={e.data.title} vi={vd(e).title} /></span>
+                <span style="font: 500 10px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.06em; text-transform: uppercase;"><L en={e.data.category ?? ''} vi={catVi[e.data.category ?? ''] ?? e.data.category ?? ''} /></span>
                 <span style="font: 400 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); text-align: right;">{e.data.year}</span>
               </a>
             ))}

@@ -1,0 +1,22 @@
+// English -> Vietnamese for the work pages and the homepage Work section.
+export const work: Record<string, string> = {
+  '01 · The work —': '01 · Dự án —',
+  'entries': 'dự án',
+  'Selected work, indexed.': 'Dự án tiêu biểu, được lập chỉ mục.',
+  'Category': 'Danh mục',
+  'Project': 'Dự án',
+  'Role': 'Vai trò',
+  'Year': 'Năm',
+  '02 · Featured deep dive': '02 · Dự án nổi bật',
+  'Close': 'Đóng',
+  'Problem': 'Vấn đề',
+  'Approach': 'Hướng tiếp cận',
+  'Outcome': 'Kết quả',
+  'Product UX and web design across analytics, AI, finance, and B2B SaaS.': 'Thiết kế UX sản phẩm và thiết kế web trong các lĩnh vực analytics, AI, tài chính và B2B SaaS.',
+  'Featured': 'Nổi bật',
+  'All projects': 'Tất cả dự án',
+  'All': 'Tất cả',
+  'Skills': 'Kỹ năng',
+  'Previous': 'Trước',
+  'Next': 'Tiếp theo',
+};

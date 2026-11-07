@@ -1,5 +1,6 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import L from './L.astro';
 
 interface Props {
   entries: CollectionEntry<'work'>[];
@@ -8,6 +9,9 @@ interface Props {
 
 const { entries, activeSlug = '' } = Astro.props;
 
+const viEntries = await getCollection('work-vi');
+const viOf = (slug: string) => viEntries.find((v) => v.slug === slug)?.data;
+const catVi: Record<string, string> = { 'Branding': 'Thương hiệu', 'Product Design': 'Thiết kế sản phẩm', 'Web Design': 'Thiết kế web', 'Other': 'Khác' };
 const categoryOrder: string[] = [];
 const grouped: Record<string, typeof entries> = {};
 for (const e of entries) {
@@ -31,7 +35,7 @@ for (const e of entries) {
             style="width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background: none; border: none; cursor: pointer; text-align: left;"
             class="cat-toggle"
           >
-            <span style="font: 500 12px/16px 'Poppins', sans-serif; color: var(--text-secondary); letter-spacing: 0.01em;">{cat}</span>
+            <span style="font: 500 12px/16px 'Poppins', sans-serif; color: var(--text-secondary); letter-spacing: 0.01em;"><L en={cat} vi={catVi[cat] ?? cat} /></span>
             <svg data-cat-chevron={catId} width="12" height="12" viewBox="0 0 12 12" fill="none"
               style={`flex-shrink: 0; transition: transform 200ms ease; transform: rotate(${isExpanded ? '90deg' : '0deg'});`}>
               <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -47,7 +51,7 @@ for (const e of entries) {
                   class={isActive ? '' : 'sidebar-link'}
                 >
                   <div style={`font: ${isActive ? '500' : '400'} 12px/18px 'Poppins', sans-serif; color: ${isActive ? 'var(--text-bright)' : 'var(--text-secondary)'}; margin-bottom: 2px; transition: color 150ms ease;`}>
-                    {e.data.title}
+                    <L en={e.data.title} vi={viOf(e.slug)?.title ?? e.data.title} />
                   </div>
                   <div style="font: 400 10px/14px 'JetBrains Mono', monospace; color: var(--text-disabled);">
                     {e.data.year ?? ''}

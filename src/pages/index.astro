@@ -14,11 +14,23 @@ import '../styles/global.css';
 import { getCollection } from 'astro:content';
 
 const writingEntries = await getCollection('writing');
+const writingEntriesVi = await getCollection('writing-vi');
 const writingItems = writingEntries
   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
-  .map((e) => ({ ...e.data, slug: e.slug }));
+  .map((e) => {
+    const vi = writingEntriesVi.find((v) => v.slug === e.slug)?.data ?? e.data;
+    return {
+      ...e.data,
+      slug: e.slug,
+      titleVi: vi.title,
+      descriptionVi: vi.description,
+      readTimeVi: vi.readTime,
+      categoryVi: vi.category,
+    };
+  });
 
 const workEntries = await getCollection('work');
+const workViEntries = await getCollection('work-vi');
 const workItems = workEntries
   .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
   .slice(0, 6)
@@ -29,6 +41,10 @@ const workItems = workEntries
     title: entry.data.title,
     year: entry.data.year ?? '',
     role: entry.data.role,
+    titleVi: workViEntries.find((v) => v.slug === entry.slug)?.data.title ?? entry.data.title,
+    tagVi: workViEntries.find((v) => v.slug === entry.slug)?.data.subtitle ?? entry.data.subtitle,
+    summaryVi: workViEntries.find((v) => v.slug === entry.slug)?.data.description ?? entry.data.description,
+    roleVi: workViEntries.find((v) => v.slug === entry.slug)?.data.role ?? entry.data.role,
     size: entry.data.skills.join(' · '),
     accent: 'dark' as const,
     summary: entry.data.description,

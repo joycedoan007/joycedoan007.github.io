@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import I18nRuntime from '../components/I18nRuntime.astro';
 interface Props {
   title?: string;
   description?: string;
@@ -45,6 +46,8 @@ const {
 </head>
 <body>
   <slot />
+
+  <I18nRuntime />
 
   <!-- Theme persistence: runs before React hydrates -->
   <script is:inline>

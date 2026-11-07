@@ -6,6 +6,10 @@ interface WritingItem {
   description: string;
   notionUrl: string;
   slug: string;
+  titleVi?: string;
+  descriptionVi?: string;
+  readTimeVi?: string;
+  categoryVi?: string;
 }
 interface Props {
   items: WritingItem[];
@@ -46,17 +50,17 @@ const { items } = Astro.props;
           <span
             style="font: 500 13px/20px 'JetBrains Mono', monospace; color: var(--text-secondary);"
           >
-            {new Date(w.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })} · {w.readTime}
+            <span data-lang-block="en">{new Date(w.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })} · {w.readTime}</span><span data-lang-block="vi">{new Date(w.date).toLocaleDateString('vi-VN', { month: 'short', year: 'numeric' })} · {w.readTimeVi ?? w.readTime}</span>
           </span>
           <h3
             style="font: 500 24px/30px 'Poppins', sans-serif; letter-spacing: -0.015em; color: var(--text-bright); margin: 0;"
           >
-            {w.title}
+            <span data-lang-block="en">{w.title}</span><span data-lang-block="vi">{w.titleVi ?? w.title}</span>
           </h3>
           <p
             style="font: 400 14px/20px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;"
           >
-            {w.description}
+            <span data-lang-block="en">{w.description}</span><span data-lang-block="vi">{w.descriptionVi ?? w.description}</span>
           </p>
           <i
             class="ph-bold ph-arrow-up-right"

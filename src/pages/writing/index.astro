@@ -2,8 +2,10 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import ThemeToggle from '../../components/ThemeToggle';
+import LangSwitch from '../../components/LangSwitch.astro';
 import WritingSidebar from '../../components/WritingSidebar.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
+import L from '../../components/L.astro';
 import Footer from '../../components/Footer.astro';
 import '../../styles/global.css';
 
@@ -12,9 +14,16 @@ const sorted = all.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.d
 const recent = sorted.slice(0, 2);
 const popular = sorted.filter(e => e.data.popular);
 
-function fmtDate(d: string) {
-  return new Date(d).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+const allVi = await getCollection('writing-vi');
+const viOf = (e: (typeof all)[number]) => allVi.find((v) => v.slug === e.slug) ?? e;
+const catVi: Record<string, string> = { 'All': 'Tất cả', 'Dashboard design': 'Thiết kế dashboard', 'AI & tools': 'AI & công cụ', 'Principles': 'Nguyên tắc', 'Design systems': 'Hệ thống thiết kế' };
+for (const e of all) { const c = e.data.category; if (c) catVi[c] = viOf(e).data.category ?? catVi[c] ?? c; }
+
+function fmtDate(d: string, locale = 'en-US') {
+  return new Date(d).toLocaleDateString(locale, { month: 'short', year: 'numeric' });
 }
+const meta = (e: (typeof all)[number], lang: string) =>
+  lang === 'vi' ? `${fmtDate(e.data.date, 'vi-VN')} · ${viOf(e).data.readTime}` : `${fmtDate(e.data.date)} · ${e.data.readTime}`;
 ---
 
 <Layout title="Writing - Joyce Doan" description="Notes on design craft, AI, and product thinking by Joyce Doan.">
@@ -26,9 +35,12 @@ function fmtDate(d: string) {
           <img src="/logo.svg" alt="Joyce Doan" height="18" style="display: block; filter: var(--logo-filter);" />
         </a>
         <span style="font: 400 12px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">/</span>
-        <a href="/writing" style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-bright); text-decoration: none;">Writing</a>
+        <a href="/writing" data-i18n style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-bright); text-decoration: none;">Writing</a>
       </div>
-      <ThemeToggle client:load />
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <LangSwitch />
+        <ThemeToggle client:load />
+      </div>
     </div>
   </header>
 
@@ -41,10 +53,10 @@ function fmtDate(d: string) {
 
       <!-- Hero -->
       <div style="padding: 56px 72px 48px; border-bottom: 1px solid var(--border-subtle);">
-        <div class="overline" style="margin-bottom: 16px;">Notes on the craft</div>
-        <h1 style="font: 500 48px/1.0 'Poppins', sans-serif; letter-spacing: -0.04em; color: var(--text-bright); margin: 0 0 12px;">Writing</h1>
+        <div class="overline" style="margin-bottom: 16px;"><L en="Notes on the craft" vi="Ghi chép về nghề" /></div>
+        <h1 style="font: 500 48px/1.0 'Poppins', sans-serif; letter-spacing: -0.04em; color: var(--text-bright); margin: 0 0 12px;"><L en="Writing" vi="Bài viết" /></h1>
         <p style="font: 400 15px/24px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0; max-width: 480px;">
-          Short essays on design thinking, AI, data UX, and the product decisions behind complex interfaces.
+          <L en="Short essays on design thinking, AI, data UX, and the product decisions behind complex interfaces." vi="Những bài viết ngắn về tư duy thiết kế, AI, data UX và các quyết định sản phẩm đằng sau những giao diện phức tạp." />
         </p>
       </div>
 
@@ -52,17 +64,17 @@ function fmtDate(d: string) {
 
         <!-- Popular -->
         <div style="margin-bottom: 56px;">
-          <h2 style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 20px;">Popular</h2>
+          <h2 style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 20px;"><L en="Popular" vi="Phổ biến" /></h2>
           <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
             {popular.map((e) => (
               <a href={`/writing/${e.slug}`} class="writing-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 24px; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); background: var(--bg-surface); text-decoration: none; gap: 32px; transition: border-color 150ms ease;">
                 <div>
-                  <div class="overline" style="margin-bottom: 10px;">{e.data.category ?? 'Writing'}</div>
-                  <h3 style="font: 500 15px/1.4 'Poppins', sans-serif; color: var(--text-bright); margin: 0 0 8px;">{e.data.title}</h3>
-                  <p style="font: 400 13px/20px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0;">{e.data.description}</p>
+                  <div class="overline" style="margin-bottom: 10px;"><L en={e.data.category ?? 'Writing'} vi={viOf(e).data.category ?? 'Bài viết'} /></div>
+                  <h3 style="font: 500 15px/1.4 'Poppins', sans-serif; color: var(--text-bright); margin: 0 0 8px;"><L en={e.data.title} vi={viOf(e).data.title} /></h3>
+                  <p style="font: 400 13px/20px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0;"><L en={e.data.description} vi={viOf(e).data.description} /></p>
                 </div>
                 <div style="display: flex; align-items: center; justify-content: space-between;">
-                  <span style="font: 400 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">{fmtDate(e.data.date)} · {e.data.readTime}</span>
+                  <span style="font: 400 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);"><L en={meta(e, 'en')} vi={meta(e, 'vi')} /></span>
                   <i class="ph-bold ph-arrow-up-right" style="font-size: 13px; color: var(--text-disabled);"></i>
                 </div>
               </a>
@@ -73,7 +85,7 @@ function fmtDate(d: string) {
         <!-- All posts -->
         <div>
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
-            <h2 style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; margin: 0;">All posts</h2>
+            <h2 style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; margin: 0;"><L en="All posts" vi="Tất cả bài viết" /></h2>
             <div id="writing-filters" style="display: flex; gap: 6px;">
               {['All', 'Dashboard design', 'AI & tools', 'Principles', 'Design systems'].map((cat) => (
                 <button
@@ -81,7 +93,7 @@ function fmtDate(d: string) {
                   class="filter-btn"
                   style={`padding: 5px 12px; border-radius: var(--radius-full); border: 1px solid var(--border-subtle); background: ${cat === 'All' ? 'var(--primary-700)' : 'transparent'}; color: ${cat === 'All' ? 'var(--text-inverse)' : 'var(--text-secondary)'}; font: 500 11px/16px 'JetBrains Mono', monospace; letter-spacing: 0.04em; cursor: pointer; transition: all 150ms ease;`}
                 >
-                  {cat}
+                  <L en={cat} vi={catVi[cat] ?? cat} />
                 </button>
               ))}
             </div>
@@ -89,9 +101,9 @@ function fmtDate(d: string) {
           <div id="post-list">
             {sorted.map((e) => (
               <a href={`/writing/${e.slug}`} class="post-row" data-category={e.data.category ?? ''} style="display: grid; grid-template-columns: 180px 1fr 140px; gap: 24px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border-subtle); text-decoration: none; transition: padding 150ms ease;">
-                <span style="font: 400 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">{fmtDate(e.data.date)} · {e.data.readTime}</span>
-                <span style="font: 500 14px/20px 'Poppins', sans-serif; color: var(--text-bright);">{e.data.title}</span>
-                <span style="font: 500 10px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.06em; text-transform: uppercase; text-align: right;">{e.data.category ?? ''}</span>
+                <span style="font: 400 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);"><L en={meta(e, 'en')} vi={meta(e, 'vi')} /></span>
+                <span style="font: 500 14px/20px 'Poppins', sans-serif; color: var(--text-bright);"><L en={e.data.title} vi={viOf(e).data.title} /></span>
+                <span style="font: 500 10px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.06em; text-transform: uppercase; text-align: right;"><L en={e.data.category ?? ''} vi={viOf(e).data.category ?? ''} /></span>
               </a>
             ))}
           </div>

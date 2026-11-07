@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import DocDashboardMock from './DocDashboardMock';
+import { useLang, useT } from '../i18n/react';
 
 const SHOW_FEATURED_VISUAL = false;
 const SHOW_DOC_DASHBOARD_MOCK = false;
@@ -13,6 +14,10 @@ export interface WorkItem {
   role: string;
   size: string;
   accent: 'green' | 'dark' | 'gray';
+  titleVi?: string;
+  tagVi?: string;
+  summaryVi?: string;
+  roleVi?: string;
   summary: string;
   problem: string;
   approach: string;
@@ -185,6 +190,7 @@ function WorkRow({
   onHover: (item: WorkItem | null) => void;
   isHovered: boolean;
 }) {
+  const isVi = useLang() === 'vi';
   const rowStyle: React.CSSProperties = {
     display: 'grid',
     gridTemplateColumns: '64px 200px 1fr 120px 100px 32px',
@@ -211,13 +217,13 @@ function WorkRow({
         textTransform: 'uppercase',
         transition: 'color 200ms ease',
       }}>
-        {item.tag}
+        {isVi ? item.tagVi ?? item.tag : item.tag}
       </span>
       <span style={{ font: "500 32px/40px 'Poppins', sans-serif", letterSpacing: '-0.02em', color: 'var(--text-bright)' }}>
-        {item.title}
+        {isVi ? item.titleVi ?? item.title : item.title}
       </span>
       <span style={{ font: "400 14px/20px 'Poppins', sans-serif", color: 'var(--text-primary)' }}>
-        {item.role}
+        {isVi ? item.roleVi ?? item.role : item.role}
       </span>
       <span style={{ font: "500 14px/20px 'JetBrains Mono', monospace", color: 'var(--text-secondary)' }}>
         {item.year}
@@ -267,6 +273,7 @@ function WorkIndex({
   onOpen: (item: WorkItem) => void;
 }) {
   const [hoverItem, setHoverItem] = useState<WorkItem | null>(null);
+  const t = useT();
 
   function handleHover(item: WorkItem | null) {
     setHoverItem(item);
@@ -288,7 +295,7 @@ function WorkIndex({
         >
           <div>
             <div className="overline" style={{ marginBottom: 12 }}>
-              01 · The work — {items.length} entries
+              {t('01 · The work —')} {items.length} {t('entries')}
             </div>
             <h2
               style={{
@@ -298,7 +305,7 @@ function WorkIndex({
                 margin: 0,
               }}
             >
-              Selected work, indexed.
+              {t('Selected work, indexed.')}
             </h2>
           </div>
         </div>
@@ -318,10 +325,10 @@ function WorkIndex({
           }}
         >
           <span>№</span>
-          <span>Category</span>
-          <span>Project</span>
-          <span>Role</span>
-          <span>Year</span>
+          <span>{t('Category')}</span>
+          <span>{t('Project')}</span>
+          <span>{t('Role')}</span>
+          <span>{t('Year')}</span>
           <span />
         </div>
 
@@ -342,6 +349,8 @@ function WorkIndex({
 
 // ─── Featured section ─────────────────────────────────────────────────────────
 function Featured({ item }: { item: WorkItem }) {
+  const isVi = useLang() === 'vi';
+  const t = useT();
   return (
     <section
       id="featured"
@@ -359,7 +368,7 @@ function Featured({ item }: { item: WorkItem }) {
             borderBottom: '1px solid var(--border-subtle)',
           }}
         >
-          <div className="overline">02 · Featured deep dive</div>
+          <div className="overline">{t('02 · Featured deep dive')}</div>
           <span
             style={{
               font: "500 13px/20px 'JetBrains Mono', monospace",
@@ -381,7 +390,7 @@ function Featured({ item }: { item: WorkItem }) {
               textWrap: 'balance',
             }}
           >
-            {item.summary}
+            {isVi ? item.summaryVi ?? item.summary : item.summary}
           </h2>
         </div>
 
@@ -426,7 +435,7 @@ function Featured({ item }: { item: WorkItem }) {
                   textTransform: 'uppercase',
                 }}
               >
-                {item.tag} · {item.title}
+                {isVi ? item.tagVi ?? item.tag : item.tag} · {isVi ? item.titleVi ?? item.title : item.title}
               </div>
             </div>
           ))}
@@ -444,6 +453,8 @@ function CaseModal({
   item: WorkItem | null;
   onClose: () => void;
 }) {
+  const isVi = useLang() === 'vi';
+  const t = useT();
   useEffect(() => {
     if (!item) return;
     const onKey = (e: KeyboardEvent) => {
@@ -459,6 +470,7 @@ function CaseModal({
   }, [item, onClose]);
 
   if (!item) return null;
+  const pick = (en: string, v?: string) => (isVi ? v ?? en : en);
 
   return (
     <div
@@ -494,7 +506,7 @@ function CaseModal({
       >
         <button
           onClick={onClose}
-          aria-label="Close"
+          aria-label={t('Close')}
           style={{
             position: 'sticky',
             top: 16,
@@ -519,7 +531,7 @@ function CaseModal({
 
         <div style={{ padding: '48px 64px 64px' }}>
           <div className="overline" style={{ marginBottom: 12 }}>
-            {item.tag} · {item.year} · {item.size}
+            {pick(item.tag, item.tagVi)} · {item.year} · {item.size}
           </div>
           <h2
             style={{
@@ -530,7 +542,7 @@ function CaseModal({
               maxWidth: 800,
             }}
           >
-            {item.title}
+            {pick(item.title, item.titleVi)}
           </h2>
           <p
             style={{
@@ -540,7 +552,7 @@ function CaseModal({
               maxWidth: 760,
             }}
           >
-            {item.summary}
+            {pick(item.summary, item.summaryVi)}
           </p>
 
           <div
@@ -595,10 +607,10 @@ function CaseModal({
 
           {(
             [
-              { h: 'Role', body: `${item.role} · ${item.size}` },
-              { h: 'Problem', body: item.problem },
-              { h: 'Approach', body: item.approach },
-              { h: 'Outcome', body: item.outcome },
+              { h: t('Role'), body: `${pick(item.role, item.roleVi)} · ${item.size}` },
+              { h: t('Problem'), body: item.problem },
+              { h: t('Approach'), body: item.approach },
+              { h: t('Outcome'), body: item.outcome },
             ] as { h: string; body: string }[]
           ).map((s) => (
             <div

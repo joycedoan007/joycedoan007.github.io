@@ -230,3 +230,9 @@ html[lang='vi'] h3 {
   letter-spacing: -0.02em !important;
   word-spacing: -0.04em !important;
 }
+
+/* Bilingual content: both languages are rendered, CSS shows the active one. */
+html[lang='vi'] [data-lang-block='en'],
+html:not([lang='vi']) [data-lang-block='vi'] {
+  display: none !important;
+}

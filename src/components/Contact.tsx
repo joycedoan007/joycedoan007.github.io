@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useT } from '../i18n/react';
 
 interface Social {
   label: string;
@@ -13,6 +14,7 @@ interface Props {
 
 export default function Contact({ email, socials }: Props) {
   const [copied, setCopied] = useState(false);
+  const t = useT();
 
   function handleCopy() {
     try {
@@ -29,7 +31,7 @@ export default function Contact({ email, socials }: Props) {
     >
       <div style={{ maxWidth: 1320, margin: '0 auto', padding: '120px 48px' }}>
         <div className="overline" style={{ marginBottom: 32 }}>
-          06 · Get in touch
+          {t('06 · Get in touch')}
         </div>
         <div
           style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'flex-end' }}
@@ -44,7 +46,7 @@ export default function Contact({ email, socials }: Props) {
                 textWrap: 'balance',
               }}
             >
-              Have a problem worth designing?
+              {t('Have a problem worth designing?')}
             </h2>
           </div>
           <div data-reveal style={{ '--reveal-delay': '120ms' } as React.CSSProperties}>
@@ -55,8 +57,9 @@ export default function Contact({ email, socials }: Props) {
                 margin: '0 0 32px',
               }}
             >
-              I take on a small number of engagements each quarter. Send a one-paragraph problem
-              statement — the messier the better.
+              {t(
+                'I take on a small number of engagements each quarter. Send a one-paragraph problem statement — the messier the better.'
+              )}
             </p>
 
             {/* Copy email */}
@@ -80,7 +83,7 @@ export default function Contact({ email, socials }: Props) {
             >
               <div>
                 <div className="overline" style={{ marginBottom: 4 }}>
-                  Email · click to copy
+                  {t('Email · click to copy')}
                 </div>
                 <div
                   style={{
@@ -105,7 +108,7 @@ export default function Contact({ email, socials }: Props) {
                   className={copied ? 'ph-bold ph-check' : 'ph ph-copy'}
                   style={{ fontSize: 16 }}
                 />
-                {copied ? 'Copied' : 'Copy'}
+                {copied ? t('Copied') : t('Copy')}
               </span>
             </button>
 

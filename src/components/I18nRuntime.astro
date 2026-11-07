@@ -1,0 +1,18 @@
+<script>
+  import { vi } from '../i18n/vi';
+
+  const norm = (t: string) => t.replace(/\s+/g, ' ').trim();
+
+  function applyLang(lang: string) {
+    document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
+      if (!el.dataset.en) el.dataset.en = norm(el.textContent || '');
+      const en = el.dataset.en;
+      const text = lang === 'vi' ? vi[en] ?? en : en;
+      // Preserve child nodes (e.g. icons) by only replacing the text content when there are none.
+      if (el.children.length === 0) el.textContent = text;
+    });
+  }
+
+  window.addEventListener('langchange', (e) => applyLang((e as CustomEvent<string>).detail));
+  applyLang(localStorage.getItem('lang') || 'en');
+</script>

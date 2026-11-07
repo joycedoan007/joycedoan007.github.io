@@ -1,8 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 
-const work = defineCollection({
-  type: 'content',
-  schema: z.object({
+const workSchema = z.object({
     title: z.string(),
     subtitle: z.string(),          // e.g. "Document Management System"
     description: z.string(),
@@ -13,12 +11,11 @@ const work = defineCollection({
     category: z.string().optional(),
     hasImage: z.boolean().default(false),
     order: z.number().default(99),
-  }),
 });
 
-const writing = defineCollection({
-  type: 'content',
-  schema: z.object({
+const work = defineCollection({ type: 'content', schema: workSchema });
+
+const writingSchema = z.object({
     title: z.string(),
     date: z.string(),
     readTime: z.string(),
@@ -30,7 +27,12 @@ const writing = defineCollection({
       label: z.string(),
       slugs: z.array(z.string()),
     })).optional(),
-  }),
 });
 
-export const collections = { work, writing };
+const writing = defineCollection({ type: 'content', schema: writingSchema });
+
+// Vietnamese copies: same filenames and schema as the English entries.
+const workVi = defineCollection({ type: 'content', schema: workSchema });
+const writingVi = defineCollection({ type: 'content', schema: writingSchema });
+
+export const collections = { work, writing, 'work-vi': workVi, 'writing-vi': writingVi };

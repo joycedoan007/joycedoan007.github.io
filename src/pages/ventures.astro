@@ -3,6 +3,7 @@
 
 import Layout from '../layouts/Layout.astro';
 import ThemeToggle from '../components/ThemeToggle';
+import LangSwitch from '../components/LangSwitch.astro';
 import '../styles/global.css';
 import ContactCTA from '../components/ContactCTA.astro';
 import Footer from '../components/Footer.astro';
@@ -76,23 +77,26 @@ const products = [
       <a href="/" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
         <img src="/logo.svg" alt="Joyce Doan" height="18" style="display: block; filter: var(--logo-filter);" />
         <span style="font: 400 12px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">/</span>
-        <span style="font: 400 13px/20px 'Poppins', sans-serif; color: var(--text-secondary);">Ventures</span>
+        <span style="font: 400 13px/20px 'Poppins', sans-serif; color: var(--text-secondary);" data-i18n>Ventures</span>
       </a>
       <div style="display: flex; align-items: center; gap: 24px;">
-        <a href="/work" style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-secondary); text-decoration: none;">Work</a>
-        <a href="/writing" style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-secondary); text-decoration: none;">Writing</a>
-        <a href="/contact" style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-secondary); text-decoration: none;">Contact</a>
-        <ThemeToggle client:load />
+        <a href="/work" style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-secondary); text-decoration: none;" data-i18n>Work</a>
+        <a href="/writing" style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-secondary); text-decoration: none;" data-i18n>Writing</a>
+        <a href="/contact" style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-secondary); text-decoration: none;" data-i18n>Contact</a>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <LangSwitch />
+          <ThemeToggle client:load />
+        </div>
       </div>
     </div>
   </header>
 
   <div style="max-width: 1320px; margin: 0 auto; padding: 72px 48px 56px; border-bottom: 1px solid var(--border-subtle);">
-    <div class="overline" style="margin-bottom: 16px;">3 ventures · 3 companies</div>
-    <h1 style="font: 500 clamp(36px, 5vw, 64px)/1.05 'Poppins', sans-serif; letter-spacing: -0.04em; color: var(--text-bright); margin: 0 0 20px; max-width: 700px;">
+    <div class="overline" style="margin-bottom: 16px;" data-i18n>3 ventures · 3 companies</div>
+    <h1 style="font: 500 clamp(36px, 5vw, 64px)/1.05 'Poppins', sans-serif; letter-spacing: -0.04em; color: var(--text-bright); margin: 0 0 20px; max-width: 700px;" data-i18n>
       Side ventures.
     </h1>
-    <p style="font: 400 16px/26px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0; max-width: 480px;">
+    <p style="font: 400 16px/26px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0; max-width: 480px;" data-i18n>
       Design work across three separate companies — spanning AI tooling, social media automation, and multi-channel marketing.
     </p>
   </div>
@@ -105,7 +109,7 @@ const products = [
           <div>
             <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 20px;">
               <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">{p.id}</span>
-              <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.06em; text-transform: uppercase;">{p.category}</span>
+              <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.06em; text-transform: uppercase;" data-i18n>{p.category}</span>
               <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); margin-left: auto;">{p.year}</span>
             </div>
             <div style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px;">
@@ -114,7 +118,7 @@ const products = [
             <h2 style="font: 500 clamp(32px, 3.5vw, 48px)/1.05 'Poppins', sans-serif; letter-spacing: -0.03em; color: var(--text-bright); margin: 0 0 16px;">
               {p.name}
             </h2>
-            <p style="font: 400 15px/24px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0 0 24px; font-style: italic;">
+            <p style="font: 400 15px/24px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0 0 24px; font-style: italic;" data-i18n>
               {p.tagline}
             </p>
             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 32px; flex-wrap: wrap;">
@@ -124,7 +128,7 @@ const products = [
                 rel="noopener"
                 style={`display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 10px 16px; border-radius: var(--radius-md); font: 600 14px/20px 'Poppins', sans-serif; text-decoration: none; transition: opacity 150ms ease; background: var(--primary-700); color: var(--text-inverse); ${p.url === '#' ? 'opacity: 0.4; cursor: not-allowed; pointer-events: none;' : ''}`}
               >
-                Visit {p.name}
+                <span data-i18n>Visit {p.name}</span>
                 <i class="ph-bold ph-arrow-up-right" style="font-size: 13px;"></i>
               </a>
               <button
@@ -140,18 +144,18 @@ const products = [
                 </svg>
               </button>
             </div>
-            <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0 0 32px;">
+            <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0 0 32px;" data-i18n>
               {p.description}
             </p>
           </div>
 
           <div>
-            <div class="overline" style="margin-bottom: 16px;">Key features</div>
+            <div class="overline" style="margin-bottom: 16px;" data-i18n>Key features</div>
             <div style="display: flex; flex-direction: column; gap: 0;">
               {p.features.map((f) => (
                 <div style="display: grid; grid-template-columns: 160px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border-subtle);">
-                  <span style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-bright);">{f.label}</span>
-                  <span style="font: 400 13px/20px 'Poppins', sans-serif; color: var(--text-secondary);">{f.desc}</span>
+                  <span style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-bright);" data-i18n>{f.label}</span>
+                  <span style="font: 400 13px/20px 'Poppins', sans-serif; color: var(--text-secondary);" data-i18n>{f.desc}</span>
                 </div>
               ))}
             </div>
@@ -168,6 +172,15 @@ const products = [
 
 <script is:inline>
   (function () {
+    var likeVi = { 'SocialCenter.ai': 'Thích SocialCenter.ai', 'UnifyDesign': 'Thích UnifyDesign', 'Marketing Center': 'Thích Marketing Center' };
+    function setLabels(lang) {
+      document.querySelectorAll('.like-btn').forEach(function (b) {
+        var k = b.getAttribute('data-key');
+        b.setAttribute('aria-label', lang === 'vi' ? (likeVi[k] || 'Thích ' + k) : 'Like ' + k);
+      });
+    }
+    window.addEventListener('langchange', function (e) { setLabels(e.detail); });
+    try { setLabels(localStorage.getItem('lang') || 'en'); } catch (e) {}
     document.querySelectorAll('.like-btn').forEach(function (btn) {
       var heart = btn.querySelector('.like-heart');
       var key = 'liked:venture:' + btn.getAttribute('data-key');

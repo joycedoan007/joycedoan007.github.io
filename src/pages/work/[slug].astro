@@ -2,9 +2,11 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import ThemeToggle from '../../components/ThemeToggle';
+import LangSwitch from '../../components/LangSwitch.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
 import Footer from '../../components/Footer.astro';
 import WorkSidebar from '../../components/WorkSidebar.astro';
+import L from '../../components/L.astro';
 
 export async function getStaticPaths() {
   const entries = await getCollection('work');
@@ -17,6 +19,12 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 const w = entry.data;
+
+const allVi = await getCollection('work-vi');
+const viOf = (slug: string) => allVi.find((e) => e.slug === slug);
+const viEntry = viOf(entry.slug);
+const ViContent = viEntry ? (await viEntry.render()).Content : Content;
+const wv = viEntry?.data ?? w;
 
 const all = await getCollection('work');
 const sorted = all.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
@@ -33,11 +41,14 @@ const next = idx < sorted.length - 1 ? sorted[idx + 1] : null;
           <img src="/logo.svg" alt="Joyce Doan" height="18" style="display: block; filter: var(--logo-filter);" />
         </a>
         <span style="font: 400 12px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">/</span>
-        <a href="/work" style="font: 400 13px/20px 'Poppins', sans-serif; color: var(--text-secondary); text-decoration: none;">Work</a>
+        <a href="/work" style="font: 400 13px/20px 'Poppins', sans-serif; color: var(--text-secondary); text-decoration: none;"><L en="Work" vi="Dự án" /></a>
         <span style="font: 400 12px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">/</span>
-        <span style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-bright);">{w.title}</span>
+        <span style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-bright);"><L en={w.title} vi={wv.title} /></span>
       </div>
-      <ThemeToggle client:load />
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <LangSwitch />
+        <ThemeToggle client:load />
+      </div>
     </div>
   </header>
 
@@ -46,15 +57,15 @@ const next = idx < sorted.length - 1 ? sorted[idx + 1] : null;
 
     <!-- Main -->
     <main style="min-width: 0; padding: 56px 72px 120px;">
-      <div class="overline" style="margin-bottom: 16px;">{w.subtitle} · {w.role} · {w.company}</div>
-      <h1 style="font: 700 clamp(28px, 4vw, 48px)/1.1 'Poppins', sans-serif; letter-spacing: -0.03em; color: var(--text-bright); margin: 0 0 20px; max-width: 640px;">{w.title}</h1>
-      <p style="font: 400 16px/26px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0 0 40px; max-width: 560px; padding-bottom: 40px; border-bottom: 1px solid var(--border-subtle);">{w.description}</p>
+      <div class="overline" style="margin-bottom: 16px;"><L en={`${w.subtitle} · ${w.role} · ${w.company}`} vi={`${wv.subtitle} · ${wv.role} · ${wv.company}`} /></div>
+      <h1 style="font: 700 clamp(28px, 4vw, 48px)/1.1 'Poppins', sans-serif; letter-spacing: -0.03em; color: var(--text-bright); margin: 0 0 20px; max-width: 640px;"><L en={w.title} vi={wv.title} /></h1>
+      <p style="font: 400 16px/26px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0 0 40px; max-width: 560px; padding-bottom: 40px; border-bottom: 1px solid var(--border-subtle);"><L en={w.description} vi={wv.description} /></p>
 
       <div style="display: flex; gap: 8px; margin-bottom: 48px; flex-wrap: wrap;">
         <span style="display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: var(--radius-full); border: 1px solid color-mix(in srgb, var(--primary-500) 35%, transparent); background: color-mix(in srgb, var(--primary-500) 10%, transparent); font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-accent);">
           <i class="ph-bold ph-buildings" style="font-size: 13px;"></i>{w.company}
         </span>
-        <span style="padding: 5px 14px; border-radius: var(--radius-full); border: 1px solid var(--border-default); font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-secondary);">{w.role}</span>
+        <span style="padding: 5px 14px; border-radius: var(--radius-full); border: 1px solid var(--border-default); font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-secondary);"><L en={w.role} vi={wv.role} /></span>
         {w.skills.map(s => (
           <span style="padding: 5px 14px; border-radius: var(--radius-full); border: 1px solid var(--border-subtle); font: 500 11px/18px 'JetBrains Mono', monospace; color: var(--text-disabled);">{s}</span>
         ))}
@@ -70,20 +81,21 @@ const next = idx < sorted.length - 1 ? sorted[idx + 1] : null;
         </div>
       )}
 
-      <div class="prose"><Content /></div>
+      <div class="prose" data-lang-block="en"><Content /></div>
+      <div class="prose" data-lang-block="vi"><ViContent /></div>
 
       <!-- Prev/Next -->
       <div style="margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--border-subtle); display: flex; gap: 16px;">
         {prev ? (
           <a href={`/work/${prev.slug}`} style="display: flex; flex-direction: column; gap: 4px; padding: 16px 20px; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); text-decoration: none; background: var(--bg-surface); flex: 1;" class="nav-link">
-            <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase;">← Previous</span>
-            <span style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-bright);">{prev.data.title}</span>
+            <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase;">← <L en="Previous" vi="Trước" /></span>
+            <span style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-bright);"><L en={prev.data.title} vi={viOf(prev.slug)?.data.title ?? prev.data.title} /></span>
           </a>
         ) : <div style="flex:1"/>}
         {next ? (
           <a href={`/work/${next.slug}`} style="display: flex; flex-direction: column; gap: 4px; padding: 16px 20px; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); text-decoration: none; background: var(--bg-surface); flex: 1; align-items: flex-end;" class="nav-link">
-            <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase;">Next →</span>
-            <span style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-bright);">{next.data.title}</span>
+            <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase;"><L en="Next" vi="Tiếp theo" /> →</span>
+            <span style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-bright);"><L en={next.data.title} vi={viOf(next.slug)?.data.title ?? next.data.title} /></span>
           </a>
         ) : <div style="flex:1"/>}
       </div>
@@ -92,7 +104,7 @@ const next = idx < sorted.length - 1 ? sorted[idx + 1] : null;
     <!-- Right sidebar -->
     <div style="border-left: 1px solid var(--border-subtle);">
       <aside style="position: sticky; top: 48px; height: fit-content; padding: 40px 24px;">
-        <div style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">Skills</div>
+        <div style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;"><L en="Skills" vi="Kỹ năng" /></div>
         <div style="display: flex; flex-direction: column; gap: 8px;">
           {w.skills.map(s => (
             <span style="font: 400 12px/18px 'JetBrains Mono', monospace; color: var(--text-secondary);">{s}</span>
