@@ -4,6 +4,15 @@ interface Props {
   company: string;
 }
 const { stats, company } = Astro.props;
+
+// [icon, task, minutes by hand, minutes automated, label by hand, label automated]
+const tasks = [
+  ['ph-notebook', 'Summarise research & meeting notes', 40, 2, '40 min', '2 min'],
+  ['ph-folder-simple', 'Export, rename & organise assets', 25, 1, '25 min', '1 min'],
+  ['ph-file-text', 'Draft handoff specs & docs', 50, 3, '50 min', '3 min'],
+  ['ph-chart-line-up', 'Compile weekly report & follow-ups', 30, 2, '30 min', '2 min'],
+] as const;
+const totalSaved = tasks.reduce((n, t) => n + t[2] - t[3], 0);
 ---
 
 <section id="top" class="hero">
@@ -12,48 +21,40 @@ const { stats, company } = Astro.props;
     <div data-reveal class="hero__text">
       <div class="hero__chip">
         <span class="hero__avatar"><img src="/joyce.jpg" alt="" width="44" height="44" /></span>
-        <span>Joyce Doan · UI/UX Designer</span>
+        <span data-i18n>Joyce Doan · UI/UX Designer</span>
       </div>
       <h1 class="hero__title">
-        I turn repetitive work into automated<span style="color: var(--text-accent);"> workflows.</span>
+        <span data-i18n>I automate the busywork to build</span> <span data-i18n style="color: var(--text-accent);">better products.</span>
       </h1>
-      <p class="hero__tagline">
-        I'm always researching and testing AI-powered tools, then applying them across design,
-        research and everyday tasks, so more of my time goes to work that needs a human.
+      <p class="hero__tagline" data-i18n>
+        From UX research to design systems to UI, I apply AI-powered workflows at every stage. Not
+        just to move faster, but to spend more time on what users and the business actually need.
       </p>
       <div class="hero__actions">
-        <a href="/work" data-cursor="hover" class="hero__cta">
-          See the work <i class="ph-bold ph-arrow-right" style="font-size: 14px;"></i>
-        </a>
-        <a href="/contact" data-cursor="hover" class="hero__link">
-          Get in touch <i class="ph ph-arrow-up-right" style="font-size: 14px;"></i>
+        <a href="/contact" data-cursor="hover" class="hero__cta">
+          <span data-i18n>Contact</span> <i class="ph-bold ph-arrow-right" style="font-size: 14px;"></i>
         </a>
       </div>
     </div>
 
     <!-- Right: manual -> automated demo -->
-    <div data-reveal style="--reveal-delay: 120ms;" class="flow" id="flow" aria-hidden="true">
+    <div data-reveal style="--reveal-delay: 120ms;" class="flow" id="flow" aria-hidden="true" data-total={totalSaved}>
       <div class="flow__head">
-        <span class="flow__title">Weekly workflow</span>
+        <span class="flow__title" data-i18n>Weekly workflow</span>
         <div class="flow__toggle" data-toggle>
           <span class="flow__thumb"></span>
-          <span data-mode="manual">Manual</span>
-          <span data-mode="auto">Automated</span>
+          <span data-mode="manual" data-i18n>Manual</span>
+          <span data-mode="auto" data-i18n>Automated</span>
         </div>
       </div>
 
       <ul class="flow__list">
         {
-          [
-            ['ph-notebook', 'Summarise research & meeting notes', '40 min', '2 min'],
-            ['ph-folder-simple', 'Export, rename & organise assets', '25 min', '1 min'],
-            ['ph-file-text', 'Draft handoff specs & docs', '50 min', '3 min'],
-            ['ph-chart-line-up', 'Compile weekly report & follow-ups', '30 min', '2 min'],
-          ].map(([icon, label, manual, auto]) => (
+          tasks.map(([icon, label, , , manual, auto]) => (
             <li class="flow__row" data-row>
               <span class="flow__status"><i class={`ph ${icon} flow__icon`}></i><i class="ph-bold ph-check flow__check"></i><span class="flow__spin"></span></span>
-              <span class="flow__label">{label}</span>
-              <span class="flow__time"><s>{manual}</s><b>{auto}</b></span>
+              <span class="flow__label" data-i18n>{label}</span>
+              <span class="flow__time"><s data-i18n>{manual}</s><b data-i18n>{auto}</b></span>
             </li>
           ))
         }
@@ -62,7 +63,7 @@ const { stats, company } = Astro.props;
       <div class="flow__foot">
         <div class="flow__bar"><span data-bar></span></div>
         <div class="flow__saved">
-          <span>Time saved</span>
+          <span data-i18n>Time saved</span>
           <strong data-saved>0h 00m</strong>
         </div>
       </div>
@@ -77,7 +78,7 @@ const { stats, company } = Astro.props;
     const bar = flow.querySelector<HTMLElement>('[data-bar]')!;
     const saved = flow.querySelector<HTMLElement>('[data-saved]')!;
     const toggle = flow.querySelector<HTMLElement>('[data-toggle]')!;
-    const TOTAL_SAVED = 137; // minutes: 145 manual - 8 automated
+    const TOTAL_SAVED = Number(flow.dataset.total); // minutes saved, computed from the task list
     const fmt = (m: number) => `${Math.floor(m / 60)}h ${String(Math.round(m % 60)).padStart(2, '0')}m`;
     const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -115,7 +116,7 @@ const { stats, company } = Astro.props;
         await wait(500);
         for (let i = 0; i < rows.length; i++) {
           rows[i].classList.add('is-running');
-          await wait(750);
+          await wait(600);
           rows[i].classList.remove('is-running');
           rows[i].classList.add('is-done');
           bar.style.width = `${((i + 1) / rows.length) * 100}%`;
@@ -188,16 +189,6 @@ const { stats, company } = Astro.props;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-  }
-  .hero__link {
-    font: 500 14px/20px 'Poppins', sans-serif;
-    color: var(--text-bright);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    border-bottom: 1px solid var(--border-default);
-    padding-bottom: 2px;
   }
 
   /* Automation demo */
