@@ -2,7 +2,7 @@
 title: Token-Efficient Design Context
 date: "2026-04-01"
 readTime: 10 min read
-description: A one-time Figma extraction workflow that turns your design system into a reusable local file — so AI tools stop burning tokens reading the same design over and over.
+description: A one-time Figma extraction workflow that turns your design system into a reusable local file, so AI tools stop burning tokens reading the same design over and over.
 notionUrl: https://cumbersome-mailbox-4e9.notion.site/Token-Efficient-Design-Context-34ca5487c1e880a9bb87d279e489fd39
 category: AI & tools
 popular: true
@@ -32,7 +32,7 @@ This works with many tools, for example:
 - ChatGPT desktop app
 - Any local coding agent that can call APIs, read files, and write `design_system.md`
 
-## Step 1 — Create a temporary Figma token
+## Step 1, Create a temporary Figma token
 
 Generate a Personal Access Token (PAT) in Figma.
 
@@ -51,7 +51,7 @@ Generate a Personal Access Token (PAT) in Figma.
 
 > **Security note:** Keep the token temporary and read-only. Do not store it permanently in source code, Git, shared notes, or long-lived `.env` files unless you intentionally want a reusable integration.
 
-## Step 2 — Run extraction with your AI tool of choice
+## Step 2, Run extraction with your AI tool of choice
 
 Open the tool you want to use for extraction. It can be Codex CLI, Claude Code, a desktop AI app, Cursor, Windsurf, or another coding agent.
 
@@ -378,7 +378,7 @@ After extraction, your project should contain: `./design_system.md`
 
 That file becomes the reusable design context for future AI-assisted UI work.
 
-## Step 3 — Reuse the extracted design context
+## Step 3, Reuse the extracted design context
 
 For future UI tasks, do not ask the AI to inspect Figma again unless the design has changed.
 
@@ -403,7 +403,7 @@ This workflow turns the Figma file into a compact, reusable design contract:
 
 The result is cheaper, faster, and more consistent UI generation.
 
-## Step 4 — Import into Claude Design
+## Step 4, Import into Claude Design
 
 Once you have `design_system.md`, you can install it into Claude Design so it becomes persistent context.
 

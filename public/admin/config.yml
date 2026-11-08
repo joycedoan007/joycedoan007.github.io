@@ -28,6 +28,7 @@ collections:
       - { name: title, label: Title, widget: string }
       - { name: tag, label: Category tag, widget: string, hint: "e.g. Analytics platform" }
       - { name: year, label: Year, widget: string }
+      - { name: url, label: Website URL, widget: string, required: false }
       - { name: role, label: Role, widget: string }
       - { name: size, label: Team / duration, widget: string, hint: "e.g. 6 mo · 3 engs" }
       - name: accent

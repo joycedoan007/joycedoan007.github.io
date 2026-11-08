@@ -2,12 +2,12 @@
 title: Design System Markdown Template
 date: "2026-03-01"
 readTime: 14 min read
-description: A practical template for documenting UI components, styles, and guidelines — from color tokens to component rules.
+description: A practical template for documenting UI components, styles, and guidelines, from color tokens to component rules.
 notionUrl: https://joycedoan.notion.site/design-system-template
 category: Design systems
 ---
 
-This template is used to document and maintain a design system — covering tokens, components, and rules. Duplicate this for each new product and fill in your values.
+This template is used to document and maintain a design system, covering tokens, components, and rules. Duplicate this for each new product and fill in your values.
 
 [Download Markdown Template →](https://drive.google.com/file/d/1j07EdXSv6ADf0vgMlGK-d1YJCRaEzDzf/view?usp=sharing)
 
@@ -228,10 +228,10 @@ Use this scale for all token names (50–950 range).
 
 ### Button
 
-- **Primary** — bg: `primary-700`, text: `text-inverse`
-- **Secondary** — bg: `bg-surface`, border: `border-default`
-- **Disabled** — opacity: 0.4
-- **Ghost** — bg: transparent, text: `text-primary`
+- **Primary**: bg: `primary-700`, text: `text-inverse`
+- **Secondary**: bg: `bg-surface`, border: `border-default`
+- **Disabled**: opacity: 0.4
+- **Ghost**: bg: transparent, text: `text-primary`
 
 **Divider:** `border-subtle` horizontal / vertical
 
@@ -303,8 +303,8 @@ Use this scale for all token names (50–950 range).
 ## 4. Accessibility
 
 - Contrast: all body text must meet WCAG AA (4.5:1 minimum)
-- Focus: always visible — never `outline: none` without a replacement ring
-- Motion: wrap transitions in `prefers-reduced-motion` — drop to 0ms
+- Focus: always visible, never `outline: none` without a replacement ring
+- Motion: wrap transitions in `prefers-reduced-motion`, drop to 0ms
 - Color: never use color as the only signal (pair with icon or text)
 - Touch targets: minimum 44×44px on mobile
 
@@ -312,10 +312,10 @@ Use this scale for all token names (50–950 range).
 
 ## 5. Rules
 
-1. **No magic numbers** — every value traces to a token
-2. **Tokens over classes** — components consume tokens, not hardcoded values
-3. **One source of truth** — Figma is intent, code is implementation; reconcile every sprint
-4. **Components are context-agnostic** — layout is the parent's responsibility
-5. **Dark mode is not a feature** — test every token in both modes before shipping
-6. **Document the why** — comments explain constraints, not what the code does
-7. **Deprecate before deleting** — give one sprint cycle to migrate before removing tokens or components
+1. **No magic numbers**: every value traces to a token
+2. **Tokens over classes**: components consume tokens, not hardcoded values
+3. **One source of truth**: Figma is intent, code is implementation; reconcile every sprint
+4. **Components are context-agnostic**: layout is the parent's responsibility
+5. **Dark mode is not a feature**: test every token in both modes before shipping
+6. **Document the why**: comments explain constraints, not what the code does
+7. **Deprecate before deleting**: give one sprint cycle to migrate before removing tokens or components

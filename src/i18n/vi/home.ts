@@ -45,8 +45,8 @@ export const home: Record<string, string> = {
     'Tôi thiết kế những công cụ tôn trọng thời gian và trí tuệ của người dùng.',
   "I'm a UI/UX designer focused on data-driven products. I design dashboards and complex interfaces where clarity matters more than decoration.":
     'Tôi là nhà thiết kế UI/UX tập trung vào các sản phẩm dựa trên dữ liệu. Tôi thiết kế bảng điều khiển và giao diện phức tạp, nơi sự rõ ràng quan trọng hơn trang trí.',
-  'Currently exploring the intersection of AI, UX, and product design — figuring out how non-deterministic outputs can feel trustworthy in a high-stakes workflow.':
-    'Hiện tại tôi đang khám phá giao điểm giữa AI, UX và thiết kế sản phẩm — tìm cách để những kết quả không xác định vẫn đáng tin cậy trong quy trình làm việc có rủi ro cao.',
+  'Currently exploring the intersection of AI, UX, and product design, figuring out how non-deterministic outputs can feel trustworthy in a high-stakes workflow.':
+    'Hiện tại tôi đang khám phá giao điểm giữa AI, UX và thiết kế sản phẩm, tìm cách để những kết quả không xác định vẫn đáng tin cậy trong quy trình làm việc có rủi ro cao.',
   'The best interfaces feel obvious in retrospect. Getting there usually means cutting more than you add.':
     'Giao diện tốt nhất khi nhìn lại luôn có vẻ hiển nhiên. Để đạt được điều đó thường phải cắt bớt nhiều hơn là thêm vào.',
   'View profile': 'Xem hồ sơ',

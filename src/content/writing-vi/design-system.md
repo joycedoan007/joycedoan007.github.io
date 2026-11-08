@@ -2,12 +2,12 @@
 title: Mẫu Markdown cho Design System
 date: "2026-03-01"
 readTime: 14 phút đọc
-description: Mẫu thực tế để ghi chép UI component, style và hướng dẫn sử dụng — từ color token đến quy tắc cho component.
+description: Mẫu thực tế để ghi chép UI component, style và hướng dẫn sử dụng, từ color token đến quy tắc cho component.
 notionUrl: https://joycedoan.notion.site/design-system-template
 category: Hệ thống thiết kế
 ---
 
-Mẫu này dùng để ghi chép và duy trì một design system — bao gồm token, component và các quy tắc. Hãy nhân bản mẫu cho mỗi sản phẩm mới và điền giá trị của bạn.
+Mẫu này dùng để ghi chép và duy trì một design system, bao gồm token, component và các quy tắc. Hãy nhân bản mẫu cho mỗi sản phẩm mới và điền giá trị của bạn.
 
 [Tải mẫu Markdown →](https://drive.google.com/file/d/1j07EdXSv6ADf0vgMlGK-d1YJCRaEzDzf/view?usp=sharing)
 
@@ -228,10 +228,10 @@ Dùng thang này cho mọi tên token (dải 50–950).
 
 ### Button
 
-- **Primary** — nền: `primary-700`, chữ: `text-inverse`
-- **Secondary** — nền: `bg-surface`, viền: `border-default`
-- **Disabled** — độ mờ: 0.4
-- **Ghost** — nền: trong suốt, chữ: `text-primary`
+- **Primary**: nền: `primary-700`, chữ: `text-inverse`
+- **Secondary**: nền: `bg-surface`, viền: `border-default`
+- **Disabled**: độ mờ: 0.4
+- **Ghost**: nền: trong suốt, chữ: `text-primary`
 
 **Đường phân cách:** `border-subtle` ngang / dọc
 
@@ -303,8 +303,8 @@ Dùng thang này cho mọi tên token (dải 50–950).
 ## 4. Khả năng tiếp cận
 
 - Độ tương phản: mọi chữ nội dung phải đạt WCAG AA (tối thiểu 4.5:1)
-- Focus: luôn hiển thị rõ — không bao giờ dùng `outline: none` mà không có vòng thay thế
-- Chuyển động: bọc transition trong `prefers-reduced-motion` — giảm về 0ms
+- Focus: luôn hiển thị rõ, không bao giờ dùng `outline: none` mà không có vòng thay thế
+- Chuyển động: bọc transition trong `prefers-reduced-motion`, giảm về 0ms
 - Màu sắc: không bao giờ dùng màu làm tín hiệu duy nhất (kết hợp với icon hoặc chữ)
 - Vùng chạm: tối thiểu 44×44px trên mobile
 
@@ -312,10 +312,10 @@ Dùng thang này cho mọi tên token (dải 50–950).
 
 ## 5. Quy tắc
 
-1. **Không dùng magic number** — mọi giá trị đều truy về một token
-2. **Token trước class** — component sử dụng token, không dùng giá trị hardcode
-3. **Một nguồn sự thật duy nhất** — Figma là ý đồ, code là bản triển khai; đối chiếu lại mỗi sprint
-4. **Component không phụ thuộc ngữ cảnh** — layout là trách nhiệm của phần tử cha
-5. **Dark mode không phải là một tính năng** — kiểm thử mọi token ở cả hai chế độ trước khi phát hành
-6. **Ghi lại lý do** — comment giải thích các ràng buộc, không mô tả code làm gì
-7. **Deprecate trước khi xóa** — dành một sprint để migrate trước khi gỡ token hoặc component
+1. **Không dùng magic number**: mọi giá trị đều truy về một token
+2. **Token trước class**: component sử dụng token, không dùng giá trị hardcode
+3. **Một nguồn sự thật duy nhất**: Figma là ý đồ, code là bản triển khai; đối chiếu lại mỗi sprint
+4. **Component không phụ thuộc ngữ cảnh**: layout là trách nhiệm của phần tử cha
+5. **Dark mode không phải là một tính năng**: kiểm thử mọi token ở cả hai chế độ trước khi phát hành
+6. **Ghi lại lý do**: comment giải thích các ràng buộc, không mô tả code làm gì
+7. **Deprecate trước khi xóa**: dành một sprint để migrate trước khi gỡ token hoặc component

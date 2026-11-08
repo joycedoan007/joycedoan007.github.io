@@ -33,7 +33,7 @@ You're using Claude Code to:
 
 Then you give that file to AI tools so they stop guessing.
 
-## Step 1 — Set Up Claude Code (Don't Overthink This)
+## Step 1, Set Up Claude Code (Don't Overthink This)
 
 You will use:
 
@@ -48,7 +48,7 @@ You don't need to "learn coding". You just need to:
 
 That's it.
 
-## Step 2 — Paste This Prompt (THIS is the important part)
+## Step 2, Paste This Prompt (THIS is the important part)
 
 This is where most people mess up. They ask AI vague things like: *"Analyze this design"*. That gives garbage.
 
@@ -134,7 +134,7 @@ For every design decision, label it as one of:
 Be thorough, but avoid inventing details that cannot be verified.
 ```
 
-## Step 3 — Let Claude Run (What's Actually Happening)
+## Step 3, Let Claude Run (What's Actually Happening)
 
 Claude will:
 
@@ -146,7 +146,7 @@ Claude will:
 
 Then it generates: `consortiagroup_design_system.md`
 
-## Step 4 — Open the .md File
+## Step 4, Open the .md File
 
 This file is your gold. It contains things like:
 
@@ -159,7 +159,7 @@ This file is your gold. It contains things like:
 
 This is basically: *"How this product is designed under the hood"*
 
-## Step 5 — Feed It Into AI Design Tools
+## Step 5, Feed It Into AI Design Tools
 
 Now go to:
 
@@ -175,7 +175,7 @@ Paste the whole `design_system.md`. Then prompt like:
 - "Using this system, design a mobile onboarding flow"
 - "Generate a pricing page"
 
-## Step 6 — What Changes in Output (This is the key)
+## Step 6, What Changes in Output (This is the key)
 
 Without this workflow: AI invents UI every time.
 
@@ -188,7 +188,7 @@ So now you get:
 - consistent components
 - consistent visual hierarchy
 
-It starts to feel like a real product — not random Dribbble shots.
+It starts to feel like a real product, not random Dribbble shots.
 
 ## The Big Idea (Don't Skip This)
 
@@ -213,7 +213,7 @@ And then letting AI execute.
 
 ## If You Only Remember One Thing
 
-**AI is not bad at design — it just lacks your system.**
+**AI is not bad at design, it just lacks your system.**
 
 Once you give it the system: everything gets 10x better.
 

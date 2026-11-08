@@ -3,8 +3,8 @@
 export const ventures: Record<string, string> = {
   '3 ventures · 3 companies': '3 venture · 3 công ty',
   'Side ventures.': 'Các dự án phụ.',
-  'Design work across three separate companies — spanning AI tooling, social media automation, and multi-channel marketing.':
-    'Công việc thiết kế cho ba công ty khác nhau — trải dài từ công cụ AI, tự động hóa mạng xã hội đến marketing đa kênh.',
+  'Design work across three separate companies, spanning AI tooling, social media automation, and multi-channel marketing.':
+    'Công việc thiết kế cho ba công ty khác nhau, trải dài từ công cụ AI, tự động hóa mạng xã hội đến marketing đa kênh.',
   'Key features': 'Tính năng chính',
   'Visit SocialCenter.ai': 'Truy cập SocialCenter.ai',
   'Visit UnifyDesign': 'Truy cập UnifyDesign',
@@ -12,8 +12,8 @@ export const ventures: Record<string, string> = {
   'AI · Content · Marketing': 'AI · Nội dung · Marketing',
   'Design Tooling · AI': 'Công cụ thiết kế · AI',
   'Marketing · Multi-channel': 'Marketing · Đa kênh',
-  'From idea to published — one platform for all your social content.':
-    'Từ ý tưởng đến xuất bản — một nền tảng cho toàn bộ nội dung mạng xã hội của bạn.',
+  'From idea to published, one platform for all your social content.':
+    'Từ ý tưởng đến xuất bản, một nền tảng cho toàn bộ nội dung mạng xã hội của bạn.',
   'An AI-powered social media and content management platform that lets users generate, schedule, approve, publish, and analyze content across social media and blog platforms from a single dashboard.':
     'Nền tảng quản lý mạng xã hội và nội dung ứng dụng AI, cho phép người dùng tạo, lên lịch, duyệt, xuất bản và phân tích nội dung trên mạng xã hội và nền tảng blog từ một dashboard duy nhất.',
   'AI Content Generation': 'Tạo nội dung bằng AI',
@@ -39,8 +39,8 @@ export const ventures: Record<string, string> = {
     'Mô hình đa tenant với tài khoản con cho khách hàng và thanh toán gộp',
   'The single source of truth for your design system.':
     'Nguồn dữ liệu duy nhất cho design system của bạn.',
-  "A design system control plane that keeps Figma files, code repositories, and AI outputs in sync. Teams connect their sources — Figma, Git, Storybook, websites — and UnifyDesign detects when they've drifted apart, then lets teams reconcile the differences from one workspace.":
-    'Một control plane cho design system giúp đồng bộ file Figma, kho code và kết quả từ AI. Các đội kết nối nguồn của mình — Figma, Git, Storybook, website — và UnifyDesign phát hiện khi chúng lệch nhau, sau đó cho phép đối chiếu và xử lý sự khác biệt ngay trong một workspace.',
+  "A design system control plane that keeps Figma files, code repositories, and AI outputs in sync. Teams connect their sources, Figma, Git, Storybook, websites, and UnifyDesign detects when they've drifted apart, then lets teams reconcile the differences from one workspace.":
+    'Một control plane cho design system giúp đồng bộ file Figma, kho code và kết quả từ AI. Các đội kết nối nguồn của mình, Figma, Git, Storybook, website, và UnifyDesign phát hiện khi chúng lệch nhau, sau đó cho phép đối chiếu và xử lý sự khác biệt ngay trong một workspace.',
   Overview: 'Tổng quan',
   'Workspace health and sync summary at a glance': 'Tình trạng workspace và tóm tắt đồng bộ trong nháy mắt',
   'Drift Dashboard': 'Dashboard độ lệch',

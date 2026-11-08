@@ -295,7 +295,7 @@ function WorkIndex({
         >
           <div>
             <div className="overline" style={{ marginBottom: 12 }}>
-              {t('The work —')} {items.length} {t('entries')}
+              {t('The work:')} {items.length} {t('entries')}
             </div>
             <h2
               style={{

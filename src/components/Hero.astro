@@ -31,8 +31,8 @@ const totalSaved = tasks.reduce((n, t) => n + t[2] - t[3], 0);
         just to move faster, but to spend more time on what users and the business actually need.
       </p>
       <div class="hero__actions">
-        <a href="/contact" data-cursor="hover" class="hero__cta">
-          <span data-i18n>Contact</span> <i class="ph-bold ph-arrow-right" style="font-size: 14px;"></i>
+        <a href="/contact" data-cursor="hover" class="btn btn--primary btn--lg">
+          <span data-i18n>Contact</span> <i class="ph-bold ph-arrow-right"></i>
         </a>
       </div>
     </div>
@@ -178,18 +178,6 @@ const totalSaved = tasks.reduce((n, t) => n + t[2] - t[3], 0);
     margin: 0;
   }
   .hero__actions { display: flex; align-items: center; gap: 28px; }
-  .hero__cta {
-    height: 48px;
-    padding: 10px 22px;
-    background: var(--primary-700);
-    color: var(--text-inverse);
-    border-radius: var(--radius-md);
-    font: 600 14px/20px 'Poppins', sans-serif;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
 
   /* Automation demo */
   .flow {

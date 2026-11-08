@@ -8,6 +8,7 @@ const workSchema = z.object({
     role: z.string().default('UI/UX Designer'),
     company: z.string().default('Consortia Group'),
     year: z.string().optional(),
+    url: z.string().url().optional(),   // live site, shown as a "Visit website" button
     category: z.string().optional(),
     hasImage: z.boolean().default(false),
     order: z.number().default(99),

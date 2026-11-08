@@ -33,7 +33,7 @@ Bạn dùng Claude Code để:
 
 Sau đó bạn đưa file này cho các công cụ AI để chúng không còn phải đoán mò.
 
-## Bước 1 — Cài đặt Claude Code (đừng nghĩ quá nhiều)
+## Bước 1, Cài đặt Claude Code (đừng nghĩ quá nhiều)
 
 Bạn sẽ dùng:
 
@@ -48,7 +48,7 @@ Bạn không cần "học code". Bạn chỉ cần:
 
 Vậy là xong.
 
-## Bước 2 — Dán prompt này (ĐÂY mới là phần quan trọng)
+## Bước 2, Dán prompt này (ĐÂY mới là phần quan trọng)
 
 Đây là chỗ hầu hết mọi người làm sai. Họ hỏi AI những câu mơ hồ như: *"Phân tích thiết kế này"*. Kết quả sẽ rất tệ.
 
@@ -134,7 +134,7 @@ For every design decision, label it as one of:
 Be thorough, but avoid inventing details that cannot be verified.
 ```
 
-## Bước 3 — Để Claude chạy (chuyện gì đang diễn ra)
+## Bước 3, Để Claude chạy (chuyện gì đang diễn ra)
 
 Claude sẽ:
 
@@ -146,7 +146,7 @@ Claude sẽ:
 
 Sau đó nó tạo ra: `consortiagroup_design_system.md`
 
-## Bước 4 — Mở file .md
+## Bước 4, Mở file .md
 
 File này là mỏ vàng của bạn. Nó chứa những thứ như:
 
@@ -159,7 +159,7 @@ File này là mỏ vàng của bạn. Nó chứa những thứ như:
 
 Về cơ bản, đây là: *"Sản phẩm này được thiết kế như thế nào ở bên dưới lớp vỏ"*
 
-## Bước 5 — Đưa vào các công cụ thiết kế AI
+## Bước 5, Đưa vào các công cụ thiết kế AI
 
 Bây giờ hãy vào:
 
@@ -175,7 +175,7 @@ Dán toàn bộ nội dung `design_system.md`. Sau đó prompt như:
 - "Dùng system này, thiết kế luồng onboarding trên mobile"
 - "Tạo một trang bảng giá"
 
-## Bước 6 — Kết quả thay đổi thế nào (đây là điểm mấu chốt)
+## Bước 6, Kết quả thay đổi thế nào (đây là điểm mấu chốt)
 
 Không có quy trình này: AI bịa ra UI mỗi lần.
 
@@ -188,7 +188,7 @@ Và bạn sẽ có:
 - component nhất quán
 - phân cấp thị giác nhất quán
 
-Nó bắt đầu giống một sản phẩm thật — chứ không phải những bài Dribbble ngẫu nhiên.
+Nó bắt đầu giống một sản phẩm thật, chứ không phải những bài Dribbble ngẫu nhiên.
 
 ## Ý tưởng lớn (đừng bỏ qua)
 
@@ -213,6 +213,6 @@ Rồi để AI thực thi.
 
 ## Nếu bạn chỉ nhớ một điều
 
-**AI không kém về thiết kế — nó chỉ thiếu system của bạn.**
+**AI không kém về thiết kế, nó chỉ thiếu system của bạn.**
 
 Một khi bạn đưa system cho nó: mọi thứ đều tốt hơn gấp 10 lần.

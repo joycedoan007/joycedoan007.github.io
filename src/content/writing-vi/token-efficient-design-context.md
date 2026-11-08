@@ -2,7 +2,7 @@
 title: Ngữ cảnh thiết kế tiết kiệm token
 date: "2026-04-01"
 readTime: 10 phút đọc
-description: Quy trình trích xuất Figma một lần để biến design system của bạn thành một file cục bộ có thể tái sử dụng — để các công cụ AI không còn đốt token vào việc đọc đi đọc lại cùng một thiết kế.
+description: Quy trình trích xuất Figma một lần để biến design system của bạn thành một file cục bộ có thể tái sử dụng, để các công cụ AI không còn đốt token vào việc đọc đi đọc lại cùng một thiết kế.
 notionUrl: https://cumbersome-mailbox-4e9.notion.site/Token-Efficient-Design-Context-34ca5487c1e880a9bb87d279e489fd39
 category: AI & công cụ
 popular: true
@@ -32,7 +32,7 @@ Cách này hoạt động với nhiều công cụ, ví dụ:
 - Ứng dụng ChatGPT desktop
 - Bất kỳ coding agent cục bộ nào có thể gọi API, đọc file và ghi `design_system.md`
 
-## Bước 1 — Tạo Figma token tạm thời
+## Bước 1, Tạo Figma token tạm thời
 
 Tạo một Personal Access Token (PAT) trong Figma.
 
@@ -51,7 +51,7 @@ Tạo một Personal Access Token (PAT) trong Figma.
 
 > **Lưu ý bảo mật:** Hãy giữ token ở dạng tạm thời và chỉ đọc. Không lưu vĩnh viễn trong mã nguồn, Git, ghi chú chia sẻ hoặc file `.env` dài hạn, trừ khi bạn chủ ý muốn một tích hợp có thể tái sử dụng.
 
-## Bước 2 — Chạy trích xuất bằng công cụ AI bạn chọn
+## Bước 2, Chạy trích xuất bằng công cụ AI bạn chọn
 
 Mở công cụ bạn muốn dùng để trích xuất. Đó có thể là Codex CLI, Claude Code, một ứng dụng AI desktop, Cursor, Windsurf hoặc một coding agent khác.
 
@@ -378,7 +378,7 @@ Sau khi trích xuất, dự án của bạn sẽ có: `./design_system.md`
 
 File đó trở thành ngữ cảnh thiết kế có thể tái sử dụng cho các công việc UI có hỗ trợ AI sau này.
 
-## Bước 3 — Tái sử dụng ngữ cảnh thiết kế đã trích xuất
+## Bước 3, Tái sử dụng ngữ cảnh thiết kế đã trích xuất
 
 Với các tác vụ UI sau này, đừng yêu cầu AI kiểm tra lại Figma trừ khi thiết kế đã thay đổi.
 
@@ -403,7 +403,7 @@ Quy trình này biến file Figma thành một "hợp đồng thiết kế" gọ
 
 Kết quả là việc tạo UI rẻ hơn, nhanh hơn và nhất quán hơn.
 
-## Bước 4 — Nhập vào Claude Design
+## Bước 4, Nhập vào Claude Design
 
 Khi đã có `design_system.md`, bạn có thể cài đặt nó vào Claude Design để nó trở thành ngữ cảnh lâu dài.
 

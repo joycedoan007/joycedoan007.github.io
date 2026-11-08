@@ -1,5 +1,5 @@
 ---
-// PAGE HIDDEN — uncomment the template below and remove the redirect when ready to publish
+// PAGE HIDDEN, uncomment the template below and remove the redirect when ready to publish
 
 import Layout from '../layouts/Layout.astro';
 import ThemeToggle from '../components/ThemeToggle';
@@ -15,7 +15,7 @@ const products = [
     company: 'SocialCenter.ai',
     category: 'AI · Content · Marketing',
     year: '2026',
-    tagline: 'From idea to published — one platform for all your social content.',
+    tagline: 'From idea to published, one platform for all your social content.',
     description: 'An AI-powered social media and content management platform that lets users generate, schedule, approve, publish, and analyze content across social media and blog platforms from a single dashboard.',
     features: [
       { label: 'AI Content Generation', desc: 'Platform-native drafts for LinkedIn, X, Instagram, Facebook' },
@@ -36,7 +36,7 @@ const products = [
     category: 'Design Tooling · AI',
     year: '2025',
     tagline: 'The single source of truth for your design system.',
-    description: 'A design system control plane that keeps Figma files, code repositories, and AI outputs in sync. Teams connect their sources — Figma, Git, Storybook, websites — and UnifyDesign detects when they\'ve drifted apart, then lets teams reconcile the differences from one workspace.',
+    description: 'A design system control plane that keeps Figma files, code repositories, and AI outputs in sync. Teams connect their sources, Figma, Git, Storybook, websites, and UnifyDesign detects when they\'ve drifted apart, then lets teams reconcile the differences from one workspace.',
     features: [
       { label: 'Overview', desc: 'Workspace health and sync summary at a glance' },
       { label: 'Drift Dashboard', desc: 'Detects where design/code has diverged with severity levels' },
@@ -70,7 +70,7 @@ const products = [
 ];
 ---
 
-<Layout title="Ventures - Joyce Doan" description="Products I helped design across three companies — UnifyDesign, SocialCenter.ai, and Marketing Center.">
+<Layout title="Ventures - Joyce Doan" description="Products I helped design across three companies, UnifyDesign, SocialCenter.ai, and Marketing Center.">
 
   <header style="position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg-page) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-subtle);">
     <div style="max-width: 1320px; margin: 0 auto; padding: 0 48px; height: 48px; display: flex; align-items: center; justify-content: space-between;">
@@ -97,7 +97,7 @@ const products = [
       Side ventures.
     </h1>
     <p style="font: 400 16px/26px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0; max-width: 480px;" data-i18n>
-      Design work across three separate companies — spanning AI tooling, social media automation, and multi-channel marketing.
+      Design work across three separate companies, spanning AI tooling, social media automation, and multi-channel marketing.
     </p>
   </div>
 
@@ -126,10 +126,11 @@ const products = [
                 href={p.url}
                 target={p.url !== '#' ? '_blank' : undefined}
                 rel="noopener"
-                style={`display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 10px 16px; border-radius: var(--radius-md); font: 600 14px/20px 'Poppins', sans-serif; text-decoration: none; transition: opacity 150ms ease; background: var(--primary-700); color: var(--text-inverse); ${p.url === '#' ? 'opacity: 0.4; cursor: not-allowed; pointer-events: none;' : ''}`}
+                class="btn btn--primary"
+                style={`${p.url === '#' ? 'opacity: 0.4; cursor: not-allowed; pointer-events: none;' : ''}`}
               >
                 <span data-i18n>Visit {p.name}</span>
-                <i class="ph-bold ph-arrow-up-right" style="font-size: 13px;"></i>
+                <i class="ph-bold ph-arrow-up-right"></i>
               </a>
               <button
                 class="like-btn"
