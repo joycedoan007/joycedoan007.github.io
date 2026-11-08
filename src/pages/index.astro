@@ -8,6 +8,7 @@ import About from '../components/About.astro';
 import Services from '../components/Services.astro';
 import Writing from '../components/Writing.astro';
 import Contact from '../components/Contact';
+import CalBooking from '../components/CalBooking.astro';
 import Footer from '../components/Footer.astro';
 import CustomCursor from '../components/CustomCursor';
 import '../styles/global.css';
@@ -91,6 +92,7 @@ const SITE = {
     <About role={SITE.role} company={SITE.company} />
     <Services />
     <Writing items={writingItems} />
+    <CalBooking />
     <Contact
       client:load
       email={SITE.email}
