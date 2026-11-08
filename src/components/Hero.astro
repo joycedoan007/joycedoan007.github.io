@@ -21,7 +21,10 @@ const totalSaved = tasks.reduce((n, t) => n + t[2] - t[3], 0);
     <div data-reveal class="hero__text">
       <div class="hero__chip">
         <span class="hero__avatar"><img src="/joyce.jpg" alt="" width="44" height="44" /></span>
-        <span data-i18n>Joyce Doan · UI/UX Designer</span>
+        <span class="hero__chip-text">
+          <span class="hero__chip-a" data-i18n>Joyce Doan · UI/UX Designer</span>
+          <span class="hero__chip-b" data-i18n>Đoàn Thanh Trúc · See a problem, build the software to fix it</span>
+        </span>
       </div>
       <h1 class="hero__title">
         <span data-i18n>I design systems where</span> <span data-i18n style="color: var(--text-accent);">AI handles the repetitive work.</span>
@@ -155,6 +158,11 @@ const totalSaved = tasks.reduce((n, t) => n + t[2] - t[3], 0);
     font: 500 12px/16px 'JetBrains Mono', monospace;
     color: var(--text-secondary);
   }
+  .hero__chip { max-width: 100%; }
+  .hero__chip-b { display: none; }
+  .hero__chip:hover .hero__chip-a { display: none; }
+  .hero__chip:hover .hero__chip-b { display: inline; animation: chip-in 200ms ease; }
+  @keyframes chip-in { from { opacity: 0; } to { opacity: 1; } }
   .hero__avatar { position: relative; width: 36px; height: 36px; border-radius: 50%; overflow: hidden; }
   .hero__avatar img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; display: block; }
   .hero__avatar::after {

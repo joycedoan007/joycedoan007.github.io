@@ -5,14 +5,15 @@ description: Centralized platform for document upload, tracking, and validation.
 skills: ["BRANDING", "WEB DESIGN", "WEBFLOW"]
 role: UI/UX Designer
 category: "Product Design"
-year: "2025"
+year: "2023"
 hasImage: false
+url: "https://consortiagroup.co/en/portfolio"
 order: 1
 ---
 
 <div style="background: var(--bg-surface); border-left: 2px solid var(--primary-500); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: 20px 24px; margin-bottom: 40px;">
   <div class="overline" style="color: var(--text-accent); margin-bottom: 8px;">My Role</div>
-  <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">I handled the complete design system end-to-end, color tokens, typography scale, spacing, components, and all interactive states.</p>
+  <p style="font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">I worked directly with the PM to design screens for data management features. I also handled the complete design system end-to-end, color tokens, typography scale, spacing, components, and all interactive states.</p>
 </div>
 
 <div style="margin: 0 0 20px;">
@@ -27,4 +28,4 @@ Midwest Loan Services faced inefficiencies with their fragmented document storag
   <h2 style="font: 600 22px/1.2 'Poppins', sans-serif; letter-spacing: -0.02em; color: var(--text-bright); margin: 0;">Result</h2>
 </div>
 
-The centralized DMS I helped design reduced document retrieval time by 30% and supported enhanced data security through clearer access control flows and encryption-aware UI patterns. Automated workflow designs cut manual intervention, and the project shipped in one month with successful user training and system transition.
+Users retrieve documents 30% faster with the centralized DMS I helped design. Access control is clearer, the UI patterns were designed with data security in mind, and automated workflows cut manual steps. The system was handed over within one month, with user training and a successful migration.

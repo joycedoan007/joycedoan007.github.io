@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import ThemeToggle from '../components/ThemeToggle';
 import LangSwitch from '../components/LangSwitch.astro';
-import Contact from '../components/Contact';
 import CalBooking from '../components/CalBooking.astro';
 import '../styles/global.css';
 import Footer from '../components/Footer.astro';
@@ -37,6 +36,5 @@ const SITE = {
   </header>
 
   <CalBooking />
-  <Contact client:load email={SITE.email} socials={SITE.socials} />
   <Footer />
 </Layout>

@@ -9,6 +9,7 @@ export const home: Record<string, string> = {
 
   // Hero
   'Joyce Doan · UI/UX Designer': 'Joyce Doan · Nhà thiết kế UI/UX',
+  'Đoàn Thanh Trúc · See a problem, build the software to fix it': 'Đoàn Thanh Trúc · Thấy vấn đề, làm phần mềm để giải quyết',
   'I design systems where': 'Tôi thiết kế hệ thống nơi',
   'AI handles the repetitive work.': 'AI lo việc lặp lại.',
   'I use AI to automate my own UI/UX workflow, then apply the same thinking to products with AI inside. The goal is the same: less repetitive work, people kept in the decisions that matter, and a system the whole team can trust.':
@@ -41,14 +42,14 @@ export const home: Record<string, string> = {
   'Complex flows': 'Luồng phức tạp',
 
   // About
-  "I design tools that respect their users' time and intelligence.":
-    'Tôi thiết kế những công cụ tôn trọng thời gian và trí tuệ của người dùng.',
-  "I'm a UI/UX designer focused on data-driven products. I design dashboards and complex interfaces where clarity matters more than decoration.":
-    'Tôi là nhà thiết kế UI/UX tập trung vào các sản phẩm dựa trên dữ liệu. Tôi thiết kế bảng điều khiển và giao diện phức tạp, nơi sự rõ ràng quan trọng hơn trang trí.',
-  'Currently exploring the intersection of AI, UX, and product design, figuring out how non-deterministic outputs can feel trustworthy in a high-stakes workflow.':
-    'Hiện tại tôi đang khám phá giao điểm giữa AI, UX và thiết kế sản phẩm, tìm cách để những kết quả không xác định vẫn đáng tin cậy trong quy trình làm việc có rủi ro cao.',
-  'The best interfaces feel obvious in retrospect. Getting there usually means cutting more than you add.':
-    'Giao diện tốt nhất khi nhìn lại luôn có vẻ hiển nhiên. Để đạt được điều đó thường phải cắt bớt nhiều hơn là thêm vào.',
+  'I design so users struggle less and teams guess less.':
+    'Tôi thiết kế để người dùng làm việc ít vất vả hơn, và đội ít phải đoán hơn.',
+  "I see design as a way to help people. Good software makes their work and life lighter, so my job is to understand what they need before I draw anything. That's why I say no more often than yes. In data-heavy products with complex flows, every feature has a cost: users learn more, teams maintain more. I decide what to keep, what to cut, and I can explain why to both PMs and engineers.":
+    'Tôi nhìn thiết kế như một cách giúp người khác. Phần mềm tốt giúp họ làm việc và sống nhẹ nhàng hơn, nên việc của tôi là hiểu họ cần gì trước khi vẽ bất cứ thứ gì. Vì vậy tôi thường nói không nhiều hơn nói có. Với sản phẩm nhiều dữ liệu và luồng phức tạp, mỗi tính năng thêm vào đều có giá: người dùng phải học thêm, đội phải bảo trì thêm. Tôi chọn thứ cần giữ, cắt thứ không cần, và giải thích được lý do với PM lẫn kỹ sư.',
+  'With AI, I work on both sides. In my own process, I automate repetitive work to leave time for the hard decisions. In products, I design so AI takes over the manual steps while users keep the final say and a way back when AI gets it wrong.':
+    'Với AI, tôi giải bài toán ở hai phía. Trong quy trình của mình, tôi tự động hóa những việc lặp lại để dành thời gian cho quyết định khó. Trong sản phẩm, tôi thiết kế để AI làm phần thao tác thủ công, còn người dùng giữ quyền quyết định và có đường lui khi AI sai.',
+  "I don't just deliver screens. On the centralized document management system I helped design, users retrieve documents 30% faster, access rights are clearer, and the whole system was handed over in one month with user training so the team could run it on their own.":
+    'Tôi không chỉ giao màn hình. Với hệ thống quản lý tài liệu tập trung mà tôi tham gia thiết kế, người dùng truy xuất tài liệu nhanh hơn 30%, quyền truy cập rõ ràng hơn, và cả hệ thống được bàn giao trong một tháng, kèm đào tạo người dùng để đội tự vận hành.',
   'View profile': 'Xem hồ sơ',
   'UI/UX Designer, Consortia Group': 'Nhà thiết kế UI/UX, Consortia Group',
 
