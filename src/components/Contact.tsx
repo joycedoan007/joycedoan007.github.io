@@ -39,7 +39,7 @@ export default function Contact({ email, socials }: Props) {
           <div data-reveal>
             <h2
               style={{
-                font: "500 112px/0.92 'Poppins', sans-serif",
+                font: "500 clamp(30px, 3.4vw, 44px)/1.1 'Poppins', sans-serif",
                 letterSpacing: '-0.04em',
                 color: 'var(--text-bright)',
                 margin: 0,

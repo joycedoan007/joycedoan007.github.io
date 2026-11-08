@@ -299,7 +299,7 @@ function WorkIndex({
             </div>
             <h2
               style={{
-                font: "500 80px/0.92 'Poppins', sans-serif",
+                font: "500 clamp(30px, 3.4vw, 44px)/1.1 'Poppins', sans-serif",
                 letterSpacing: '-0.035em',
                 color: 'var(--text-bright)',
                 margin: 0,
@@ -382,7 +382,7 @@ function Featured({ item }: { item: WorkItem }) {
         <div data-reveal style={{ '--reveal-delay': '80ms' } as React.CSSProperties}>
           <h2
             style={{
-              font: "500 96px/0.92 'Poppins', sans-serif",
+              font: "500 clamp(30px, 3.4vw, 44px)/1.1 'Poppins', sans-serif",
               letterSpacing: '-0.035em',
               color: 'var(--text-bright)',
               margin: '0 0 48px',
@@ -535,7 +535,7 @@ function CaseModal({
           </div>
           <h2
             style={{
-              font: "500 72px/0.96 'Poppins', sans-serif",
+              font: "500 clamp(28px, 3vw, 40px)/1.1 'Poppins', sans-serif",
               letterSpacing: '-0.03em',
               color: 'var(--text-bright)',
               margin: '0 0 16px',

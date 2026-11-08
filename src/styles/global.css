@@ -205,11 +205,7 @@ body {
 @media (max-width: 600px) {
   /* Scale down oversized display type */
   [style*="clamp(72px, 10vw, 160px)"] { font-size: clamp(52px, 16vw, 84px) !important; }
-  [style*="500 64px/0.96"] { font-size: 34px !important; }
   [style*="500 48px/1.0"] { font-size: 30px !important; }
-  [style*="96px/0.92"] { font-size: 38px !important; line-height: 1.06 !important; }
-  [style*="112px/0.92"] { font-size: 40px !important; line-height: 1.06 !important; }
-  [style*="80px/0.92"] { font-size: 36px !important; line-height: 1.06 !important; }
 
   /* Shorter vertical section rhythm */
   [style*="padding: 96px 48px"] { padding-top: 56px !important; padding-bottom: 56px !important; }
