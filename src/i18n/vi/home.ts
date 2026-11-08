@@ -8,7 +8,7 @@ export const home: Record<string, string> = {
   Contact: 'Liên hệ',
 
   // Hero
-  'Joyce Doan · UI/UX Designer · AI Products': 'Joyce Doan · Nhà thiết kế UI/UX · Sản phẩm AI',
+  'Joyce Doan · UI/UX Designer': 'Joyce Doan · Nhà thiết kế UI/UX',
   'I design systems where': 'Tôi thiết kế hệ thống nơi',
   'AI handles the repetitive work.': 'AI lo việc lặp lại.',
   'I use AI to automate my own UI/UX workflow, then apply the same thinking to products with AI inside. The goal is the same: less repetitive work, people kept in the decisions that matter, and a system the whole team can trust.':
