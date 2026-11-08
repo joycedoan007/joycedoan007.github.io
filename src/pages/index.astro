@@ -33,7 +33,7 @@ const workEntries = await getCollection('work');
 const workViEntries = await getCollection('work-vi');
 const workItems = workEntries
   .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
-  .slice(0, 6)
+  .slice(0, 5)
   .map((entry) => ({
     id: entry.slug,
     slug: entry.slug,

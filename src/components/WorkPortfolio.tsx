@@ -295,7 +295,7 @@ function WorkIndex({
         >
           <div>
             <div className="overline" style={{ marginBottom: 12 }}>
-              {t('01 · The work —')} {items.length} {t('entries')}
+              {t('The work —')} {items.length} {t('entries')}
             </div>
             <h2
               style={{
@@ -305,7 +305,7 @@ function WorkIndex({
                 margin: 0,
               }}
             >
-              {t('Selected work, indexed.')}
+              {t('Selected work, designed by hand.')}
             </h2>
           </div>
         </div>
@@ -368,7 +368,7 @@ function Featured({ item }: { item: WorkItem }) {
             borderBottom: '1px solid var(--border-subtle)',
           }}
         >
-          <div className="overline">{t('02 · Featured deep dive')}</div>
+          <div className="overline">{t('Featured deep dive')}</div>
           <span
             style={{
               font: "500 13px/20px 'JetBrains Mono', monospace",

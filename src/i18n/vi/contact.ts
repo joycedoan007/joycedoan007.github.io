@@ -2,11 +2,10 @@
 // of elements marked `data-i18n`.
 export const contact: Record<string, string> = {
   'Get in touch': 'Liên hệ',
-  'Have a problem worth designing?': 'Bạn có một vấn đề đáng để thiết kế?',
-  "Let's talk": 'Cùng trao đổi',
-  '06 · Get in touch': '06 · Liên hệ',
-  'I take on a small number of engagements each quarter. Send a one-paragraph problem statement — the messier the better.':
-    'Mỗi quý tôi chỉ nhận một số ít dự án. Hãy gửi một đoạn mô tả vấn đề — càng bề bộn càng tốt.',
+  "Looking for a designer to join your team? Let's talk.": 'Đội của bạn đang cần một nhà thiết kế? Hãy nói chuyện với tôi.',
+  'Tell me about your team': 'Kể tôi nghe về đội của bạn',
+  "I'm looking for a UI/UX role on a team building complex, data-heavy products. Send me a few lines about your team and the role.":
+    'Tôi đang tìm một vị trí thiết kế UI/UX, nơi sản phẩm phức tạp, nhiều dữ liệu và cần sự rõ ràng. Hãy gửi tôi vài dòng về đội và vị trí của bạn.',
   'Email · click to copy': 'Email · nhấn để sao chép',
   Copy: 'Sao chép',
   Copied: 'Đã sao chép',

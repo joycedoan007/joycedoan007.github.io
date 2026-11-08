@@ -1,13 +1,13 @@
 // English -> Vietnamese for the work pages and the homepage Work section.
 export const work: Record<string, string> = {
-  '01 · The work —': '01 · Dự án —',
+  'The work —': 'Dự án —',
   'entries': 'dự án',
-  'Selected work, indexed.': 'Dự án tiêu biểu, được lập chỉ mục.',
+  'Selected work, designed by hand.': 'Dự án tiêu biểu, thiết kế bằng tay.',
   'Category': 'Danh mục',
   'Project': 'Dự án',
   'Role': 'Vai trò',
   'Year': 'Năm',
-  '02 · Featured deep dive': '02 · Dự án nổi bật',
+  'Featured deep dive': 'Dự án nổi bật',
   'Close': 'Đóng',
   'Problem': 'Vấn đề',
   'Approach': 'Hướng tiếp cận',

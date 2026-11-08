@@ -13,7 +13,7 @@ const { role, company } = Astro.props;
       class="overline"
       style="margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border-subtle);"
     >
-      <span data-i18n>03 · About</span>
+      <span data-i18n>About</span>
     </div>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: flex-start;">
       <div data-reveal>
@@ -36,21 +36,13 @@ const { role, company } = Astro.props;
           The best interfaces feel obvious in retrospect. Getting there usually means cutting more
           than you add.
         </p>
-        <div
-          style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; font: 500 13px/20px 'JetBrains Mono', monospace;"
+        <a
+          href="/about"
+          data-cursor="hover"
+          style="margin-top: 24px; align-self: flex-start; display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 10px 20px; background: var(--primary-700); color: var(--text-inverse); border-radius: var(--radius-md); font: 600 14px/20px 'Poppins', sans-serif; text-decoration: none;"
         >
-          {
-            [
-              ['Currently', `${role}, ${company}`],
-              ['Tools', 'Figma, Claude, Codex, Illustrator'],
-            ].map(([k, v]) => (
-              <div>
-                <div data-i18n style="color: var(--text-secondary);">{k}</div>
-                <div data-i18n style="color: var(--text-bright);">{v}</div>
-              </div>
-            ))
-          }
-        </div>
+          <span data-i18n>View profile</span>
+        </a>
       </div>
     </div>
   </div>

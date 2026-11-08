@@ -31,7 +31,7 @@ export default function Contact({ email, socials }: Props) {
     >
       <div style={{ maxWidth: 1320, margin: '0 auto', padding: '120px 48px' }}>
         <div className="overline" style={{ marginBottom: 32 }}>
-          {t('06 · Get in touch')}
+          {t('Get in touch')}
         </div>
         <div
           style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'flex-end' }}
@@ -46,7 +46,7 @@ export default function Contact({ email, socials }: Props) {
                 textWrap: 'balance',
               }}
             >
-              {t('Have a problem worth designing?')}
+              {t("Looking for a designer to join your team? Let's talk.")}
             </h2>
           </div>
           <div data-reveal style={{ '--reveal-delay': '120ms' } as React.CSSProperties}>
@@ -58,7 +58,7 @@ export default function Contact({ email, socials }: Props) {
               }}
             >
               {t(
-                'I take on a small number of engagements each quarter. Send a one-paragraph problem statement — the messier the better.'
+                "I'm looking for a UI/UX role on a team building complex, data-heavy products. Send me a few lines about your team and the role."
               )}
             </p>
 

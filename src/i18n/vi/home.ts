@@ -41,7 +41,6 @@ export const home: Record<string, string> = {
   'Complex flows': 'Luồng phức tạp',
 
   // About
-  '03 · About': '03 · Giới thiệu',
   "I design tools that respect their users' time and intelligence.":
     'Tôi thiết kế những công cụ tôn trọng thời gian và trí tuệ của người dùng.',
   "I'm a UI/UX designer focused on data-driven products. I design dashboards and complex interfaces where clarity matters more than decoration.":
@@ -50,15 +49,14 @@ export const home: Record<string, string> = {
     'Hiện tại tôi đang khám phá giao điểm giữa AI, UX và thiết kế sản phẩm — tìm cách để những kết quả không xác định vẫn đáng tin cậy trong quy trình làm việc có rủi ro cao.',
   'The best interfaces feel obvious in retrospect. Getting there usually means cutting more than you add.':
     'Giao diện tốt nhất khi nhìn lại luôn có vẻ hiển nhiên. Để đạt được điều đó thường phải cắt bớt nhiều hơn là thêm vào.',
-  Currently: 'Hiện tại',
-  Tools: 'Công cụ',
+  'View profile': 'Xem hồ sơ',
   'UI/UX Designer, Consortia Group': 'Nhà thiết kế UI/UX, Consortia Group',
 
   // Services
-  '04 · Services': '04 · Dịch vụ',
-  'What I do.': 'Tôi làm gì.',
+  'Services': 'Dịch vụ',
+  'Dense data, calm screens.': 'Dữ liệu dày, màn hình dịu.',
   'Usually as a lead or solo designer on a small team. Occasionally as an advisor.':
-    'Thường với vai trò trưởng nhóm hoặc nhà thiết kế duy nhất trong nhóm nhỏ. Thỉnh thoảng là cố vấn.',
+    'Thường là trưởng nhóm thiết kế, hoặc nhà thiết kế duy nhất trong một nhóm nhỏ. Đôi khi tôi làm cố vấn.',
   'Dashboard & data UX': 'Bảng điều khiển & UX dữ liệu',
   "Hierarchies for dense data. Query-to-glance pipelines. Tables that don't make you squint.":
     'Phân cấp cho dữ liệu dày đặc. Luồng từ truy vấn đến cái nhìn nhanh. Bảng biểu không làm bạn phải nheo mắt.',
@@ -73,6 +71,7 @@ export const home: Record<string, string> = {
     'Token, component và mô hình đóng góp. Loại mà kỹ sư thực sự dùng.',
 
   // Writing
-  '05 · Writing': '05 · Bài viết',
-  'Notes on the craft.': 'Ghi chép về nghề.',
+  'Things I figured out.': 'Những điều tôi đã tự mày mò.',
+  'Short, practical write-ups drawn from my own projects and experiments.':
+    'Những bài viết ngắn, thực tế, rút ra từ chính các dự án và thử nghiệm của tôi.',
 };
