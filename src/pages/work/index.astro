@@ -1,10 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
+import Header from '../../components/Header.astro';
 import Layout from '../../layouts/Layout.astro';
-import ThemeToggle from '../../components/ThemeToggle';
-import LangSwitch from '../../components/LangSwitch.astro';
-import WorkSidebar from '../../components/WorkSidebar.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
+import Footer from '../../components/Footer.astro';
 import L from '../../components/L.astro';
 import '../../styles/global.css';
 
@@ -19,30 +18,14 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
 
 <Layout title="Work - Joyce Doan" description="Selected UI/UX design work by Joyce Doan.">
 
-  <header style="position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg-page) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-subtle);">
-    <div style="max-width: 100%; padding: 0 24px; height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
-      <div style="display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0;">
-        <a href="/" style="display: inline-flex; text-decoration: none;">
-          <img src="/logo.svg" alt="Joyce Doan" height="18" style="display: block; filter: var(--logo-filter);" />
-        </a>
-        <span style="font: 400 12px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">/</span>
-        <a href="/work" style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-bright); text-decoration: none;"><L en="Work" vi="Dự án" /></a>
-      </div>
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <LangSwitch />
-        <ThemeToggle client:load />
-      </div>
-    </div>
-  </header>
+  <Header />
 
-  <div style="display: grid; grid-template-columns: 220px 1fr; min-height: calc(100vh - 48px);">
-
-    <WorkSidebar entries={sorted} />
+  <div style="display: grid; grid-template-columns: 1fr; min-height: calc(100vh - var(--header-h, 48px));">
 
     <main style="min-width: 0;">
 
       <!-- Hero -->
-      <div style="padding: 56px 72px 48px; border-bottom: 1px solid var(--border-subtle);">
+      <div style="padding: 56px max(48px, calc((100% - 1320px) / 2 + 48px)) 48px; border-bottom: 1px solid var(--border-subtle);">
         <div class="overline" style="margin-bottom: 16px;" data-i18n>UI/UX Designer</div>
         <h1 style="font: 500 48px/1.0 'Poppins', sans-serif; letter-spacing: -0.04em; color: var(--text-bright); margin: 0 0 12px;"><L en="Work" vi="Dự án" /></h1>
         <p style="font: 400 15px/24px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0; max-width: 480px;">
@@ -50,7 +33,7 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
         </p>
       </div>
 
-      <div style="padding: 56px 72px 96px;">
+      <div style="padding: 56px max(48px, calc((100% - 1320px) / 2 + 48px)) 96px;">
 
         <!-- Featured -->
         <div style="margin-bottom: 56px;">
@@ -112,6 +95,7 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
               </a>
             ))}
           </div>
+          <nav id="work-pager" aria-label="Pagination" style="display: none; justify-content: center; align-items: center; gap: 6px; margin-top: 32px;"></nav>
         </div>
 
       </div>
@@ -120,6 +104,7 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
     </main>
 
   </div>
+  <Footer />
 
 </Layout>
 
@@ -127,6 +112,9 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
   .work-card:hover { border-color: var(--border-default) !important; }
   .work-card:hover i { color: var(--text-accent) !important; }
   .project-row:hover span:nth-child(1) { color: var(--text-accent) !important; }
+  .pager-btn { min-width: 44px; padding: 0 14px; }
+  .pager-btn:disabled { opacity: 0.4; cursor: default; }
+  .pager-btn.active { border-color: var(--text-bright); }
   .filter-btn:hover { border-color: var(--border-default) !important; color: var(--text-bright) !important; }
   .filter-btn.active { background: var(--primary-700) !important; color: var(--text-inverse) !important; border-color: var(--primary-700) !important; }
 </style>
@@ -138,17 +126,30 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
   const labelHand = document.getElementById('list-label-hand')!;
   const labelAi = document.getElementById('list-label-ai')!;
   const sparkles = document.getElementById('ai-sparkles')!;
+  const pager = document.getElementById('work-pager')!;
+  const PER_PAGE = 7;
   let filter = 'All';
   let aiMode = false;
+  const list = document.getElementById('project-list')!;
+  let listHeight = 0;
+  let page = 1;
 
   // Hand-designed work shows by default; AI projects only when AI mode is on.
   function apply(animate: boolean) {
     let n = 0;
-    rows.forEach((row) => {
+    const matching = [...rows].filter((row) => {
       const isAi = row.dataset.ai === 'true';
       const cat = row.dataset.category ?? '';
-      const visible = isAi === aiMode && (filter === 'All' || cat === filter);
+      return isAi === aiMode && (filter === 'All' || cat === filter);
+    });
+    const pages = Math.max(1, Math.ceil(matching.length / PER_PAGE));
+    page = Math.min(page, pages);
+    const shown = new Set(matching.slice((page - 1) * PER_PAGE, page * PER_PAGE));
+    const lastShown = [...shown].pop();
+    rows.forEach((row) => {
+      const visible = shown.has(row);
       row.style.display = visible ? 'grid' : 'none';
+      row.style.borderBottom = row === lastShown ? 'none' : '1px solid var(--border-subtle)';
       row.classList.remove('ai-row');
       if (visible && animate) {
         row.style.setProperty('--i', String(n++));
@@ -159,6 +160,31 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
     });
     labelHand.hidden = aiMode;
     labelAi.hidden = !aiMode;
+    // Keep the table at the height of a full page so it doesn't shrink on short pages or filters.
+    const sample = [...shown][0];
+    if (sample && !listHeight) {
+      listHeight = sample.getBoundingClientRect().height * PER_PAGE;
+      list.style.minHeight = `${listHeight}px`;
+    }
+    renderPager(pages);
+  }
+
+  function renderPager(pages: number) {
+    pager.innerHTML = '';
+    pager.style.display = pages > 1 ? 'flex' : 'none';
+    const add = (label: string, to: number, opts: { active?: boolean; disabled?: boolean; aria?: string } = {}) => {
+      const b = document.createElement('button');
+      b.className = 'btn btn--secondary pager-btn' + (opts.active ? ' active' : '');
+      b.textContent = label;
+      b.disabled = !!opts.disabled;
+      if (opts.aria) b.setAttribute('aria-label', opts.aria);
+      if (opts.active) b.setAttribute('aria-current', 'page');
+      b.addEventListener('click', () => { page = to; apply(false); });
+      pager.appendChild(b);
+    };
+    add('←', page - 1, { disabled: page === 1, aria: 'Previous page' });
+    for (let i = 1; i <= pages; i++) add(String(i), i, { active: i === page });
+    add('→', page + 1, { disabled: page === pages, aria: 'Next page' });
   }
 
   function burst() {
@@ -177,6 +203,7 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
 
   aiSwitch.addEventListener('click', () => {
     aiMode = !aiMode;
+    page = 1;
     aiSwitch.setAttribute('aria-checked', String(aiMode));
     aiSwitch.classList.toggle('is-on', aiMode);
     if (aiMode) burst();
@@ -187,6 +214,7 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
   buttons.forEach((btn) => {
     btn.addEventListener('click', () => {
       filter = btn.dataset.filter ?? 'All';
+      page = 1;
       buttons.forEach((b) => b.classList.remove('active'));
       btn.classList.add('active');
       apply(false);

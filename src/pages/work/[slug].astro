@@ -1,8 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
+import Header from '../../components/Header.astro';
 import Layout from '../../layouts/Layout.astro';
-import ThemeToggle from '../../components/ThemeToggle';
-import LangSwitch from '../../components/LangSwitch.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
 import Footer from '../../components/Footer.astro';
 import WorkSidebar from '../../components/WorkSidebar.astro';
@@ -34,25 +33,9 @@ const next = idx < sorted.length - 1 ? sorted[idx + 1] : null;
 ---
 
 <Layout title={`${w.title} - Joyce Doan`} description={w.description}>
-  <header style="position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg-page) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-subtle);">
-    <div style="max-width: 100%; padding: 0 24px; height: 48px; display: flex; align-items: center; justify-content: space-between;">
-      <div style="display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0;">
-        <a href="/" style="display: inline-flex; text-decoration: none;">
-          <img src="/logo.svg" alt="Joyce Doan" height="18" style="display: block; filter: var(--logo-filter);" />
-        </a>
-        <span style="font: 400 12px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">/</span>
-        <a href="/work" style="font: 400 13px/20px 'Poppins', sans-serif; color: var(--text-secondary); text-decoration: none;"><L en="Work" vi="Dự án" /></a>
-        <span style="font: 400 12px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">/</span>
-        <span style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-bright);"><L en={w.title} vi={wv.title} /></span>
-      </div>
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <LangSwitch />
-        <ThemeToggle client:load />
-      </div>
-    </div>
-  </header>
+  <Header />
 
-  <div style="display: grid; grid-template-columns: 220px 1fr 200px; min-height: calc(100vh - 48px);">
+  <div style="display: grid; grid-template-columns: 220px 1fr 200px; min-height: calc(100vh - var(--header-h, 48px));">
     <WorkSidebar entries={sorted} activeSlug={entry.slug} />
 
     <!-- Main -->
@@ -66,7 +49,7 @@ const next = idx < sorted.length - 1 ? sorted[idx + 1] : null;
             href={w.url}
             target="_blank"
             rel="noopener noreferrer"
-            class="btn btn--primary"
+            class="btn btn--secondary"
             data-cursor="hover"
             style="margin-top: 24px;"
           >
@@ -108,7 +91,7 @@ const next = idx < sorted.length - 1 ? sorted[idx + 1] : null;
 
     <!-- Right sidebar -->
     <div style="border-left: 1px solid var(--border-subtle);">
-      <aside style="position: sticky; top: 48px; height: fit-content; padding: 40px 24px;">
+      <aside style="position: sticky; top: var(--header-h, 48px); height: fit-content; padding: 40px 24px;">
         <div style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;"><L en="Skills" vi="Kỹ năng" /></div>
         <div style="display: flex; flex-direction: column; gap: 8px;">
           {w.skills.map(s => (
