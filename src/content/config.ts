@@ -11,6 +11,7 @@ const workSchema = z.object({
     url: z.string().url().optional(),   // live site, shown as a "Visit website" button
     category: z.string().optional(),
     hasImage: z.boolean().default(false),
+    ai: z.boolean().default(false),     // shown when "AI mode" is on, hidden otherwise
     order: z.number().default(99),
 });
 

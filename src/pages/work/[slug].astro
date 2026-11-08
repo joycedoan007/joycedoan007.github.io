@@ -57,8 +57,8 @@ const next = idx < sorted.length - 1 ? sorted[idx + 1] : null;
 
     <!-- Main -->
     <main style="min-width: 0; padding: 56px 72px 120px;">
-      <div class="overline" style="margin-bottom: 16px;"><L en={[w.subtitle, w.role, w.company, w.year].filter(Boolean).join(' · ')} vi={[wv.subtitle, wv.role, wv.company, wv.year ?? w.year].filter(Boolean).join(' · ')} /></div>
-      <h1 style="font: 700 clamp(28px, 4vw, 48px)/1.1 'Poppins', sans-serif; letter-spacing: -0.03em; color: var(--text-bright); margin: 0 0 20px; max-width: 640px;"><L en={w.title} vi={wv.title} /></h1>
+      <div class="overline" style="margin-bottom: 16px;"><L en={[w.role, w.company, w.year].filter(Boolean).join(' · ')} vi={[wv.role, wv.company, wv.year ?? w.year].filter(Boolean).join(' · ')} /></div>
+      <h1 style="font: 500 clamp(32px, 4vw, 48px)/1.05 'Poppins', sans-serif; letter-spacing: -0.04em; color: var(--text-bright); margin: 0 0 20px; max-width: 640px;"><L en={w.title} vi={wv.title} /></h1>
       <div style="margin: 0 0 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border-subtle);">
         <p style="font: 400 16px/26px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0; max-width: 560px;"><L en={w.description} vi={wv.description} /></p>
         {w.url && (

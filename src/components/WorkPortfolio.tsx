@@ -1,9 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import DocDashboardMock from './DocDashboardMock';
 import { useLang, useT } from '../i18n/react';
 
-const SHOW_FEATURED_VISUAL = false;
-const SHOW_DOC_DASHBOARD_MOCK = false;
 
 export interface WorkItem {
   id: string;
@@ -24,6 +21,7 @@ export interface WorkItem {
   outcome: string;
   metrics: { value: string; label: string }[];
   featured?: boolean;
+  ai?: boolean;
   order: number;
 }
 
@@ -264,6 +262,65 @@ function WorkRow({
   );
 }
 
+// ─── AI mode: scramble-to-text reveal + sparkle burst ────────────────────────
+const GLYPHS = '✦+*/<>#%&01';
+
+function useScramble(target: string) {
+  const [out, setOut] = useState(target);
+  const first = useRef(true);
+  useEffect(() => {
+    if (first.current || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      first.current = false;
+      setOut(target);
+      return;
+    }
+    let frame = 0;
+    const total = 26;
+    const id = setInterval(() => {
+      frame++;
+      const done = Math.floor((frame / total) * target.length);
+      setOut(
+        target
+          .split('')
+          .map((c, i) => (i < done || c === ' ' ? c : GLYPHS[Math.floor(Math.random() * GLYPHS.length)]))
+          .join('')
+      );
+      if (frame >= total) {
+        clearInterval(id);
+        setOut(target);
+      }
+    }, 28);
+    return () => clearInterval(id);
+  }, [target]);
+  return out;
+}
+
+function Sparkles({ burst }: { burst: number }) {
+  if (!burst) return null;
+  return (
+    <span className="ai-sparkles" key={burst} aria-hidden="true">
+      {Array.from({ length: 10 }).map((_, i) => {
+        const a = (i / 10) * Math.PI * 2;
+        const d = 34 + (i % 3) * 14;
+        return (
+          <i
+            key={i}
+            style={
+              {
+                '--dx': `${Math.cos(a) * d}px`,
+                '--dy': `${Math.sin(a) * d}px`,
+                '--delay': `${(i % 4) * 40}ms`,
+              } as React.CSSProperties
+            }
+          >
+            ✦
+          </i>
+        );
+      })}
+    </span>
+  );
+}
+
 // ─── Work index section ───────────────────────────────────────────────────────
 function WorkIndex({
   items,
@@ -273,7 +330,16 @@ function WorkIndex({
   onOpen: (item: WorkItem) => void;
 }) {
   const [hoverItem, setHoverItem] = useState<WorkItem | null>(null);
+  const [aiMode, setAiMode] = useState(false);
+  const [burst, setBurst] = useState(0);
   const t = useT();
+  const shown = items.filter((w) => !!w.ai === aiMode);
+  const title = useScramble(aiMode ? t('Selected work, designed with AI.') : t('Selected work, designed by hand.'));
+
+  function toggleAi() {
+    setAiMode((v) => !v);
+    setBurst((b) => b + 1);
+  }
 
   function handleHover(item: WorkItem | null) {
     setHoverItem(item);
@@ -295,9 +361,10 @@ function WorkIndex({
         >
           <div>
             <div className="overline" style={{ marginBottom: 12 }}>
-              {t('The work:')} {items.length} {t('entries')}
+              {t('The work')}
             </div>
             <h2
+              className={aiMode ? 'ai-title is-ai' : 'ai-title'}
               style={{
                 font: "500 clamp(30px, 3.4vw, 44px)/1.1 'Poppins', sans-serif",
                 letterSpacing: '-0.035em',
@@ -305,8 +372,25 @@ function WorkIndex({
                 margin: 0,
               }}
             >
-              {t('Selected work, designed by hand.')}
+              {title}
             </h2>
+          </div>
+          <div style={{ position: 'relative', flexShrink: 0 }}>
+            <button
+              type="button"
+              role="switch"
+              aria-checked={aiMode}
+              onClick={toggleAi}
+              data-cursor="hover"
+              className={aiMode ? 'ai-switch is-on' : 'ai-switch'}
+            >
+              <i className="ph-bold ph-sparkle" />
+              <span>{t('AI mode')}</span>
+              <span className="ai-switch__track">
+                <span className="ai-switch__thumb" />
+              </span>
+            </button>
+            <Sparkles burst={aiMode ? burst : 0} />
           </div>
         </div>
 
@@ -332,111 +416,17 @@ function WorkIndex({
           <span />
         </div>
 
-        {items.map((w, i) => (
-          <WorkRow
-            key={w.id}
-            item={w}
-            idx={i}
-            onOpen={onOpen}
-            onHover={handleHover}
-            isHovered={hoverItem?.id === w.id}
-          />
-        ))}
-      </div>
-    </section>
-  );
-}
-
-// ─── Featured section ─────────────────────────────────────────────────────────
-function Featured({ item }: { item: WorkItem }) {
-  const isVi = useLang() === 'vi';
-  const t = useT();
-  return (
-    <section
-      id="featured"
-      style={{ borderBottom: '1px solid var(--border-subtle)', background: 'var(--bg-surface)' }}
-    >
-      <div style={{ maxWidth: 1320, margin: '0 auto', padding: '96px 48px' }}>
-        <div
-          data-reveal
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'baseline',
-            paddingBottom: 24,
-            marginBottom: 56,
-            borderBottom: '1px solid var(--border-subtle)',
-          }}
-        >
-          <div className="overline">{t('Featured deep dive')}</div>
-          <span
-            style={{
-              font: "500 13px/20px 'JetBrains Mono', monospace",
-              color: 'var(--text-secondary)',
-            }}
-          >
-            {item.year} · {item.size}
-          </span>
-        </div>
-
-        <div data-reveal style={{ '--reveal-delay': '80ms' } as React.CSSProperties}>
-          <h2
-            style={{
-              font: "500 clamp(30px, 3.4vw, 44px)/1.1 'Poppins', sans-serif",
-              letterSpacing: '-0.035em',
-              color: 'var(--text-bright)',
-              margin: '0 0 48px',
-              maxWidth: 1100,
-              textWrap: 'balance',
-            }}
-          >
-            {isVi ? item.summaryVi ?? item.summary : item.summary}
-          </h2>
-        </div>
-
-        <div data-reveal style={{ '--reveal-delay': '140ms' } as React.CSSProperties}>
-          {SHOW_FEATURED_VISUAL && (item.slug === '01-document-management' && SHOW_DOC_DASHBOARD_MOCK ? (
-            <div
-              style={{
-                borderRadius: 'var(--radius-lg)',
-                border: '1px solid var(--border-subtle)',
-                overflow: 'hidden',
-                marginBottom: 56,
-                background: 'transparent',
-              }}
-            >
-              <DocDashboardMock />
-            </div>
-          ) : (
-            <div
-              style={{
-                aspectRatio: '21 / 9',
-                background:
-                  'linear-gradient(135deg, #002923 0%, #005441 60%, color-mix(in srgb, var(--primary-500) 35%, #002923) 100%)',
-                borderRadius: 'var(--radius-lg)',
-                border: '1px solid var(--border-subtle)',
-                position: 'relative',
-                overflow: 'hidden',
-                marginBottom: 56,
-              }}
-            >
-              <BigDashboard />
-              <div
-                style={{
-                  position: 'absolute',
-                  top: 24,
-                  left: 24,
-                  padding: '6px 12px',
-                  background: 'rgba(11,14,18,0.7)',
-                  borderRadius: 'var(--radius-full)',
-                  font: "600 12px/16px 'Poppins', sans-serif",
-                  color: 'var(--text-bright)',
-                  letterSpacing: '0.04em',
-                  textTransform: 'uppercase',
-                }}
-              >
-                {isVi ? item.tagVi ?? item.tag : item.tag} · {isVi ? item.titleVi ?? item.title : item.title}
-              </div>
+        {/* Keyed by mode so the rows replay their entrance whenever AI mode flips */}
+        <div key={aiMode ? 'ai' : 'hand'} className={aiMode ? 'ai-rows is-ai' : 'ai-rows'}>
+          {shown.map((w, i) => (
+            <div className="ai-row" style={{ '--i': i } as React.CSSProperties} key={w.id}>
+              <WorkRow
+                item={w}
+                idx={i}
+                onOpen={onOpen}
+                onHover={handleHover}
+                isHovered={hoverItem?.id === w.id}
+              />
             </div>
           ))}
         </div>
@@ -646,19 +636,15 @@ function CaseModal({
 // ─── Root export ──────────────────────────────────────────────────────────────
 export default function WorkPortfolio({
   workItemsJson,
-  featuredId,
 }: {
   workItemsJson: string;
-  featuredId: string;
 }) {
   const items: WorkItem[] = JSON.parse(workItemsJson);
-  const featured = items.find((w) => w.id === featuredId) ?? items[0];
   const [openItem, setOpenItem] = useState<WorkItem | null>(null);
 
   return (
     <>
       <WorkIndex items={items} onOpen={setOpenItem} />
-      <Featured item={featured} />
       <CaseModal item={openItem} onClose={() => setOpenItem(null)} />
     </>
   );

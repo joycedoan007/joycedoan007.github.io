@@ -80,7 +80,16 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
         <!-- All projects -->
         <div>
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
-            <h2 style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; margin: 0;"><L en="All projects" vi="Tất cả dự án" /></h2>
+            <h2 style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; margin: 0;"><span id="list-label-hand"><L en="All projects" vi="Tất cả dự án" /></span><span id="list-label-ai" hidden><L en="AI projects" vi="Dự án AI" /></span></h2>
+            <div style="display: flex; align-items: center; gap: 20px;">
+            <div style="position: relative;">
+              <button type="button" role="switch" aria-checked="false" id="ai-switch" data-cursor="hover" class="ai-switch ai-switch--sm">
+                <i class="ph-bold ph-sparkle"></i>
+                <span><L en="AI mode" vi="Chế độ AI" /></span>
+                <span class="ai-switch__track"><span class="ai-switch__thumb"></span></span>
+              </button>
+              <span class="ai-sparkles" id="ai-sparkles" aria-hidden="true"></span>
+            </div>
             <div id="work-filters" style="display: flex; gap: 6px;">
               {['All', 'Product Design', 'Web Design', 'Branding'].map((cat) => (
                 <button
@@ -92,11 +101,11 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
                 </button>
               ))}
             </div>
+            </div>
           </div>
           <div id="project-list">
             {sorted.map((e, i) => (
-              <a href={`/work/${e.slug}`} class="project-row" data-category={e.data.category ?? ''} style={`display: grid; grid-template-columns: 32px 1fr 180px 80px; gap: 24px; align-items: center; padding: 16px 0;${i < sorted.length - 1 ? ' border-bottom: 1px solid var(--border-subtle);' : ''} text-decoration: none; transition: padding 150ms ease;`}>
-                <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">{String(i + 1).padStart(2, '0')}</span>
+              <a href={`/work/${e.slug}`} class="project-row" data-category={e.data.category ?? ''} data-ai={String(e.data.ai)} style={`display: ${e.data.ai ? 'none' : 'grid'}; grid-template-columns: 1fr 180px 80px; gap: 24px; align-items: center; padding: 16px 0;${i < sorted.length - 1 ? ' border-bottom: 1px solid var(--border-subtle);' : ''} text-decoration: none; transition: padding 150ms ease;`}>
                 <span style="font: 500 14px/20px 'Poppins', sans-serif; color: var(--text-bright);"><L en={e.data.title} vi={vd(e).title} /></span>
                 <span style="font: 500 10px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.06em; text-transform: uppercase;"><L en={e.data.category ?? ''} vi={catVi[e.data.category ?? ''] ?? e.data.category ?? ''} /></span>
                 <span style="font: 400 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); text-align: right;">{e.data.year}</span>
@@ -117,7 +126,7 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
 <style>
   .work-card:hover { border-color: var(--border-default) !important; }
   .work-card:hover i { color: var(--text-accent) !important; }
-  .project-row:hover span:nth-child(2) { color: var(--text-accent) !important; }
+  .project-row:hover span:nth-child(1) { color: var(--text-accent) !important; }
   .filter-btn:hover { border-color: var(--border-default) !important; color: var(--text-bright) !important; }
   .filter-btn.active { background: var(--primary-700) !important; color: var(--text-inverse) !important; border-color: var(--primary-700) !important; }
 </style>
@@ -125,21 +134,66 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
 <script>
   const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
   const rows = document.querySelectorAll<HTMLElement>('.project-row');
+  const aiSwitch = document.getElementById('ai-switch') as HTMLButtonElement;
+  const labelHand = document.getElementById('list-label-hand')!;
+  const labelAi = document.getElementById('list-label-ai')!;
+  const sparkles = document.getElementById('ai-sparkles')!;
+  let filter = 'All';
+  let aiMode = false;
+
+  // Hand-designed work shows by default; AI projects only when AI mode is on.
+  function apply(animate: boolean) {
+    let n = 0;
+    rows.forEach((row) => {
+      const isAi = row.dataset.ai === 'true';
+      const cat = row.dataset.category ?? '';
+      const visible = isAi === aiMode && (filter === 'All' || cat === filter);
+      row.style.display = visible ? 'grid' : 'none';
+      row.classList.remove('ai-row');
+      if (visible && animate) {
+        row.style.setProperty('--i', String(n++));
+        void row.offsetWidth; // restart the entrance animation
+        row.classList.add('ai-row');
+        row.classList.toggle('ai-row--magic', aiMode);
+      }
+    });
+    labelHand.hidden = aiMode;
+    labelAi.hidden = !aiMode;
+  }
+
+  function burst() {
+    sparkles.innerHTML = '';
+    for (let i = 0; i < 10; i++) {
+      const a = (i / 10) * Math.PI * 2;
+      const d = 26 + (i % 3) * 10;
+      const el = document.createElement('i');
+      el.textContent = '✦';
+      el.style.setProperty('--dx', `${Math.cos(a) * d}px`);
+      el.style.setProperty('--dy', `${Math.sin(a) * d}px`);
+      el.style.setProperty('--delay', `${(i % 4) * 40}ms`);
+      sparkles.appendChild(el);
+    }
+  }
+
+  aiSwitch.addEventListener('click', () => {
+    aiMode = !aiMode;
+    aiSwitch.setAttribute('aria-checked', String(aiMode));
+    aiSwitch.classList.toggle('is-on', aiMode);
+    if (aiMode) burst();
+    else sparkles.innerHTML = '';
+    apply(true);
+  });
 
   buttons.forEach((btn) => {
     btn.addEventListener('click', () => {
-      const filter = btn.dataset.filter ?? 'All';
-
+      filter = btn.dataset.filter ?? 'All';
       buttons.forEach((b) => b.classList.remove('active'));
       btn.classList.add('active');
-
-      rows.forEach((row) => {
-        const cat = row.dataset.category ?? '';
-        row.style.display = (filter === 'All' || cat === filter) ? 'grid' : 'none';
-      });
+      apply(false);
     });
   });
 
   // Set "All" as active on load
   document.querySelector<HTMLButtonElement>('.filter-btn[data-filter="All"]')?.classList.add('active');
+  apply(false);
 </script>

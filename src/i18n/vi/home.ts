@@ -8,12 +8,12 @@ export const home: Record<string, string> = {
   Contact: 'Liên hệ',
 
   // Hero
-  'Joyce Doan · UI/UX Designer': 'Joyce Doan · Nhà thiết kế UI/UX',
-  'I automate the busywork to build': 'Tôi tự động hóa việc lặp lại để xây dựng',
-  'better products.': 'sản phẩm tốt hơn.',
-  'From UX research to design systems to UI, I apply AI-powered workflows at every stage. Not just to move faster, but to spend more time on what users and the business actually need.':
-    'Từ nghiên cứu UX, hệ thống thiết kế đến UI, tôi áp dụng quy trình AI ở mọi giai đoạn. Không chỉ để làm nhanh hơn, mà để dành nhiều thời gian hơn cho điều người dùng và doanh nghiệp thực sự cần.',
-  'See the work': 'Xem dự án',
+  'Joyce Doan · UI/UX Designer · AI Products': 'Joyce Doan · Nhà thiết kế UI/UX · Sản phẩm AI',
+  'I design systems where': 'Tôi thiết kế hệ thống nơi',
+  'AI handles the repetitive work.': 'AI lo việc lặp lại.',
+  'I use AI to automate my own UI/UX workflow, then apply the same thinking to products with AI inside. The goal is the same: less repetitive work, people kept in the decisions that matter, and a system the whole team can trust.':
+    'Tôi dùng AI để tự động hóa quy trình UI/UX của chính mình, rồi áp dụng cùng tư duy đó để thiết kế sản phẩm có AI bên trong. Mục tiêu giống nhau: bớt việc lặp lại, giữ con người ở những quyết định quan trọng, và để hệ thống đủ tin cậy cho cả đội vận hành.',
+  'Book a call': 'Đặt lịch gọi',
   'Get in touch': 'Liên hệ',
   'Weekly workflow': 'Quy trình hằng tuần',
   Manual: 'Thủ công',

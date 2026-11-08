@@ -32,9 +32,9 @@ const writingItems = writingEntries
 
 const workEntries = await getCollection('work');
 const workViEntries = await getCollection('work-vi');
-const workItems = workEntries
-  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
-  .slice(0, 5)
+const byOrder = workEntries.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+// Hand-designed work shows by default; AI projects only appear when "AI mode" is on.
+const workItems = [...byOrder.filter((e) => !e.data.ai).slice(0, 5), ...byOrder.filter((e) => e.data.ai)]
   .map((entry) => ({
     id: entry.slug,
     slug: entry.slug,
@@ -54,10 +54,10 @@ const workItems = workEntries
     outcome: '',
     metrics: [] as { value: string; label: string }[],
     featured: entry.data.order === 1,
+    ai: entry.data.ai,
     order: entry.data.order ?? 99,
   }));
 
-const featuredId = workItems[0]?.id ?? '';
 
 const SITE = {
   name: 'Joyce Doan',
@@ -87,7 +87,6 @@ const SITE = {
     <WorkPortfolio
       client:load
       workItemsJson={JSON.stringify(workItems)}
-      featuredId={featuredId}
     />
     <About role={SITE.role} company={SITE.company} />
     <Services />
