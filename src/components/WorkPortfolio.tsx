@@ -509,7 +509,7 @@ function CaseModal({
             float: 'right',
             width: 36,
             height: 36,
-            borderRadius: 'var(--radius-md)',
+            borderRadius: 'var(--radius-btn)',
             background: 'var(--bg-elevated)',
             border: '1px solid var(--border-subtle)',
             color: 'var(--text-bright)',

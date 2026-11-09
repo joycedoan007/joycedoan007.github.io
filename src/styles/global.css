@@ -28,6 +28,7 @@
   --radius-lg:   8px;
   --radius-xl:   12px;
   --radius-full: 9999px;
+  --radius-btn:  8px;
 
   --logo-filter: invert(1);
 }
@@ -323,7 +324,7 @@ html:not([lang='vi']) [data-lang-block='vi'] {
   gap: 8px;
   height: 44px;
   padding: 0 20px;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-btn);
   border: 1px solid transparent;
   font: 600 14px/20px 'Poppins', sans-serif;
   text-decoration: none;
@@ -387,7 +388,7 @@ nav.nav-fx a { position: relative; z-index: 1; transition: color 200ms ease; }
   z-index: 0;
   width: var(--w, 0px);
   height: var(--h, 32px);
-  border-radius: 10px;
+  border-radius: var(--radius-btn);
   background: var(--bg-elevated);
   opacity: 0;
   pointer-events: none;

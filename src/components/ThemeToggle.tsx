@@ -20,7 +20,7 @@ export default function ThemeToggle() {
       style={{
         width: 32,
         height: 32,
-        borderRadius: 'var(--radius-md)',
+        borderRadius: 'var(--radius-btn)',
         background: 'transparent',
         border: '1px solid var(--border-subtle)',
         color: 'var(--text-primary)',
