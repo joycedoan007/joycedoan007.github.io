@@ -82,5 +82,18 @@ const {
       initReveal();
     }
   </script>
+
+  <!-- AI-mode switch: green glow that follows the cursor (position set relative to the label and the track) -->
+  <script>
+    document.addEventListener('pointermove', (e) => {
+      const sw = (e.target as HTMLElement | null)?.closest<HTMLElement>('.ai-switch');
+      if (!sw) return;
+      for (const el of Array.from(sw.children) as HTMLElement[]) {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+        el.style.setProperty('--my', `${e.clientY - r.top}px`);
+      }
+    });
+  </script>
 </body>
 </html>
