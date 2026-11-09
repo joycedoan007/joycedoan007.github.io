@@ -384,7 +384,6 @@ function WorkIndex({
               data-cursor="hover"
               className={aiMode ? 'ai-switch is-on' : 'ai-switch'}
             >
-              <i className="ph-bold ph-sparkle" />
               <span>{t('AI mode')}</span>
               <span className="ai-switch__track">
                 <span className="ai-switch__thumb" />
