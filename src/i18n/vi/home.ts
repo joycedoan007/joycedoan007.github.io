@@ -43,13 +43,13 @@ export const home: Record<string, string> = {
 
   // About
   'I design so users struggle less and teams guess less.':
-    'Tôi thiết kế để người dùng làm việc ít vất vả hơn, và đội ít phải đoán hơn.',
-  "I see design as a way to help people. Good software makes their work and life lighter, so my job is to understand what they need before I draw anything. That's why I say no more often than yes. In data-heavy products with complex flows, every feature has a cost: users learn more, teams maintain more. I decide what to keep, what to cut, and I can explain why to both PMs and engineers.":
-    'Tôi nhìn thiết kế như một cách giúp người khác. Phần mềm tốt giúp họ làm việc và sống nhẹ nhàng hơn, nên việc của tôi là hiểu họ cần gì trước khi vẽ bất cứ thứ gì. Vì vậy tôi thường nói không nhiều hơn nói có. Với sản phẩm nhiều dữ liệu và luồng phức tạp, mỗi tính năng thêm vào đều có giá: người dùng phải học thêm, đội phải bảo trì thêm. Tôi chọn thứ cần giữ, cắt thứ không cần, và giải thích được lý do với PM lẫn kỹ sư.',
+    'Tôi thiết kế sản phẩm để người dùng làm việc nhanh hơn, và đội vận hành ít rủi ro hơn.',
+  "The document management system I helped design lets users retrieve documents 30% faster, makes access permissions clearer, and was handed over in one month with training so the team could run it on their own. That's how I work: understand the problem and the number to improve before I draw anything.":
+    'Hệ thống quản lý tài liệu tôi tham gia thiết kế giúp người dùng truy xuất tài liệu nhanh hơn 30%, phân quyền truy cập rõ ràng hơn, và được bàn giao trong một tháng, kèm đào tạo để đội tự vận hành. Tôi làm việc theo cách đó: hiểu rõ bài toán và con số cần cải thiện trước khi vẽ bất cứ thứ gì.',
+  'In data-heavy products with complex flows, every feature has a cost: users learn more, teams maintain more. I decide what to keep, what to cut, and I can explain why to both PMs and engineers so every decision has a basis.':
+    'Với sản phẩm nhiều dữ liệu và luồng phức tạp, mỗi tính năng thêm vào đều có giá: người dùng phải học thêm, đội phải bảo trì thêm. Tôi chọn thứ cần giữ, cắt thứ không cần, và giải thích được lý do với PM lẫn kỹ sư để mọi quyết định đều có cơ sở.',
   'With AI, I work on both sides. In my own process, I automate repetitive work to leave time for the hard decisions. In products, I design so AI takes over the manual steps while users keep the final say and a way back when AI gets it wrong.':
-    'Với AI, tôi giải bài toán ở hai phía. Trong quy trình của mình, tôi tự động hóa những việc lặp lại để dành thời gian cho quyết định khó. Trong sản phẩm, tôi thiết kế để AI làm phần thao tác thủ công, còn người dùng giữ quyền quyết định và có đường lui khi AI sai.',
-  "I don't just deliver screens. On the centralized document management system I helped design, users retrieve documents 30% faster, access rights are clearer, and the whole system was handed over in one month with user training so the team could run it on their own.":
-    'Tôi không chỉ giao màn hình. Với hệ thống quản lý tài liệu tập trung mà tôi tham gia thiết kế, người dùng truy xuất tài liệu nhanh hơn 30%, quyền truy cập rõ ràng hơn, và cả hệ thống được bàn giao trong một tháng, kèm đào tạo người dùng để đội tự vận hành.',
+    'Với AI, tôi giải bài toán ở hai phía. Trong quy trình của mình, tôi tự động hóa việc lặp lại để dành thời gian cho quyết định khó. Trong sản phẩm, tôi thiết kế để AI làm phần thao tác thủ công, còn người dùng giữ quyền quyết định và có đường lui khi AI sai.',
   'View profile': 'Xem hồ sơ',
   'UI/UX Designer, Consortia Group': 'Nhà thiết kế UI/UX, Consortia Group',
 
