@@ -4,15 +4,6 @@ interface Props {
   company: string;
 }
 const { stats, company } = Astro.props;
-
-// [icon, task, minutes by hand, minutes automated, label by hand, label automated]
-const tasks = [
-  ['ph-notebook', 'Summarise research & meeting notes', 40, 2, '40 min', '2 min'],
-  ['ph-folder-simple', 'Export, rename & organise assets', 25, 1, '25 min', '1 min'],
-  ['ph-file-text', 'Draft handoff specs & docs', 50, 3, '50 min', '3 min'],
-  ['ph-chart-line-up', 'Compile weekly report & follow-ups', 30, 2, '30 min', '2 min'],
-] as const;
-const totalSaved = tasks.reduce((n, t) => n + t[2] - t[3], 0);
 ---
 
 <section id="top" class="hero">
@@ -41,99 +32,20 @@ const totalSaved = tasks.reduce((n, t) => n + t[2] - t[3], 0);
       </div>
     </div>
 
-    <!-- Right: manual -> automated demo -->
-    <div data-reveal style="--reveal-delay: 120ms;" class="flow" id="flow" aria-hidden="true" data-total={totalSaved}>
-      <div class="flow__head">
-        <span class="flow__title" data-i18n>Weekly workflow</span>
-        <div class="flow__toggle" data-toggle>
-          <span class="flow__thumb"></span>
-          <span data-mode="manual" data-i18n>Manual</span>
-          <span data-mode="auto" data-i18n>Automated</span>
-        </div>
-      </div>
-
-      <ul class="flow__list">
-        {
-          tasks.map(([icon, label, , , manual, auto]) => (
-            <li class="flow__row" data-row>
-              <span class="flow__status"><i class={`ph ${icon} flow__icon`}></i><i class="ph-bold ph-check flow__check"></i><span class="flow__spin"></span></span>
-              <span class="flow__label" data-i18n>{label}</span>
-              <span class="flow__time"><s data-i18n>{manual}</s><b data-i18n>{auto}</b></span>
-            </li>
-          ))
-        }
-      </ul>
-
-      <div class="flow__foot">
-        <div class="flow__bar"><span data-bar></span></div>
-        <div class="flow__saved">
-          <span data-i18n>Time saved</span>
-          <strong data-saved>0h 00m</strong>
-        </div>
-      </div>
+    <!-- Right: two-way AI design-system sync diagram -->
+    <div data-reveal style="--reveal-delay: 120ms;" class="sync">
+      <video
+        src="/ai-workflow.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        aria-label="Two-way AI design system sync loop: a scheduled task has AI explore Figma and the code repo, compare both against a baseline, then open a PR or a Figma proposal for approval, and run again on schedule."
+      ></video>
     </div>
   </div>
 </section>
-
-<script>
-  const flow = document.getElementById('flow');
-  if (flow) {
-    const rows = [...flow.querySelectorAll<HTMLElement>('[data-row]')];
-    const bar = flow.querySelector<HTMLElement>('[data-bar]')!;
-    const saved = flow.querySelector<HTMLElement>('[data-saved]')!;
-    const toggle = flow.querySelector<HTMLElement>('[data-toggle]')!;
-    const TOTAL_SAVED = Number(flow.dataset.total); // minutes saved, computed from the task list
-    const fmt = (m: number) => `${Math.floor(m / 60)}h ${String(Math.round(m % 60)).padStart(2, '0')}m`;
-    const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
-    const setSaved = (v: number) => (saved.textContent = fmt(v));
-    const countTo = (to: number, ms: number) =>
-      new Promise<void>((resolve) => {
-        const t0 = performance.now();
-        const tick = (t: number) => {
-          const k = Math.min((t - t0) / ms, 1);
-          setSaved(to * (1 - Math.pow(1 - k, 3)));
-          k < 1 ? requestAnimationFrame(tick) : resolve();
-        };
-        requestAnimationFrame(tick);
-      });
-
-    const reset = () => {
-      toggle.dataset.state = 'manual';
-      rows.forEach((r) => (r.className = 'flow__row'));
-      bar.style.width = '0%';
-      setSaved(0);
-    };
-
-    const showFinal = () => {
-      toggle.dataset.state = 'auto';
-      rows.forEach((r) => (r.className = 'flow__row is-done'));
-      bar.style.width = '100%';
-      setSaved(TOTAL_SAVED);
-    };
-
-    const loop = async () => {
-      while (true) {
-        reset();
-        await wait(1800);
-        toggle.dataset.state = 'auto';
-        await wait(500);
-        for (let i = 0; i < rows.length; i++) {
-          rows[i].classList.add('is-running');
-          await wait(600);
-          rows[i].classList.remove('is-running');
-          rows[i].classList.add('is-done');
-          bar.style.width = `${((i + 1) / rows.length) * 100}%`;
-        }
-        await countTo(TOTAL_SAVED, 900);
-        await wait(3200);
-      }
-    };
-
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) showFinal();
-    else loop();
-  }
-</script>
 
 <style>
   .hero { border-bottom: 1px solid var(--border-subtle); }
@@ -143,8 +55,8 @@ const totalSaved = tasks.reduce((n, t) => n + t[2] - t[3], 0);
     padding: 64px 48px;
     min-height: calc(100svh - var(--header-h, 64px) - 72px);
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 520px);
-    gap: 80px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 600px);
+    gap: 56px;
     align-items: center;
   }
   .hero__text { display: flex; flex-direction: column; align-items: flex-start; gap: 28px; }
@@ -188,79 +100,8 @@ const totalSaved = tasks.reduce((n, t) => n + t[2] - t[3], 0);
   }
   .hero__actions { display: flex; align-items: center; gap: 28px; }
 
-  /* Automation demo */
-  .flow {
-    border: 1px solid var(--border-default);
-    border-radius: 20px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    background: var(--bg-surface, transparent);
-  }
-  .flow__head { display: flex; align-items: center; justify-content: space-between; }
-  .flow__title { font: 500 12px/16px 'JetBrains Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); }
-  .flow__toggle {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 3px;
-    border: 1px solid var(--border-default);
-    border-radius: 999px;
-    font: 500 12px/16px 'JetBrains Mono', monospace;
-  }
-  .flow__toggle span[data-mode] { position: relative; z-index: 1; padding: 6px 14px; text-align: center; color: var(--text-secondary); transition: color 0.3s; }
-  .flow__thumb { position: absolute; top: 3px; bottom: 3px; left: 3px; width: calc(50% - 3px); border-radius: 999px; background: var(--text-bright); transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
-  .flow__toggle[data-state='manual'] [data-mode='manual'],
-  .flow__toggle[data-state='auto'] [data-mode='auto'] { color: var(--bg-page, #fff); }
-  .flow__toggle[data-state='auto'] .flow__thumb { transform: translateX(100%); }
-
-  .flow__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-  .flow__row {
-    display: grid;
-    grid-template-columns: 36px 1fr auto;
-    align-items: center;
-    gap: 14px;
-    padding: 14px;
-    border: 1px solid var(--border-subtle);
-    border-radius: 14px;
-    transition: border-color 0.3s, background 0.3s;
-  }
-  .flow__row.is-running { border-color: var(--text-accent); }
-  .flow__row.is-done { border-color: var(--border-subtle); background: color-mix(in srgb, var(--text-accent) 6%, transparent); }
-  .flow__status {
-    position: relative;
-    width: 36px; height: 36px;
-    border-radius: 10px;
-    border: 1px solid var(--border-subtle);
-    display: grid; place-items: center;
-    color: var(--text-secondary);
-    font-size: 18px;
-    transition: background 0.3s, color 0.3s, border-color 0.3s;
-  }
-  .flow__status > * { grid-area: 1 / 1; transition: opacity 0.2s, transform 0.3s; }
-  .flow__check, .flow__spin { opacity: 0; transform: scale(0.6); }
-  .flow__spin { width: 16px; height: 16px; border: 2px solid var(--border-default); border-top-color: var(--text-accent); border-radius: 50%; }
-  .flow__row.is-running .flow__icon { opacity: 0; }
-  .flow__row.is-running .flow__spin { opacity: 1; transform: none; animation: flow-spin 0.7s linear infinite; }
-  .flow__row.is-done .flow__icon { opacity: 0; }
-  .flow__row.is-done .flow__check { opacity: 1; transform: none; }
-  .flow__row.is-done .flow__status { background: var(--primary-700); border-color: var(--primary-700); color: var(--text-inverse); }
-  .flow__label { font: 500 14px/20px 'Poppins', sans-serif; color: var(--text-bright); }
-  .flow__time { display: grid; justify-items: end; font: 500 12px/16px 'JetBrains Mono', monospace; }
-  .flow__time > * { grid-area: 1 / 1; transition: opacity 0.3s, transform 0.3s; }
-  .flow__time s { color: var(--text-secondary); }
-  .flow__time b { color: var(--text-accent); font-weight: 600; opacity: 0; transform: translateY(6px); }
-  .flow__row.is-done .flow__time s { opacity: 0; transform: translateY(-6px); }
-  .flow__row.is-done .flow__time b { opacity: 1; transform: none; }
-
-  .flow__foot { display: flex; align-items: center; gap: 20px; padding-top: 4px; }
-  .flow__bar { flex: 1; height: 4px; border-radius: 4px; background: var(--border-subtle); overflow: hidden; }
-  .flow__bar span { display: block; height: 100%; width: 0; background: var(--text-accent); transition: width 0.5s ease; }
-  .flow__saved { display: flex; align-items: baseline; gap: 10px; font: 500 12px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); }
-  .flow__saved strong { font: 500 24px/28px 'Poppins', sans-serif; letter-spacing: -0.02em; color: var(--text-bright); font-variant-numeric: tabular-nums; }
-
-  @keyframes flow-spin { to { transform: rotate(360deg); } }
+  /* Two-way sync diagram (video) */
+  .sync video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 20px; object-fit: cover; }
 
   @media (max-width: 900px) {
     .hero__inner { grid-template-columns: 1fr; gap: 40px; padding: 32px 24px 48px; }
