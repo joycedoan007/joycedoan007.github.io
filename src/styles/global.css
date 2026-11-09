@@ -70,6 +70,32 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Film-grain noise on body and .grain sections (same technique as robinlopez.fr: noise tile as a background image, overlay-blended with the background colour) */
+:root {
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='2.4 0 0 0 -0.7  2.4 0 0 0 -0.7  2.4 0 0 0 -0.7  0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
+}
+/* Same noise laid over images, so photos pick up the grain too */
+.grain-img { position: relative; }
+.grain-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--grain) 0 0 / 240px 240px repeat;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+.prose .grain-img { display: block; margin: 24px 0; border-radius: var(--radius-lg); line-height: 0; overflow: hidden; }
+.prose .grain-img img { margin: 0; }
+
+body,
+.grain {
+  background-image: var(--grain) !important;
+  background-size: 240px 240px !important;
+  background-repeat: repeat !important;
+  background-blend-mode: overlay;
+}
+
 ::selection {
   background: var(--primary-500);
   color: var(--text-inverse);
@@ -235,6 +261,10 @@ html:not([lang='vi']) [data-lang-block='vi'] {
 
 /* ─── Buttons: one scale for every CTA (44px, 20px side padding, 14px label) ─── */
 .btn {
+  --tx: 0px;
+  --ty: 0px;
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -247,15 +277,53 @@ html:not([lang='vi']) [data-lang-block='vi'] {
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-  transition: opacity 150ms ease, border-color 150ms ease, background 150ms ease;
+  transform: translate(var(--tx), var(--ty));
+  transition: transform 700ms cubic-bezier(0.34, 1.56, 0.64, 1), background-color 400ms ease, color 400ms ease, border-color 400ms ease;
 }
-.btn i { font-size: 14px; }
 .btn--lg { height: 48px; padding: 0 24px; font-size: 15px; }
-.btn--lg i { font-size: 15px; }
 .btn--primary { background: var(--primary-700); color: var(--text-inverse); }
-.btn--primary:hover { opacity: 0.88; }
 .btn--secondary { background: transparent; color: var(--text-bright); border-color: var(--border-default); }
-.btn--secondary:hover { border-color: var(--text-secondary); }
+
+/* Rolling label + diagonal arrow swap (markup added by the script in Layout.astro).
+   The label is cloned visually with a text-shadow 20px below, so the original nodes (and their i18n) stay untouched. */
+.btn__roll {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  height: 20px;
+}
+.btn__roll-in {
+  display: block;
+  text-shadow: 0 20px 0 currentColor;
+  transition: transform 550ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+.btn__icon {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  font-size: 14px;
+}
+.btn--lg .btn__icon { font-size: 15px; }
+.btn__icon > i {
+  display: block;
+  font-size: inherit !important;
+  transition: transform 550ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+.btn__icon > i + i { position: absolute; inset: 0; transform: translate(-130%, 130%); }
+
+@media (hover: hover) {
+  .btn--primary:hover { background: var(--text-bright); color: var(--bg-page); }
+  .btn--secondary:hover { background: var(--text-bright); color: var(--bg-page); border-color: var(--text-bright); }
+  .btn:hover .btn__roll-in { transform: translateY(-20px); }
+  .btn:hover .btn__icon > i:first-child { transform: translate(130%, -130%); }
+  .btn:hover .btn__icon > i + i { transform: translate(0, 0); }
+}
+.btn:active { transition-duration: 150ms; }
+@media (prefers-reduced-motion: reduce) {
+  .btn, .btn__roll-in, .btn__icon > i { transition: none; }
+}
 
 /* ─── AI mode switch (home, Work section) ─── */
 .ai-switch {

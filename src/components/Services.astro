@@ -1,18 +1,22 @@
 ---
 const services = [
   {
+    icon: 'ph-chart-bar',
     title: 'Dashboard & data UX',
     body: "Hierarchies for dense data. Query-to-glance pipelines. Tables that don't make you squint.",
   },
   {
+    icon: 'ph-browsers',
     title: 'Product UX & UI',
     body: 'End-to-end flows for B2B SaaS. Onboarding, settings, the unglamorous middle bits.',
   },
   {
+    icon: 'ph-sparkle',
     title: 'AI-integrated interfaces',
     body: 'Designing for non-deterministic outputs. Confidence, control, and graceful failure.',
   },
   {
+    icon: 'ph-stack',
     title: 'Design systems',
     body: 'Tokens, components, contribution model. The kind that engineers actually use.',
   },
@@ -21,53 +25,89 @@ const services = [
 
 <section id="services" style="border-bottom: 1px solid var(--border-subtle);">
   <div style="max-width: 1320px; margin: 0 auto; padding: 96px 48px;">
-    <div
-      data-reveal
-      style="display: flex; justify-content: space-between; align-items: flex-start; gap: 48px; margin-bottom: 48px; padding-bottom: 40px; border-bottom: 1px solid var(--border-subtle);"
-    >
-      <div>
-        <div class="overline" data-i18n style="margin-bottom: 12px;">Services</div>
-        <h2
-          style="font: 500 clamp(30px, 3.4vw, 44px)/1.1 'Poppins', sans-serif; letter-spacing: -0.03em; color: var(--text-bright); margin: 0;"
-        >
-          <span data-i18n>Dense data, calm screens.</span>
-        </h2>
-      </div>
-      <div style="display: flex; flex-direction: column; gap: 12px; max-width: 520px;">
-        <p data-i18n style="font: 400 15px/24px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">
+    <div data-reveal style="margin-bottom: 56px;">
+      <div class="overline" data-i18n style="margin-bottom: 12px;">Services</div>
+      <h2
+        style="font: 500 clamp(30px, 3.4vw, 44px)/1.1 'Poppins', sans-serif; letter-spacing: -0.03em; color: var(--text-bright); margin: 0 0 48px;"
+      >
+        <span data-i18n>Dense data, calm screens.</span>
+      </h2>
+      <div style="display: flex; flex-direction: column; gap: 16px; max-width: 820px;">
+        <p data-i18n style="font: 400 16px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0; text-wrap: pretty;">
           I often work as the sole UI/UX Designer within small teams, taking ownership of the design process from problem analysis to solution delivery.
         </p>
-        <p data-i18n style="font: 400 15px/24px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">
+        <p data-i18n style="font: 400 16px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0; text-wrap: pretty;">
           With a strong understanding of technical concepts and system logic, I bridge the gap between design and development, proactively identifying challenges and proposing practical solutions.
         </p>
-        <p data-i18n style="font: 400 15px/24px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">
+        <p data-i18n style="font: 400 16px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0; text-wrap: pretty;">
           Beyond my own work, I also provide design guidance and strategic recommendations to help other designers approach problems more effectively.
         </p>
       </div>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
       {
         services.map((s, i) => (
           <div
             data-reveal
-            style={`--reveal-delay: ${i * 50}ms; display: flex; flex-direction: column; gap: 16px; padding: 28px 24px; min-height: 240px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md);`}
+            class="service-card"
+            data-cursor="hover"
+            style={`--reveal-delay: ${i * 50}ms;`}
           >
-            <h3
-              data-i18n
-              style="font: 500 24px/30px 'Poppins', sans-serif; letter-spacing: -0.02em; color: var(--text-bright); margin: 0;"
-            >
-              {s.title}
-            </h3>
-            <p
-              data-i18n
-              style="font: 400 15px/24px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;"
-            >
-              {s.body}
-            </p>
+            <span class="service-card__icon"><i class={`ph-bold ${s.icon}`}></i></span>
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-top: auto;">
+              <h3
+                data-i18n
+                style="font: 500 28px/34px 'Poppins', sans-serif; letter-spacing: -0.02em; color: var(--text-bright); margin: 0;"
+              >
+                {s.title}
+              </h3>
+              <p
+                data-i18n
+                style="font: 400 15px/24px 'Poppins', sans-serif; color: var(--text-primary); margin: 0; max-width: 460px;"
+              >
+                {s.body}
+              </p>
+            </div>
           </div>
         ))
       }
     </div>
   </div>
 </section>
+
+<style>
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    min-height: 300px;
+    padding: 32px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    transition: border-color 300ms ease, background-color 300ms ease;
+  }
+  .service-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--border-default);
+    border-radius: 999px;
+    font-size: 22px;
+    color: var(--text-bright);
+    transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease, transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .service-card:hover { border-color: var(--text-accent); }
+  .service-card:hover .service-card__icon {
+    background: var(--primary-700);
+    border-color: var(--primary-700);
+    color: var(--text-inverse);
+    transform: rotate(-8deg) scale(1.08);
+  }
+  @media (max-width: 900px) {
+    #services [style*='repeat(2, 1fr)'] { grid-template-columns: 1fr !important; }
+  }
+</style>

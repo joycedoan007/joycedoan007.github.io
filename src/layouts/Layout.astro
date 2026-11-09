@@ -95,5 +95,62 @@ const {
       }
     });
   </script>
+  <script is:inline>
+    document.querySelectorAll('.prose img').forEach(function (img) {
+      if (img.parentElement.classList.contains('grain-img')) return;
+      var wrap = document.createElement('span');
+      wrap.className = 'grain-img';
+      img.parentNode.insertBefore(wrap, img);
+      wrap.appendChild(img);
+    });
+  </script>
+  <script is:inline>
+    // Buttons: split label into a rolling pair, clone the arrow for a diagonal swap, and pull toward the cursor
+    (function () {
+      function enhance(btn) {
+        if (btn.dataset.fx) return;
+        btn.dataset.fx = '1';
+        var kids = Array.prototype.slice.call(btn.childNodes);
+        var labelNodes = kids.filter(function (n) { return !(n.nodeType === 1 && n.tagName === 'I'); });
+        if (labelNodes.some(function (n) { return n.textContent.trim(); })) {
+          var roll = document.createElement('span');
+          roll.className = 'btn__roll';
+          var inner = document.createElement('span');
+          inner.className = 'btn__roll-in';
+          roll.appendChild(inner);
+          btn.insertBefore(roll, labelNodes[0]);
+          labelNodes.forEach(function (n) { inner.appendChild(n); });
+        }
+        Array.prototype.slice.call(btn.children).forEach(function (i) {
+          if (i.tagName !== 'I') return;
+          var wrap = document.createElement('span');
+          wrap.className = 'btn__icon';
+          btn.insertBefore(wrap, i);
+          wrap.appendChild(i);
+          wrap.appendChild(i.cloneNode(true));
+        });
+      }
+      function run() { document.querySelectorAll('.btn').forEach(enhance); }
+      run();
+      new MutationObserver(run).observe(document.body, { childList: true, subtree: true });
+
+      if (!window.matchMedia('(hover: hover)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      document.addEventListener('pointermove', function (e) {
+        var btn = e.target.closest && e.target.closest('.btn');
+        if (!btn) return;
+        var r = btn.getBoundingClientRect();
+        btn.style.transitionDuration = '120ms';
+        btn.style.setProperty('--tx', (e.clientX - r.left - r.width / 2) * 0.22 + 'px');
+        btn.style.setProperty('--ty', (e.clientY - r.top - r.height / 2) * 0.32 + 'px');
+      });
+      document.addEventListener('pointerout', function (e) {
+        var btn = e.target.closest && e.target.closest('.btn');
+        if (!btn || btn.contains(e.relatedTarget)) return;
+        btn.style.transitionDuration = '';
+        btn.style.setProperty('--tx', '0px');
+        btn.style.setProperty('--ty', '0px');
+      });
+    })();
+  </script>
 </body>
 </html>

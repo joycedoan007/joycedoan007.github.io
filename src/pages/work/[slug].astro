@@ -63,7 +63,7 @@ const next = idx < sorted.length - 1 ? sorted[idx + 1] : null;
       </div>
 
       {w.hasImage && (
-        <div style="margin-bottom: 56px;">
+        <div class="grain-img" style="margin-bottom: 56px; border-radius: var(--radius-lg);">
           <img
             src={`/work/${entry.slug.replace(/^\d+-/, '')}/cover.png`}
             alt={w.title}

@@ -11,7 +11,7 @@ const { stats, company } = Astro.props;
     <!-- Left: message -->
     <div data-reveal class="hero__text">
       <div class="hero__chip">
-        <span class="hero__avatar"><img src="/joyce.jpg" alt="" width="44" height="44" /></span>
+        <span class="hero__avatar grain-img"><img src="/joyce.jpg" alt="" width="44" height="44" /></span>
         <span class="hero__chip-text">
           <span class="hero__chip-a" data-i18n>Joyce Doan · UI/UX Designer</span>
           <span class="hero__chip-b" data-i18n>Đoàn Thanh Trúc · See a problem, build the software to fix it</span>
@@ -21,9 +21,7 @@ const { stats, company } = Astro.props;
         <span data-i18n>I design digital products where</span> <span data-i18n style="color: var(--text-accent);">thoughtful UX meets intelligent systems.</span>
       </h1>
       <p class="hero__tagline" data-i18n>
-        I use AI to automate my own UI/UX workflow, then apply the same thinking to products with AI
-        inside. The goal is the same: less repetitive work, people kept in the decisions that
-        matter, and a system the whole team can trust.
+        I turn complex workflows into intuitive digital products. By combining UX thinking, technical understanding, and AI, I help teams make better decisions and build smarter products.
       </p>
       <div class="hero__actions">
         <a href="#book" data-cursor="hover" class="btn btn--primary btn--lg">
@@ -52,7 +50,7 @@ const { stats, company } = Astro.props;
     max-width: 1320px;
     margin: 0 auto;
     padding: 64px 48px;
-    min-height: calc(100svh - var(--header-h, 64px) - 72px);
+    min-height: calc(100svh - var(--header-h, 64px) - 82px);
     display: grid;
     grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
     gap: 56px;
@@ -94,7 +92,8 @@ const { stats, company } = Astro.props;
   .hero__tagline {
     font: 400 17px/28px 'Poppins', sans-serif;
     color: var(--text-primary);
-    max-width: 520px;
+    max-width: 560px;
+    text-wrap: balance;
     margin: 0;
   }
   .hero__actions { display: flex; align-items: center; gap: 28px; }

@@ -12,8 +12,8 @@ export const home: Record<string, string> = {
   'Đoàn Thanh Trúc · See a problem, build the software to fix it': 'Đoàn Thanh Trúc · Thấy vấn đề, làm phần mềm để giải quyết',
   'I design digital products where': 'Tôi thiết kế sản phẩm số nơi',
   'thoughtful UX meets intelligent systems.': 'UX chu đáo gặp gỡ hệ thống thông minh.',
-  'I use AI to automate my own UI/UX workflow, then apply the same thinking to products with AI inside. The goal is the same: less repetitive work, people kept in the decisions that matter, and a system the whole team can trust.':
-    'Tôi dùng AI để tự động hóa quy trình UI/UX của chính mình, rồi áp dụng cùng tư duy đó để thiết kế sản phẩm có AI bên trong. Mục tiêu giống nhau: bớt việc lặp lại, giữ con người ở những quyết định quan trọng, và để hệ thống đủ tin cậy cho cả đội vận hành.',
+  "I turn complex workflows into intuitive digital products. By combining UX thinking, technical understanding, and AI, I help teams make better decisions and build smarter products.":
+    "Tôi biến những quy trình phức tạp thành sản phẩm số trực quan. Kết hợp tư duy UX, hiểu biết kỹ thuật và AI, tôi giúp các đội ngũ ra quyết định tốt hơn và xây dựng sản phẩm thông minh hơn.",
   'Book a call': 'Đặt lịch gọi',
   'Get in touch': 'Liên hệ',
   'Baseline + rules': 'Đường cơ sở + quy tắc',
