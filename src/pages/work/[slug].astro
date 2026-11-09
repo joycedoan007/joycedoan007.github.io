@@ -63,11 +63,11 @@ const next = idx < sorted.length - 1 ? sorted[idx + 1] : null;
       </div>
 
       {w.hasImage && (
-        <div class="grain-img" style="margin-bottom: 56px; border-radius: var(--radius-lg);">
+        <div class="grain-img" style="margin-bottom: 56px; border-radius: var(--radius-card);">
           <img
             src={`/work/${entry.slug.replace(/^\d+-/, '')}/cover.png`}
             alt={w.title}
-            style="width: 100%; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); display: block;"
+            style="width: 100%; border-radius: var(--radius-card); border: 1px solid var(--border-subtle); display: block;"
           />
         </div>
       )}
@@ -78,13 +78,13 @@ const next = idx < sorted.length - 1 ? sorted[idx + 1] : null;
       <!-- Prev/Next -->
       <div style="margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--border-subtle); display: flex; gap: 16px;">
         {prev ? (
-          <a href={`/work/${prev.slug}`} style="display: flex; flex-direction: column; gap: 4px; padding: 16px 20px; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); text-decoration: none; background: var(--bg-surface); flex: 1;" class="nav-link">
+          <a href={`/work/${prev.slug}`} style="display: flex; flex-direction: column; gap: 4px; padding: 16px 20px; border-radius: var(--radius-card); border: 1px solid var(--border-subtle); text-decoration: none; background: var(--bg-surface); flex: 1;" class="nav-link">
             <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px;"><i class="ph-bold ph-arrow-left"></i><L en="Previous" vi="Trước" /></span>
             <span style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-bright);"><L en={prev.data.title} vi={viOf(prev.slug)?.data.title ?? prev.data.title} /></span>
           </a>
         ) : <div style="flex:1"/>}
         {next ? (
-          <a href={`/work/${next.slug}`} style="display: flex; flex-direction: column; gap: 4px; padding: 16px 20px; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); text-decoration: none; background: var(--bg-surface); flex: 1; align-items: flex-end;" class="nav-link">
+          <a href={`/work/${next.slug}`} style="display: flex; flex-direction: column; gap: 4px; padding: 16px 20px; border-radius: var(--radius-card); border: 1px solid var(--border-subtle); text-decoration: none; background: var(--bg-surface); flex: 1; align-items: flex-end;" class="nav-link">
             <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px;"><L en="Next" vi="Tiếp theo" /><i class="ph-bold ph-arrow-right"></i></span>
             <span style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-bright);"><L en={next.data.title} vi={viOf(next.slug)?.data.title ?? next.data.title} /></span>
           </a>
@@ -118,5 +118,5 @@ const next = idx < sorted.length - 1 ? sorted[idx + 1] : null;
   .prose ul { margin: 0 0 20px; padding-left: 20px; }
   .prose li { font: 400 15px/26px 'Poppins', sans-serif; color: var(--text-primary); margin-bottom: 6px; }
   .prose hr { border: none; border-top: 1px solid var(--border-subtle); margin: 40px 0; }
-  .prose img { width: 100%; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); margin: 24px 0; display: block; }
+  .prose img { width: 100%; border-radius: var(--radius-card); border: 1px solid var(--border-subtle); margin: 24px 0; display: block; }
 </style>

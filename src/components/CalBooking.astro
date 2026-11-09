@@ -5,9 +5,49 @@
     <div class="overline" style="margin-bottom: 16px; text-align: center;" data-i18n>Get in touch</div>
     <h2 style="font: 500 clamp(30px, 3.4vw, 44px)/1.1 'Poppins', sans-serif; letter-spacing: -0.04em; color: var(--text-bright); margin: 0 auto 16px; max-width: 720px; text-align: center; text-wrap: balance;" data-i18n>Looking for a designer to join your team? Let's talk.</h2>
     <p data-i18n style="font: 400 16px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0 auto 56px; max-width: 560px; text-align: center; text-wrap: balance;">I'm open to conversations about Product Design opportunities, collaborations, and interesting product challenges.</p>
-    <div id="my-cal-inline-30min" style="width: 100%; min-height: 640px; overflow: auto;"></div>
+    <div id="my-cal-inline-30min" style="width: 100%; min-height: 500px; overflow: auto;"></div>
   </div>
 </section>
+
+<style is:global>
+  /* Wide screens: Cal's card is always 1040px (280 + 480 + 280) centred in the iframe, with a ~80px branding strip below.
+     Cal only offers one radius for its card and buttons, so it stays at the 8px button radius. To give the card the site's
+     16px card corners, the four corners are painted over in the section colour and the border is drawn here instead
+     (Cal's own border is switched off on wide screens). The branding link below the card is left untouched. */
+  /* Resolved on the section, outside Cal's element: the embed carries a light-theme class that overrides the shared colour tokens inside it. */
+  #book { --cal-frame-bg: var(--bg-surface); --cal-frame-border: var(--border-subtle); }
+  @media (min-width: 1200px) {
+    #my-cal-inline-30min cal-inline {
+      --cal-side: max(0px, calc((100% - 1040px) / 2));
+      --cal-r: var(--radius-card);
+      align-content: flex-start !important;
+      min-height: 0 !important;
+    }
+    #my-cal-inline-30min cal-inline::before,
+    #my-cal-inline-30min cal-inline::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 80px;
+      left: var(--cal-side);
+      right: var(--cal-side);
+      pointer-events: none;
+    }
+    #my-cal-inline-30min cal-inline::before {
+      z-index: 1;
+      background:
+        radial-gradient(circle at 100% 100%, transparent calc(var(--cal-r) - 0.5px), var(--cal-frame-bg) var(--cal-r)) 0 0 / var(--cal-r) var(--cal-r) no-repeat,
+        radial-gradient(circle at 0 100%, transparent calc(var(--cal-r) - 0.5px), var(--cal-frame-bg) var(--cal-r)) 100% 0 / var(--cal-r) var(--cal-r) no-repeat,
+        radial-gradient(circle at 100% 0, transparent calc(var(--cal-r) - 0.5px), var(--cal-frame-bg) var(--cal-r)) 0 100% / var(--cal-r) var(--cal-r) no-repeat,
+        radial-gradient(circle at 0 0, transparent calc(var(--cal-r) - 0.5px), var(--cal-frame-bg) var(--cal-r)) 100% 100% / var(--cal-r) var(--cal-r) no-repeat;
+    }
+    #my-cal-inline-30min cal-inline::after {
+      z-index: 2;
+      border: 1px solid var(--cal-frame-border);
+      border-radius: var(--cal-r);
+    }
+  }
+</style>
 
 <script is:inline>
   (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
@@ -28,15 +68,19 @@
     calLink: "joyce-doan-qxgctl/30min",
   });
 
+  // Wide screens: the frame above draws the card border, so Cal's own border is switched off there.
+  const wide = window.matchMedia("(min-width: 1200px)");
   const sendUi = () => Cal.ns["30min"]("ui", {
     cssVarsPerTheme: {
-      light: { "cal-brand": "#0b0e13", "cal-bg": "#F4F2EE", "cal-bg-muted": "#ECEAE4", "cal-bg-emphasis": "#ECEAE4" },
-      dark: { "cal-brand": "#E5E7EB", "cal-bg": "#0B0E12", "cal-bg-muted": "#131920", "cal-bg-emphasis": "#131920" },
+      // cal-radius rounds the date and time buttons (8px = the site's button radius); cal-border is the time-slot border
+      light: { "cal-brand": "#0b0e13", "cal-bg": "#F4F2EE", "cal-bg-muted": "#ECEAE4", "cal-bg-emphasis": "#ECEAE4", "cal-radius": "8px", "cal-border": "#C8C8C8", "cal-border-booker": "#E2E2E2", "cal-border-booker-width": wide.matches ? "0px" : "1px" },
+      dark: { "cal-brand": "#E5E7EB", "cal-bg": "#0B0E12", "cal-bg-muted": "#131920", "cal-bg-emphasis": "#131920", "cal-radius": "8px", "cal-border": "#37393D", "cal-border-booker": "#1E2227", "cal-border-booker-width": wide.matches ? "0px" : "1px" },
     },
     hideEventTypeDetails: false,
     layout: "month_view",
   });
   sendUi();
+  wide.addEventListener("change", sendUi);
 
   const applyTheme = () => {
     // Cal only reads the theme when the iframe loads, so swap it in the iframe URL.

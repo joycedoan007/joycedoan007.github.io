@@ -21,3 +21,8 @@ const SITE = {
   <CalBooking />
   <Footer />
 </Layout>
+
+<style is:global>
+  /* The booking section sits on the surface colour; match the page behind the floating header so there is no band above it. */
+  html body { background-color: var(--bg-surface); }
+</style>

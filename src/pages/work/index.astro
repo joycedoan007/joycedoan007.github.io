@@ -44,7 +44,7 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
           <h2 style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 20px;"><L en="Featured" vi="Nổi bật" /></h2>
           <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
             {featured.map((e) => (
-              <a href={`/work/${e.slug}`} class="work-card" style="display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); background: var(--bg-surface); text-decoration: none; overflow: hidden; transition: border-color 150ms ease;">
+              <a href={`/work/${e.slug}`} class="work-card" style="display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--border-subtle); border-radius: var(--radius-card); background: var(--bg-surface); text-decoration: none; overflow: hidden; transition: border-color 150ms ease;">
                 <div class="grain-img" style="aspect-ratio: 4/3; overflow: hidden; background: var(--bg-elevated);">
                   <img src={`/work/${e.slug.replace(/^\d+-/, '')}/cover.png`} alt={e.data.title} style="width: 100%; height: 100%; object-fit: cover; display: block;" />
                 </div>

@@ -82,7 +82,7 @@ const meta = (e: (typeof all)[number], lang: string) =>
           <h2 style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 20px;"><L en="Popular" vi="Phổ biến" /></h2>
           <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
             {popular.map((e) => (
-              <a href={`/writing/${e.slug}`} class="writing-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 24px; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); background: var(--bg-surface); text-decoration: none; gap: 32px; transition: border-color 150ms ease;">
+              <a href={`/writing/${e.slug}`} class="writing-card" style="display: flex; flex-direction: column; justify-content: space-between; padding: 24px; border: 1px solid var(--border-subtle); border-radius: var(--radius-card); background: var(--bg-surface); text-decoration: none; gap: 32px; transition: border-color 150ms ease;">
                 <div>
                   <div class="overline" style="margin-bottom: 10px;"><L en={e.data.category ?? 'Writing'} vi={viOf(e).data.category ?? 'Bài viết'} /></div>
                   <h3 style="font: 500 15px/1.4 'Poppins', sans-serif; color: var(--text-bright); margin: 0 0 8px;"><L en={e.data.title} vi={viOf(e).data.title} /></h3>

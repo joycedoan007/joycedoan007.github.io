@@ -489,7 +489,7 @@ function CaseModal({
         style={{
           background: 'var(--bg-surface)',
           border: '1px solid var(--border-subtle)',
-          borderRadius: 'var(--radius-lg)',
+          borderRadius: 'var(--radius-card)',
           width: '100%',
           maxWidth: 1080,
           position: 'relative',
@@ -552,7 +552,7 @@ function CaseModal({
               aspectRatio: '21 / 9',
               background:
                 'linear-gradient(135deg, #002923 0%, #005441 60%, color-mix(in srgb, var(--primary-500) 35%, #002923) 100%)',
-              borderRadius: 'var(--radius-lg)',
+              borderRadius: 'var(--radius-card)',
               border: '1px solid var(--border-subtle)',
               position: 'relative',
               overflow: 'hidden',
@@ -568,7 +568,7 @@ function CaseModal({
               gridTemplateColumns: `repeat(${item.metrics.length}, 1fr)`,
               gap: 0,
               border: '1px solid var(--border-subtle)',
-              borderRadius: 'var(--radius-lg)',
+              borderRadius: 'var(--radius-card)',
               marginBottom: 40,
             }}
           >

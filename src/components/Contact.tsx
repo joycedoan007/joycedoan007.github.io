@@ -72,7 +72,7 @@ export default function Contact({ email, socials }: Props) {
                 background: 'var(--bg-page)',
                 border: '1px solid var(--border-subtle)',
                 padding: '20px 24px',
-                borderRadius: 'var(--radius-lg)',
+                borderRadius: 'var(--radius-card)',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
