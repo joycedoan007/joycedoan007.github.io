@@ -45,14 +45,9 @@ const { items } = Astro.props;
           href={`/writing/${w.slug}`}
           data-cursor="hover"
           data-reveal
-          style={`--reveal-delay: ${i * 40}ms; display: grid; grid-template-columns: 64px 200px 1fr 200px 32px; gap: 32px; align-items: center; padding: 28px 0;${i < items.length - 1 ? ' border-bottom: 1px solid var(--border-subtle);' : ''} text-decoration: none; color: inherit; transition: background 200ms ease, padding 200ms ease;`}
+          style={`--reveal-delay: ${i * 40}ms; display: grid; grid-template-columns: 240px 1fr 200px 32px; gap: 32px; align-items: center; padding: 28px 0;${i < items.length - 1 ? ' border-bottom: 1px solid var(--border-subtle);' : ''} text-decoration: none; color: inherit; transition: background 200ms ease, padding 200ms ease;`}
           class="writing-row"
         >
-          <span
-            style="font: 500 14px/18px 'JetBrains Mono', monospace; color: var(--text-secondary);"
-          >
-            {String(i + 1).padStart(2, '0')}
-          </span>
           <span
             style="font: 500 13px/20px 'JetBrains Mono', monospace; color: var(--text-secondary);"
           >
@@ -69,14 +64,21 @@ const { items } = Astro.props;
             <span data-lang-block="en">{w.description}</span><span data-lang-block="vi">{w.descriptionVi ?? w.description}</span>
           </p>
           <i
-            class="ph-bold ph-arrow-up-right"
-            style="font-size: 16px; color: var(--text-secondary);"
+            class="ph-bold ph-arrow-up-right writing-arrow"
+            style="font-size: 18px; color: var(--text-secondary); transition: color 200ms ease, transform 200ms ease;"
           />
         </a>
       ))
     }
   </div>
 </section>
+
+<style>
+  .writing-row:hover .writing-arrow {
+    color: var(--text-accent) !important;
+    transform: translate(2px, -2px);
+  }
+</style>
 
 <script>
   document.querySelectorAll('.writing-row').forEach((el) => {

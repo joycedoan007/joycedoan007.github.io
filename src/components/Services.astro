@@ -1,22 +1,18 @@
 ---
 const services = [
   {
-    n: '01',
     title: 'Dashboard & data UX',
     body: "Hierarchies for dense data. Query-to-glance pipelines. Tables that don't make you squint.",
   },
   {
-    n: '02',
     title: 'Product UX & UI',
     body: 'End-to-end flows for B2B SaaS. Onboarding, settings, the unglamorous middle bits.',
   },
   {
-    n: '03',
     title: 'AI-integrated interfaces',
     body: 'Designing for non-deterministic outputs. Confidence, control, and graceful failure.',
   },
   {
-    n: '04',
     title: 'Design systems',
     body: 'Tokens, components, contribution model. The kind that engineers actually use.',
   },
@@ -45,31 +41,28 @@ const services = [
       </p>
     </div>
 
-    {
-      services.map((s, i) => (
-        <div
-          data-reveal
-          style={`--reveal-delay: ${i * 50}ms; display: grid; grid-template-columns: 64px 480px 1fr; gap: 32px; align-items: flex-start; padding: 36px 0;${i < services.length - 1 ? ' border-bottom: 1px solid var(--border-subtle);' : ''}`}
-        >
-          <span
-            style="font: 500 14px/18px 'JetBrains Mono', monospace; color: var(--text-secondary);"
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+      {
+        services.map((s, i) => (
+          <div
+            data-reveal
+            style={`--reveal-delay: ${i * 50}ms; display: flex; flex-direction: column; gap: 16px; padding: 28px 24px; min-height: 240px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md);`}
           >
-            {s.n}
-          </span>
-          <h3
-            data-i18n
-            style="font: 500 28px/34px 'Poppins', sans-serif; letter-spacing: -0.02em; color: var(--text-bright); margin: 0;"
-          >
-            {s.title}
-          </h3>
-          <p
-            data-i18n
-            style="font: 400 15px/24px 'Poppins', sans-serif; color: var(--text-primary); margin: 0; max-width: 560px;"
-          >
-            {s.body}
-          </p>
-        </div>
-      ))
-    }
+            <h3
+              data-i18n
+              style="font: 500 24px/30px 'Poppins', sans-serif; letter-spacing: -0.02em; color: var(--text-bright); margin: 0;"
+            >
+              {s.title}
+            </h3>
+            <p
+              data-i18n
+              style="font: 400 15px/24px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;"
+            >
+              {s.body}
+            </p>
+          </div>
+        ))
+      }
+    </div>
   </div>
 </section>
