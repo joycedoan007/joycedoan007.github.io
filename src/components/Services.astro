@@ -23,7 +23,7 @@ const services = [
   <div style="max-width: 1320px; margin: 0 auto; padding: 96px 48px;">
     <div
       data-reveal
-      style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; padding-bottom: 24px; border-bottom: 1px solid var(--border-subtle);"
+      style="display: flex; justify-content: space-between; align-items: flex-start; gap: 48px; margin-bottom: 48px; padding-bottom: 40px; border-bottom: 1px solid var(--border-subtle);"
     >
       <div>
         <div class="overline" data-i18n style="margin-bottom: 12px;">Services</div>
@@ -33,12 +33,17 @@ const services = [
           <span data-i18n>Dense data, calm screens.</span>
         </h2>
       </div>
-      <p
-        data-i18n
-        style="font: 400 15px/24px 'Poppins', sans-serif; color: var(--text-primary); max-width: 360px; margin: 0;"
-      >
-        Usually as a lead or solo designer on a small team. Occasionally as an advisor.
-      </p>
+      <div style="display: flex; flex-direction: column; gap: 12px; max-width: 520px;">
+        <p data-i18n style="font: 400 15px/24px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">
+          I often work as the sole UI/UX Designer within small teams, taking ownership of the design process from problem analysis to solution delivery.
+        </p>
+        <p data-i18n style="font: 400 15px/24px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">
+          With a strong understanding of technical concepts and system logic, I bridge the gap between design and development, proactively identifying challenges and proposing practical solutions.
+        </p>
+        <p data-i18n style="font: 400 15px/24px 'Poppins', sans-serif; color: var(--text-primary); margin: 0;">
+          Beyond my own work, I also provide design guidance and strategic recommendations to help other designers approach problems more effectively.
+        </p>
+      </div>
     </div>
 
     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">

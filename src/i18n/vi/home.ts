@@ -10,8 +10,8 @@ export const home: Record<string, string> = {
   // Hero
   'Joyce Doan · UI/UX Designer': 'Joyce Doan · Nhà thiết kế UI/UX',
   'Đoàn Thanh Trúc · See a problem, build the software to fix it': 'Đoàn Thanh Trúc · Thấy vấn đề, làm phần mềm để giải quyết',
-  'I design systems where': 'Tôi thiết kế hệ thống nơi',
-  'AI handles the repetitive work.': 'AI lo việc lặp lại.',
+  'I design digital products where': 'Tôi thiết kế sản phẩm số nơi',
+  'thoughtful UX meets intelligent systems.': 'UX chu đáo gặp gỡ hệ thống thông minh.',
   'I use AI to automate my own UI/UX workflow, then apply the same thinking to products with AI inside. The goal is the same: less repetitive work, people kept in the decisions that matter, and a system the whole team can trust.':
     'Tôi dùng AI để tự động hóa quy trình UI/UX của chính mình, rồi áp dụng cùng tư duy đó để thiết kế sản phẩm có AI bên trong. Mục tiêu giống nhau: bớt việc lặp lại, giữ con người ở những quyết định quan trọng, và để hệ thống đủ tin cậy cho cả đội vận hành.',
   'Book a call': 'Đặt lịch gọi',
@@ -72,8 +72,12 @@ export const home: Record<string, string> = {
   // Services
   'Services': 'Dịch vụ',
   'Dense data, calm screens.': 'Dữ liệu dày, màn hình dịu.',
-  'Usually as a lead or solo designer on a small team. Occasionally as an advisor.':
-    'Thường là trưởng nhóm thiết kế, hoặc nhà thiết kế duy nhất trong một nhóm nhỏ. Đôi khi tôi làm cố vấn.',
+  'I often work as the sole UI/UX Designer within small teams, taking ownership of the design process from problem analysis to solution delivery.':
+    'Tôi thường làm việc với vai trò UI/UX Designer duy nhất trong các nhóm nhỏ, chịu trách nhiệm toàn bộ quy trình thiết kế từ phân tích vấn đề đến bàn giao giải pháp.',
+  'With a strong understanding of technical concepts and system logic, I bridge the gap between design and development, proactively identifying challenges and proposing practical solutions.':
+    'Với hiểu biết vững về kỹ thuật và logic hệ thống, tôi kết nối thiết kế với phát triển, chủ động nhận diện thách thức và đề xuất giải pháp thực tế.',
+  'Beyond my own work, I also provide design guidance and strategic recommendations to help other designers approach problems more effectively.':
+    'Ngoài công việc của mình, tôi còn hướng dẫn thiết kế và đưa ra các đề xuất chiến lược để giúp các nhà thiết kế khác tiếp cận vấn đề hiệu quả hơn.',
   'Dashboard & data UX': 'Bảng điều khiển & UX dữ liệu',
   "Hierarchies for dense data. Query-to-glance pipelines. Tables that don't make you squint.":
     'Phân cấp cho dữ liệu dày đặc. Luồng từ truy vấn đến cái nhìn nhanh. Bảng biểu không làm bạn phải nheo mắt.',
