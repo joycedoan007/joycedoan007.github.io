@@ -152,5 +152,40 @@ const {
       });
     })();
   </script>
+  <script is:inline>
+    // Nav hover: a highlight pill slides to the hovered link and fades out when the pointer leaves (any <nav class="nav-fx">)
+    (function () {
+      if (!window.matchMedia('(hover: hover)').matches) return;
+      document.querySelectorAll('nav.nav-fx').forEach(function (nav) {
+        var pill = document.createElement('span');
+        pill.className = 'nav-pill';
+        pill.setAttribute('aria-hidden', 'true');
+        nav.insertBefore(pill, nav.firstChild);
+        var shown = false;
+        function moveTo(link) {
+          var set = function () {
+            pill.style.setProperty('--x', link.offsetLeft + 'px');
+            pill.style.setProperty('--w', link.offsetWidth + 'px');
+            pill.style.setProperty('--h', link.offsetHeight + 'px');
+          };
+          if (!shown) {
+            pill.style.transition = 'none';
+            set();
+            void pill.offsetWidth;
+            pill.style.transition = '';
+            shown = true;
+          } else {
+            set();
+          }
+          pill.style.opacity = '1';
+        }
+        nav.querySelectorAll('a').forEach(function (a) {
+          a.addEventListener('mouseenter', function () { moveTo(a); });
+          a.addEventListener('focus', function () { moveTo(a); });
+        });
+        nav.addEventListener('mouseleave', function () { pill.style.opacity = '0'; shown = false; });
+      });
+    })();
+  </script>
 </body>
 </html>

@@ -12,8 +12,9 @@ const doubled = [...items, ...items];
 ---
 
 <section
+  id="marquee"
   class="grain"
-  style="position: sticky; bottom: 0; z-index: 5; background-color: var(--bg-page); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 24px 0; overflow: hidden;"
+  style="position: relative; z-index: 5; background-color: var(--bg-page); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 24px 0; overflow: hidden;"
 >
   <div
     class="animate-marquee"
@@ -35,3 +36,32 @@ const doubled = [...items, ...items];
     }
   </div>
 </section>
+
+<script>
+  // Holds the strip against the bottom of the window while the hero is on screen, then lets it rise with the page.
+  // The hero reserves RELEASE px of extra space below its content, so the strip's resting place is that far below the
+  // fold. Starting it RELEASE px higher puts it flush with the bottom edge, and easing the offset to 0 as you scroll
+  // keeps it there until it reaches its normal position, with no jump and no overlap.
+  const strip = document.getElementById('marquee');
+  const RELEASE = 48;
+  const wide = window.matchMedia('(min-width: 901px)');
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    if (!strip) return;
+    const offset = wide.matches ? Math.min(Math.max(window.scrollY, 0), RELEASE) - RELEASE : 0;
+    strip.style.transform = offset ? `translateY(${offset}px)` : '';
+  };
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    },
+    { passive: true }
+  );
+  window.addEventListener('resize', update);
+  update();
+</script>

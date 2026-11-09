@@ -52,7 +52,7 @@ export const about: Record<string, string> = {
   Capabilities: 'Năng lực',
   'Design skills.': 'Kỹ năng thiết kế.',
   'UI Design': 'Thiết kế UI',
-  'Design Systems': 'Design System',
+  'Design Systems': 'Hệ thống thiết kế',
   'UX Design': 'Thiết kế UX',
   'Soft Skills': 'Kỹ năng mềm',
   Prototyping: 'Prototype',
