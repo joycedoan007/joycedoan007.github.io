@@ -105,9 +105,9 @@ Cấu trúc cân bằng giữa khám phá rộng (Trang chủ) và chiều sâu 
       <div style="font: 500 12px/18px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;">Chủ doanh nghiệp bán lẻ / khách sạn</div>
       <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Trang chủ</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Giải pháp</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-accent); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Demo</span>
       </div>
     </div>
@@ -115,9 +115,9 @@ Cấu trúc cân bằng giữa khám phá rộng (Trang chủ) và chiều sâu 
       <div style="font: 500 12px/18px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;">Người mua quan tâm ngân sách</div>
       <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Trang chủ</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Bảng giá</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-accent); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Đăng ký</span>
       </div>
     </div>
@@ -125,9 +125,9 @@ Cấu trúc cân bằng giữa khám phá rộng (Trang chủ) và chiều sâu 
       <div style="font: 500 12px/18px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;">Khách đang tìm hiểu</div>
       <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Tài nguyên</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Trợ lý AI</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-accent); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Demo</span>
       </div>
     </div>

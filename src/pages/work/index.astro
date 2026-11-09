@@ -175,19 +175,20 @@ const featured = sorted.filter(e => e.data.hasImage).slice(0, 3);
   function renderPager(pages: number) {
     pager.innerHTML = '';
     pager.style.display = pages > 1 ? 'flex' : 'none';
-    const add = (label: string, to: number, opts: { active?: boolean; disabled?: boolean; aria?: string } = {}) => {
+    const add = (label: string, to: number, opts: { active?: boolean; disabled?: boolean; aria?: string; icon?: string } = {}) => {
       const b = document.createElement('button');
       b.className = 'btn btn--secondary pager-btn' + (opts.active ? ' active' : '');
-      b.textContent = label;
+      if (opts.icon) b.innerHTML = `<i class="ph-bold ${opts.icon}" aria-hidden="true"></i>`;
+      else b.textContent = label;
       b.disabled = !!opts.disabled;
       if (opts.aria) b.setAttribute('aria-label', opts.aria);
       if (opts.active) b.setAttribute('aria-current', 'page');
       b.addEventListener('click', () => { page = to; apply(false); });
       pager.appendChild(b);
     };
-    add('←', page - 1, { disabled: page === 1, aria: 'Previous page' });
+    add('', page - 1, { disabled: page === 1, aria: 'Previous page', icon: 'ph-arrow-left' });
     for (let i = 1; i <= pages; i++) add(String(i), i, { active: i === page });
-    add('→', page + 1, { disabled: page === pages, aria: 'Next page' });
+    add('', page + 1, { disabled: page === pages, aria: 'Next page', icon: 'ph-arrow-right' });
   }
 
   function burst() {

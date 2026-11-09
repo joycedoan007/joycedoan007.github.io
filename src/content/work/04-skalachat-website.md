@@ -105,9 +105,9 @@ The structure balances broad discovery (Home) with deep vertical specificity (So
       <div style="font: 500 12px/18px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;">Retail / Hospitality Owner</div>
       <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Home</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Solutions</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-accent); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Demo</span>
       </div>
     </div>
@@ -115,9 +115,9 @@ The structure balances broad discovery (Home) with deep vertical specificity (So
       <div style="font: 500 12px/18px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;">Budget-Conscious Buyer</div>
       <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Home</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Pricing</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-accent); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Sign Up</span>
       </div>
     </div>
@@ -125,9 +125,9 @@ The structure balances broad discovery (Home) with deep vertical specificity (So
       <div style="font: 500 12px/18px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;">Research-Phase Visitor</div>
       <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Resources</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">AI Assistant</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-accent); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Demo</span>
       </div>
     </div>

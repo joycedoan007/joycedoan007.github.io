@@ -107,9 +107,9 @@ The experience is organized into five product layers, each serving a distinct ph
       <div style="font: 500 12px/18px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;">First-Time Applicant</div>
       <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Home</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Program</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-accent); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Apply</span>
       </div>
     </div>
@@ -117,9 +117,9 @@ The experience is organized into five product layers, each serving a distinct ph
       <div style="font: 500 12px/18px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;">Content Learner</div>
       <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Resources</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Filter</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-accent); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Detail + Rate</span>
       </div>
     </div>
@@ -127,9 +127,9 @@ The experience is organized into five product layers, each serving a distinct ph
       <div style="font: 500 12px/18px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;">Returning Rookie</div>
       <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Login</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Dashboard</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-accent); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Manage</span>
       </div>
     </div>
@@ -137,9 +137,9 @@ The experience is organized into five product layers, each serving a distinct ph
       <div style="font: 500 12px/18px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;">Blog Reader</div>
       <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Blog</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Category</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-accent); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Article</span>
       </div>
     </div>

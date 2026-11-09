@@ -9,7 +9,7 @@ category: Design systems
 
 This template is used to document and maintain a design system, covering tokens, components, and rules. Duplicate this for each new product and fill in your values.
 
-[Download Markdown Template →](https://drive.google.com/file/d/1j07EdXSv6ADf0vgMlGK-d1YJCRaEzDzf/view?usp=sharing)
+[Download Markdown Template <i class="ph-bold ph-arrow-right" style="vertical-align: -2px; margin-left: 2px;"></i>](https://drive.google.com/file/d/1j07EdXSv6ADf0vgMlGK-d1YJCRaEzDzf/view?usp=sharing)
 
 ## Overview
 

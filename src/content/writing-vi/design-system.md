@@ -9,7 +9,7 @@ category: Hệ thống thiết kế
 
 Mẫu này dùng để ghi chép và duy trì một design system, bao gồm token, component và các quy tắc. Hãy nhân bản mẫu cho mỗi sản phẩm mới và điền giá trị của bạn.
 
-[Tải mẫu Markdown →](https://drive.google.com/file/d/1j07EdXSv6ADf0vgMlGK-d1YJCRaEzDzf/view?usp=sharing)
+[Tải mẫu Markdown <i class="ph-bold ph-arrow-right" style="vertical-align: -2px; margin-left: 2px;"></i>](https://drive.google.com/file/d/1j07EdXSv6ADf0vgMlGK-d1YJCRaEzDzf/view?usp=sharing)
 
 ## Tổng quan
 

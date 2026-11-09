@@ -177,13 +177,13 @@ const xShareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(entry.da
       <div style="margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--border-subtle); display: flex; gap: 16px;">
         {prev ? (
           <a href={`/writing/${prev.slug}`} style="display: flex; flex-direction: column; gap: 4px; padding: 16px 20px; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); background: var(--bg-surface); text-decoration: none; flex: 1; transition: border-color 150ms ease;" class="nav-link">
-            <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase;"><L en="← Previous" vi="← Trước" /></span>
+            <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px;"><i class="ph-bold ph-arrow-left"></i><L en="Previous" vi="Trước" /></span>
             <span style="font: 500 14px/20px 'Poppins', sans-serif; color: var(--text-bright);"><L en={prev.data.title} vi={viOf(prev).data.title} /></span>
           </a>
         ) : <div style="flex:1" />}
         {next ? (
           <a href={`/writing/${next.slug}`} style="display: flex; flex-direction: column; gap: 4px; padding: 16px 20px; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); background: var(--bg-surface); text-decoration: none; flex: 1; align-items: flex-end; transition: border-color 150ms ease;" class="nav-link">
-            <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase;"><L en="Next →" vi="Tiếp →" /></span>
+            <span style="font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px;"><L en="Next" vi="Tiếp" /><i class="ph-bold ph-arrow-right"></i></span>
             <span style="font: 500 14px/20px 'Poppins', sans-serif; color: var(--text-bright);"><L en={next.data.title} vi={viOf(next).data.title} /></span>
           </a>
         ) : <div style="flex:1" />}

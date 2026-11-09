@@ -103,9 +103,9 @@ The navigation was structured around the four core product areas, with About and
       <div style="font: 500 12px/18px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;">SME Decision-Maker</div>
       <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Home</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">AI Marketing</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-accent); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Contact</span>
       </div>
     </div>
@@ -113,9 +113,9 @@ The navigation was structured around the four core product areas, with About and
       <div style="font: 500 12px/18px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;">Operations / E-commerce</div>
       <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Home</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">AI Assistants</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-accent); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Contact</span>
       </div>
     </div>
@@ -123,9 +123,9 @@ The navigation was structured around the four core product areas, with About and
       <div style="font: 500 12px/18px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;">Partner / Investor</div>
       <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">About</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Partnerships</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-accent); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Contact</span>
       </div>
     </div>

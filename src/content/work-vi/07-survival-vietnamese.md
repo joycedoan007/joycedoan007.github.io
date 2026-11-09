@@ -110,11 +110,11 @@ Tám trang, mỗi trang đảm nhận một nhiệm vụ rõ ràng trong hành t
       <div style="font: 500 12px/18px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;">Phễu chính</div>
       <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Trang chủ</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Loại khóa học</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Chi tiết</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-accent); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Thanh toán</span>
       </div>
     </div>
@@ -122,9 +122,9 @@ Tám trang, mỗi trang đảm nhận một nhiệm vụ rõ ràng trong hành t
       <div style="font: 500 12px/18px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;">Dẫn dắt bởi nội dung</div>
       <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Blog</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Chi tiết bài viết</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-accent); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Trang khóa học</span>
       </div>
     </div>
@@ -132,7 +132,7 @@ Tám trang, mỗi trang đảm nhận một nhiệm vụ rõ ràng trong hành t
       <div style="font: 500 12px/18px 'JetBrains Mono', monospace; color: var(--text-disabled); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;">Dẫn dắt bởi niềm tin</div>
       <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
         <span style="font: 400 12px/18px 'Poppins', sans-serif; color: var(--text-primary); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Giới thiệu</span>
-        <span style="color: var(--text-disabled); font-size: 12px;">→</span>
+        <i class="ph-bold ph-arrow-right" style="color: var(--text-disabled); font-size: 12px;"></i>
         <span style="font: 500 12px/18px 'Poppins', sans-serif; color: var(--text-accent); background: var(--bg-elevated); padding: 3px 10px; border-radius: var(--radius-full);">Trang khóa học</span>
       </div>
     </div>

@@ -124,7 +124,7 @@ const {
         Array.prototype.slice.call(btn.children).forEach(function (i) {
           if (i.tagName !== 'I') return;
           var wrap = document.createElement('span');
-          wrap.className = 'btn__icon';
+          wrap.className = 'btn__icon' + (i.classList.contains('ph-arrow-left') ? ' btn__icon--left' : i.classList.contains('ph-arrow-right') ? ' btn__icon--right' : '');
           btn.insertBefore(wrap, i);
           wrap.appendChild(i);
           wrap.appendChild(i.cloneNode(true));

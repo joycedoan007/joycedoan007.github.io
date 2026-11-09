@@ -373,6 +373,15 @@ html:not([lang='vi']) [data-lang-block='vi'] {
   .btn:hover .btn__icon > i:first-child { transform: translate(130%, -130%); }
   .btn:hover .btn__icon > i + i { transform: translate(0, 0); }
 }
+/* Horizontal arrows swap sideways instead of diagonally */
+.btn__icon--left > i + i { transform: translate(130%, 0); }
+.btn__icon--right > i + i { transform: translate(-130%, 0); }
+@media (hover: hover) {
+  .btn:hover .btn__icon--left > i:first-child { transform: translate(-130%, 0); }
+  .btn:hover .btn__icon--right > i:first-child { transform: translate(130%, 0); }
+  .btn:hover .btn__icon--left > i + i,
+  .btn:hover .btn__icon--right > i + i { transform: translate(0, 0); }
+}
 .btn:active { transition-duration: 150ms; }
 @media (prefers-reduced-motion: reduce) {
   .btn, .btn__roll-in, .btn__icon > i { transition: none; }
