@@ -191,9 +191,49 @@ body,
   [style*="grid-template-columns: 180px 1fr 140px"],
   [style*="grid-template-columns: 160px 1fr"],
   [style*="grid-template-columns: 220px 1fr 200px"],
-  [style*="grid-template-columns: 220px 1fr"] {
+  [style*="grid-template-columns: 220px 1fr"],
+  [style*="grid-template-columns: 240px 1fr 200px 32px"],
+  [style*="grid-template-columns: 1fr 200px"],
+  [style*="grid-template-columns: 1.35fr 1fr"] {
     grid-template-columns: 1fr !important;
   }
+
+  /* Section headers (title + side text): stack instead of squeezing side by side */
+  [style*="justify-content: space-between"][style*="margin-bottom: 48px"][style*="border-bottom"] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+  [style*="justify-content: space-between"][style*="margin-bottom: 48px"] > p { max-width: none !important; }
+
+  /* Page hero (Projects): stack title and description, less top space */
+  .page-hero { padding: 40px 20px 32px !important; }
+  .page-hero__row { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
+  .page-hero__row > p { max-width: none !important; }
+
+  /* Writing rows: tighter once stacked, arrow tucked away */
+  .writing-row { gap: 8px !important; padding: 24px 0 !important; align-items: flex-start !important; }
+  .writing-row .writing-arrow { display: none; }
+
+  /* Work list: drop the table header, stack each row as tag / title + arrow / role + year */
+  .work-head { display: none !important; }
+  .work-row {
+    grid-template-columns: 1fr auto !important;
+    gap: 6px 16px !important;
+    padding: 20px 0 !important;
+    align-items: center !important;
+  }
+  .work-row > :nth-child(1) { display: none; }
+  .work-row > :nth-child(2) { grid-column: 1 / -1; grid-row: 1; }
+  .work-row > :nth-child(3) { grid-column: 1; grid-row: 2; font-size: 24px !important; line-height: 30px !important; }
+  .work-row > :nth-child(4) { grid-column: 1; grid-row: 3; }
+  .work-row > :nth-child(5) { grid-column: 2; grid-row: 3; text-align: right; }
+  .work-row > :nth-child(6) { grid-column: 2; grid-row: 2; }
+
+  /* Marquee strip: smaller labels, no pinned bar (the hero is taller than the screen here) */
+  .animate-marquee > span { font-size: 22px !important; }
+  .animate-marquee { gap: 40px !important; }
+  section:has(> .animate-marquee) { position: static !important; padding: 16px 0 !important; }
 
   /* Trim oversized column gaps once stacked */
   [style*="gap: 80px"] { gap: 32px !important; }

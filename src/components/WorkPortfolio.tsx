@@ -238,6 +238,7 @@ function WorkRow({
   if (item.slug) {
     return (
       <a
+        className="work-row"
         href={`/work/${item.slug}`}
         onMouseEnter={() => onHover(item)}
         onMouseLeave={() => onHover(null)}
@@ -251,6 +252,7 @@ function WorkRow({
 
   return (
     <div
+      className="work-row"
       onMouseEnter={() => onHover(item)}
       onMouseLeave={() => onHover(null)}
       onClick={() => onOpen(item)}
@@ -395,6 +397,7 @@ function WorkIndex({
 
         {/* Table header */}
         <div
+          className="work-head"
           style={{
             display: 'grid',
             gridTemplateColumns: '64px 200px 1fr 120px 100px 32px',

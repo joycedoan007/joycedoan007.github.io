@@ -2,47 +2,40 @@
 const services = [
   {
     icon: 'ph-chart-bar',
-    title: 'Dashboard & data UX',
-    body: "Hierarchies for dense data. Query-to-glance pipelines. Tables that don't make you squint.",
+    title: 'Dashboard & Data UX',
+    body: 'Making complex data easier to navigate, understand, and act on through structured layouts and thoughtful information hierarchy.',
   },
   {
     icon: 'ph-browsers',
     title: 'Product UX & UI',
-    body: 'End-to-end flows for B2B SaaS. Onboarding, settings, the unglamorous middle bits.',
+    body: 'End-to-end product design, from understanding user needs to defining workflows, interactions, and polished interfaces.',
   },
   {
     icon: 'ph-sparkle',
-    title: 'AI-integrated interfaces',
-    body: 'Designing for non-deterministic outputs. Confidence, control, and graceful failure.',
+    title: 'AI-integrated Interfaces',
+    body: 'Designing for AI-powered experiences, including intelligent workflows, automation, human control, and graceful failure states.',
   },
   {
     icon: 'ph-stack',
-    title: 'Design systems',
-    body: 'Tokens, components, contribution model. The kind that engineers actually use.',
+    title: 'Design Systems',
+    body: 'Building scalable components, design tokens, and documentation that help teams maintain consistency and move faster.',
   },
 ];
+
 ---
 
 <section id="services" style="border-bottom: 1px solid var(--border-subtle);">
   <div style="max-width: 1320px; margin: 0 auto; padding: 96px 48px;">
     <div data-reveal style="margin-bottom: 56px;">
-      <div class="overline" data-i18n style="margin-bottom: 12px;">Services</div>
+      <div class="overline" data-i18n style="margin-bottom: 12px;">Expertise</div>
       <h2
         style="font: 500 clamp(30px, 3.4vw, 44px)/1.1 'Poppins', sans-serif; letter-spacing: -0.03em; color: var(--text-bright); margin: 0 0 48px;"
       >
         <span data-i18n>Dense data, calm screens.</span>
       </h2>
-      <div style="display: flex; flex-direction: column; gap: 16px; max-width: 820px;">
-        <p data-i18n style="font: 400 16px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0; text-wrap: pretty;">
-          I often work as the sole UI/UX Designer within small teams, taking ownership of the design process from problem analysis to solution delivery.
-        </p>
-        <p data-i18n style="font: 400 16px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0; text-wrap: pretty;">
-          With a strong understanding of technical concepts and system logic, I bridge the gap between design and development, proactively identifying challenges and proposing practical solutions.
-        </p>
-        <p data-i18n style="font: 400 16px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0; text-wrap: pretty;">
-          Beyond my own work, I also provide design guidance and strategic recommendations to help other designers approach problems more effectively.
-        </p>
-      </div>
+      <p data-i18n style="font: 400 16px/26px 'Poppins', sans-serif; color: var(--text-primary); margin: 0; max-width: 620px; text-wrap: pretty;">
+        I design digital products that make complex information easier to understand and everyday workflows easier to manage.
+      </p>
     </div>
 
     <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
@@ -121,6 +114,7 @@ const services = [
   }
   @media (max-width: 900px) {
     #services [style*='repeat(2, 1fr)'] { grid-template-columns: 1fr !important; }
+    .service-card { min-height: 0; padding: 24px; gap: 40px; }
   }
 </style>
 
