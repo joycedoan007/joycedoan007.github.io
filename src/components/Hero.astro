@@ -34,6 +34,7 @@ const { stats, company } = Astro.props;
     <div data-reveal style="--reveal-delay: 120ms;" class="sync">
       <div class="sync__frame" tabindex="0">
         <div class="sync__person"><img src="/joyce-cutout.png" alt="Joyce Doan" width="1100" height="1377" /></div>
+        <img class="sync__brush" src="/hero-brush.svg" alt="" width="1280" height="1200" aria-hidden="true" />
         <div class="sync__bubble" aria-hidden="true">
           <img class="sync__img sync__img--light" src="/hero-illustration.svg" alt="" width="1200" height="1200" />
           <img class="sync__img sync__img--dark" src="/hero-illustration-dark.svg" alt="" width="1200" height="1200" />
@@ -112,6 +113,7 @@ const { stats, company } = Astro.props;
     -webkit-mask: url(/joyce-cutout.png) center / 100% 100% no-repeat; mask: url(/joyce-cutout.png) center / 100% 100% no-repeat;
     opacity: 0.12;
   }
+  .sync__brush { position: absolute; z-index: 0; left: -17%; top: -10%; width: 142.9%; max-width: none; height: auto; aspect-ratio: 1280 / 1200; pointer-events: none; }
   .sync__bubble {
     position: absolute; z-index: 0; left: -17%; top: -10%; width: 142.9%; aspect-ratio: 1280 / 1200;
     transform: translateY(24px) scale(0.85); transform-origin: 50% 70%;

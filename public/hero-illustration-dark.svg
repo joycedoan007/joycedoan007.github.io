@@ -97,7 +97,7 @@
       <path d="M786 1030 L786 1100 L805 1083 L818 1115 L835 1108 L822 1077 L848 1075 Z" class="bold"/>
     </g>
   </g>
-  <g class="obj" transform="translate(290 250) scale(0.84) translate(-270 -507)">
+  <g class="obj" transform="translate(376 253) scale(0.84) translate(-270 -507)">
     <g filter="url(#soft)"><ellipse cx="270" cy="640" rx="170" ry="26" class="sh"/></g>
     <g filter="url(#pencil)">
       <!-- back sheet -->
@@ -126,7 +126,7 @@
       </g>
     </g>
   </g>
-  <g class="obj" transform="translate(911 305) scale(0.95) translate(-960 -467)">
+  <g class="obj" transform="translate(991 670) scale(0.8) translate(-960 -467)">
     <g filter="url(#soft)"><ellipse cx="960" cy="640" rx="170" ry="26" class="sh"/></g>
     <g filter="url(#pencil)">
       <!-- bottom sheet -->
