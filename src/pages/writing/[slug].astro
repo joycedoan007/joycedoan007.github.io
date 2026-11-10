@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import ThemeToggle from '../../components/ThemeToggle';
-import LangSwitch from '../../components/LangSwitch.astro';
+import Header from '../../components/Header.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
+import Footer from '../../components/Footer.astro';
 import WritingSidebar from '../../components/WritingSidebar.astro';
 import L from '../../components/L.astro';
 
@@ -59,45 +59,10 @@ const xShareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(entry.da
 ---
 
 <Layout title={`${entry.data.title} - Joyce Doan`} description={entry.data.description}>
-  <!-- ── Writing header ── -->
-  <header
-    style="position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg-page) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-subtle);"
-  >
-    <div
-      style="max-width: 100%; padding: 0 24px; height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 24px;"
-    >
-      <div style="display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0;">
-        <a href="/" style="display: inline-flex; text-decoration: none;">
-          <img src="/logo.svg" alt="Joyce Doan" height="18" style="display: block; filter: var(--logo-filter);" />
-        </a>
-        <span style="font: 400 12px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">/</span>
-        <a href="/writing" data-i18n style="font: 400 13px/20px 'Poppins', sans-serif; color: var(--text-secondary); text-decoration: none;">Writing</a>
-      </div>
-      <div style="display: flex; justify-content: flex-end;">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <nav class="nav-fx" style="display: flex; align-items: center; margin-right: 12px;">
-        {[
-          ['Work', '/work'],
-          ['Contact', '/contact'],
-        ].map(([label, href]) => (
-          <a
-            href={href}
-            data-i18n
-            style="padding: 6px 14px; font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-primary); text-decoration: none;"
-          >
-            {label}
-          </a>
-        ))}
-          </nav>
-          <LangSwitch />
-          <ThemeToggle client:load />
-        </div>
-      </div>
-    </div>
-  </header>
+  <Header />
 
   <!-- ── Three-column layout ── -->
-  <div style="display: grid; grid-template-columns: 220px 1fr 200px; min-height: calc(100vh - 48px);">
+  <div style="max-width: 1320px; margin: 0 auto; padding: 0 38px; box-sizing: border-box; display: grid; grid-template-columns: 220px 1fr 200px; min-height: calc(100vh - var(--header-h, 48px));">
 
     <WritingSidebar entries={sorted} activeSlug={entry.slug} />
 
@@ -191,7 +156,7 @@ const xShareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(entry.da
 
     <!-- RIGHT TOC -->
     <aside style="border-left: 1px solid var(--border-subtle);">
-      <div style="position: sticky; top: 48px; height: fit-content; max-height: calc(100vh - 48px); overflow-y: auto; padding: 40px 24px;">
+      <div style="position: sticky; top: var(--header-h, 48px); height: fit-content; max-height: calc(100vh - var(--header-h, 48px)); overflow-y: auto; padding: 40px 24px;">
       {tocLangs.map(({ lang, h2s, tocGroups, headingMap }) => (
         <div data-lang-block={lang}>
         {h2s.length > 0 && (
@@ -240,6 +205,9 @@ const xShareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(entry.da
       </div>
     </aside>
   </div>
+
+  <ContactCTA />
+  <Footer />
 </Layout>
 
 <style is:global>
@@ -254,14 +222,14 @@ const xShareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(entry.da
     letter-spacing: -0.02em;
     color: var(--text-bright);
     margin: 52px 0 16px;
-    scroll-margin-top: 72px;
+    scroll-margin-top: calc(var(--header-h, 48px) + 24px);
   }
   .prose h3 {
     font: 600 16px/1.3 'Poppins', sans-serif;
     letter-spacing: -0.01em;
     color: var(--text-bright);
     margin: 32px 0 10px;
-    scroll-margin-top: 72px;
+    scroll-margin-top: calc(var(--header-h, 48px) + 24px);
   }
   .prose p {
     margin: 0 0 20px;

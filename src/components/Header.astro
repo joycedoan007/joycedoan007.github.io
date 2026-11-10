@@ -32,16 +32,21 @@ const home = Astro.url.pathname === '/';
         [
           ['Work', '/work'],
           ['Writing', '/writing'],
-          ['Contact', '/contact'],
-        ].map(([label, href]) => (
-          <a
-            href={href}
-            data-cursor="hover"
-            style="padding: 6px 14px; font: 500 14px/20px 'Poppins', sans-serif; color: var(--text-primary); text-decoration: none;"
-          >
-            <span data-i18n>{label}</span>
-          </a>
-        ))
+          ['AI Radar', 'https://ai-radar.joycedoan.id.vn/'],
+        ].map(([label, href]) => {
+          const external = href.startsWith('http');
+          return (
+            <a
+              href={href}
+              data-cursor="hover"
+              {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              style="padding: 6px 14px; font: 500 14px/20px 'Poppins', sans-serif; color: var(--text-primary); text-decoration: none; display: inline-flex; align-items: center; gap: 4px;"
+            >
+              <span data-i18n>{label}</span>
+              {external && <i class="ph-bold ph-arrow-up-right" style="font-size: 12px;"></i>}
+            </a>
+          );
+        })
       }
     </nav>
 

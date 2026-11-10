@@ -23,7 +23,7 @@ for (const e of entries) {
 }
 ---
 
-<aside style="position: sticky; top: 48px; height: calc(100vh - 48px); overflow-y: auto; border-right: 1px solid var(--border-subtle); padding: 32px 0;">
+<aside style="position: sticky; top: var(--header-h, 48px); height: calc(100vh - var(--header-h, 48px)); overflow-y: auto; border-right: 1px solid var(--border-subtle); padding: 32px 0;">
   {['en', 'vi'].map((lang) => (
   <nav data-lang-block={lang}>
     {categoryOrder.map((cat) => {

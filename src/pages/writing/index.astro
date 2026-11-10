@@ -1,8 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import ThemeToggle from '../../components/ThemeToggle';
-import LangSwitch from '../../components/LangSwitch.astro';
+import Header from '../../components/Header.astro';
 import WritingSidebar from '../../components/WritingSidebar.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
 import L from '../../components/L.astro';
@@ -28,37 +27,9 @@ const meta = (e: (typeof all)[number], lang: string) =>
 
 <Layout title="Writing - Joyce Doan" description="Notes on design craft, AI, and product thinking by Joyce Doan.">
 
-  <header style="position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg-page) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-subtle);">
-    <div style="max-width: 100%; padding: 0 24px; height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
-      <div style="display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0;">
-        <a href="/" style="display: inline-flex; text-decoration: none;">
-          <img src="/logo.svg" alt="Joyce Doan" height="18" style="display: block; filter: var(--logo-filter);" />
-        </a>
-        <span style="font: 400 12px/16px 'JetBrains Mono', monospace; color: var(--text-disabled);">/</span>
-        <a href="/writing" data-i18n style="font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-bright); text-decoration: none;">Writing</a>
-      </div>
-      <div style="display: flex; justify-content: flex-end; align-items: center; gap: 12px;">
-        <nav class="nav-fx" style="display: flex; align-items: center; margin-right: 12px;">
-          {[
-            ['Work', '/work'],
-            ['Contact', '/contact'],
-          ].map(([label, href]) => (
-            <a
-              href={href}
-              data-i18n
-              style="padding: 6px 14px; font: 500 13px/20px 'Poppins', sans-serif; color: var(--text-primary); text-decoration: none;"
-            >
-              {label}
-            </a>
-          ))}
-        </nav>
-        <LangSwitch />
-        <ThemeToggle client:load />
-      </div>
-    </div>
-  </header>
+  <Header />
 
-  <div style="display: grid; grid-template-columns: 220px 1fr; min-height: calc(100vh - 48px);">
+  <div style="max-width: 1320px; margin: 0 auto; padding: 0 38px; box-sizing: border-box; display: grid; grid-template-columns: 220px 1fr; min-height: calc(100vh - var(--header-h, 48px));">
 
     <WritingSidebar entries={sorted} />
 
@@ -66,15 +37,15 @@ const meta = (e: (typeof all)[number], lang: string) =>
     <main style="min-width: 0;">
 
       <!-- Hero -->
-      <div style="padding: 56px 72px 48px; border-bottom: 1px solid var(--border-subtle);">
+      <div style="padding: 96px 48px 48px; border-bottom: 1px solid var(--border-subtle);">
         <div class="overline" style="margin-bottom: 16px;"><L en="Things I figured out" vi="Những điều tôi đã tự mày mò" /></div>
-        <h1 style="font: 500 48px/1.0 'Poppins', sans-serif; letter-spacing: -0.04em; color: var(--text-bright); margin: 0 0 12px;"><L en="Writing" vi="Bài viết" /></h1>
+        <h1 style="font: 500 clamp(30px, 3.4vw, 44px)/1.1 'Poppins', sans-serif; letter-spacing: -0.03em; color: var(--text-bright); margin: 0 0 12px;"><L en="Writing" vi="Bài viết" /></h1>
         <p style="font: 400 15px/24px 'Poppins', sans-serif; color: var(--text-secondary); margin: 0; max-width: 480px;">
           <L en="Short essays on design thinking, AI, data UX, and the product decisions behind complex interfaces." vi="Những bài viết ngắn về tư duy thiết kế, AI, data UX và các quyết định sản phẩm đằng sau những giao diện phức tạp." />
         </p>
       </div>
 
-      <div style="padding: 56px 72px 96px;">
+      <div style="padding: 56px 48px 96px;">
 
         <!-- Popular -->
         <div style="margin-bottom: 56px;">
@@ -128,6 +99,9 @@ const meta = (e: (typeof all)[number], lang: string) =>
     </main>
 
   </div>
+
+  <ContactCTA />
+  <Footer />
 
 </Layout>
 
