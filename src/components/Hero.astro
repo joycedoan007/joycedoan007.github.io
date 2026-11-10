@@ -59,11 +59,11 @@ const { stats, company } = Astro.props;
         const x = i * CELL + CELL / 2, y = j * CELL + CELL / 2;
         const d = Math.hypot(x - CX, y - CY) / R;
         if (d > 1) continue;
-        const k = 1 - Math.pow(d, 1.6);
+        const k = 1 - Math.pow(d, 2.2);
         if (k < ((BAYER[j % 8][i % 8] + 0.5) / 64) * 0.95) continue;
         hx.push(i * CELL + 0.5); hy.push(j * CELL + 0.5);
         bx.push(i * CELL + 0.5); by.push(j * CELL + 0.5);
-        vx.push(0); vy.push(0); al.push(0.18 + 0.62 * k);
+        vx.push(0); vy.push(0); al.push(0.2 + 0.7 * k);
       }
     }
     const n = hx.length;
@@ -111,12 +111,13 @@ const { stats, company } = Astro.props;
     new ResizeObserver(resize).observe(canvas);
     new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     if (matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches) {
-      frame.addEventListener('pointermove', (e) => {
+      // listen on the whole document: the glow extends well beyond the portrait frame
+      document.addEventListener('pointermove', (e) => {
         const r = canvas.getBoundingClientRect();
         mx = (e.clientX - r.left) / scale; my = (e.clientY - r.top) / scale;
         wake();
       });
-      frame.addEventListener('pointerleave', () => { mx = my = -9999; wake(); });
+      document.documentElement.addEventListener('pointerleave', () => { mx = my = -9999; wake(); });
     }
   }
 </script>
@@ -197,7 +198,7 @@ const { stats, company } = Astro.props;
     opacity: 0.12;
   }
   /* pixel glow is drawn on this canvas (see script) */
-  .sync__brush { display: block; position: absolute; z-index: 0; left: -17%; top: -10%; width: 142.9%; max-width: none; height: auto; aspect-ratio: 1280 / 1200; pointer-events: none; }
+  .sync__brush { display: block; position: absolute; z-index: 0; left: -26%; top: -18%; width: 160%; max-width: none; height: auto; aspect-ratio: 1280 / 1200; pointer-events: none; }
   .sync__frame:focus-visible { outline: none; }
 
   @media (max-width: 900px) {
