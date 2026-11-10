@@ -12,6 +12,7 @@ import Footer from '../components/Footer.astro';
 import CustomCursor from '../components/CustomCursor';
 import '../styles/global.css';
 import { getCollection } from 'astro:content';
+import { existsSync } from 'node:fs';
 
 const writingEntries = await getCollection('writing');
 const writingEntriesVi = await getCollection('writing-vi');
@@ -37,6 +38,7 @@ const workItems = [...byOrder.filter((e) => !e.data.ai).slice(0, 5), ...byOrder.
   .map((entry) => ({
     id: entry.slug,
     slug: entry.slug,
+    image: ['hover', 'cover'].map((n) => `/work/${entry.slug.replace(/^\d+-/, '')}/${n}.png`).find((f) => existsSync(`public${f}`)) ?? '',
     tag: entry.data.subtitle,
     title: entry.data.title,
     year: entry.data.year ?? '',

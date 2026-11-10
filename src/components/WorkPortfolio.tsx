@@ -5,6 +5,7 @@ import { useLang, useT } from '../i18n/react';
 export interface WorkItem {
   id: string;
   slug?: string;
+  image?: string;
   tag: string;
   title: string;
   year: string;
@@ -323,6 +324,39 @@ function Sparkles({ burst }: { burst: number }) {
   );
 }
 
+// ─── Mosaic cover: tiles blink out at random so the image assembles from squares
+const COLS = 16;
+const ROWS = 10;
+const TILE_DELAYS = Array.from({ length: COLS * ROWS }, () => Math.random() * 380);
+
+function PixelReveal() {
+  return (
+    <div
+      aria-hidden="true"
+      style={{
+        position: 'absolute',
+        inset: 0,
+        display: 'grid',
+        gridTemplateColumns: `repeat(${COLS}, 1fr)`,
+        gridTemplateRows: `repeat(${ROWS}, 1fr)`,
+      }}
+    >
+      <style>{`@keyframes px-out { 0%, 40% { opacity: 1 } 100% { opacity: 0 } }`}</style>
+      {TILE_DELAYS.map((d, i) => (
+        <span
+          key={i}
+          style={{
+            background: 'var(--bg-surface)',
+            margin: -0.5,
+            animation: 'px-out 220ms steps(2, end) both',
+            animationDelay: `${d}ms`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 // ─── Work index section ───────────────────────────────────────────────────────
 function WorkIndex({
   items,
@@ -335,6 +369,7 @@ function WorkIndex({
   const [aiMode, setAiMode] = useState(false);
   const [burst, setBurst] = useState(0);
   const t = useT();
+  const previewRef = useRef<HTMLDivElement>(null);
   const shown = items.filter((w) => !!w.ai === aiMode);
   const title = useScramble(aiMode ? t('Selected work, designed with AI.') : t('Selected work, designed by hand.'));
 
@@ -342,6 +377,32 @@ function WorkIndex({
     setAiMode((v) => !v);
     setBurst((b) => b + 1);
   }
+
+  // Preview card trails the cursor with a light ease; skipped on touch devices.
+  useEffect(() => {
+    if (!hoverItem?.image || !window.matchMedia('(hover: hover)').matches) return;
+    const W = 320, H = 200;
+    let tx = window.innerWidth / 2, ty = window.innerHeight / 2, x = tx, y = ty, raf = 0, placed = false;
+    const place = () => {
+      const el = previewRef.current;
+      if (!el) return;
+      x += (tx - x) * 0.18;
+      y += (ty - y) * 0.18;
+      el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      raf = requestAnimationFrame(place);
+    };
+    const onMove = (e: MouseEvent) => {
+      tx = Math.min(e.clientX + 24, window.innerWidth - W - 16);
+      ty = Math.min(Math.max(e.clientY - H / 2, 16), window.innerHeight - H - 16);
+      if (!placed) { x = tx; y = ty; placed = true; }
+    };
+    window.addEventListener('mousemove', onMove);
+    raf = requestAnimationFrame(place);
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      cancelAnimationFrame(raf);
+    };
+  }, [hoverItem]);
 
   function handleHover(item: WorkItem | null) {
     setHoverItem(item);
@@ -432,6 +493,39 @@ function WorkIndex({
             </div>
           ))}
         </div>
+      </div>
+      <div
+        ref={previewRef}
+        aria-hidden="true"
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: 320,
+          aspectRatio: '16 / 10',
+          zIndex: 50,
+          pointerEvents: 'none',
+          borderRadius: 'var(--radius-card)',
+          border: '1px solid var(--border-subtle)',
+          background: 'var(--bg-surface)',
+          boxShadow: '0 24px 60px rgba(0,0,0,0.28)',
+          overflow: 'hidden',
+          opacity: hoverItem?.image ? 1 : 0,
+          transition: 'opacity 180ms ease',
+          willChange: 'transform',
+        }}
+      >
+        {hoverItem?.image && (
+          <>
+            <img
+              key={hoverItem.id}
+              src={hoverItem.image}
+              alt=""
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+            <PixelReveal key={`px-${hoverItem.id}`} />
+          </>
+        )}
       </div>
     </section>
   );
