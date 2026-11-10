@@ -38,11 +38,88 @@ const { stats, company } = Astro.props;
     <div data-reveal style="--reveal-delay: 120ms;" class="sync">
       <div class="sync__frame" tabindex="0">
         <div class="sync__person"><img src="/joyce-cutout.png" alt="Joyce Doan" width="1100" height="1377" /></div>
-        <img class="sync__brush" src="/hero-brush.svg" alt="" width="1280" height="1200" aria-hidden="true" />
+        <canvas class="sync__brush" aria-hidden="true"></canvas>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  // Radial pixel glow drawn on a canvas; each block springs away from the cursor and eases back home
+  const canvas = document.querySelector<HTMLCanvasElement>('.sync__brush');
+  const frame = document.querySelector<HTMLElement>('.sync__frame');
+  const ctx = canvas?.getContext('2d');
+  if (canvas && frame && ctx) {
+    const W = 1280, H = 1200, CELL = 8, SIZE = 7, CX = 640, CY = 600, R = 580;
+    const BAYER = [[0,32,8,40,2,34,10,42],[48,16,56,24,50,18,58,26],[12,44,4,36,14,46,6,38],[60,28,52,20,62,30,54,22],[3,35,11,43,1,33,9,41],[51,19,59,27,49,17,57,25],[15,47,7,39,13,45,5,37],[63,31,55,23,61,29,53,21]];
+    // x/y = current position, hx/hy = home, vx/vy = velocity, a = opacity
+    const bx: number[] = [], by: number[] = [], hx: number[] = [], hy: number[] = [], vx: number[] = [], vy: number[] = [], al: number[] = [];
+    for (let j = 0; j < H / CELL; j++) {
+      for (let i = 0; i < W / CELL; i++) {
+        const x = i * CELL + CELL / 2, y = j * CELL + CELL / 2;
+        const d = Math.hypot(x - CX, y - CY) / R;
+        if (d > 1) continue;
+        const k = 1 - Math.pow(d, 1.6);
+        if (k < ((BAYER[j % 8][i % 8] + 0.5) / 64) * 0.95) continue;
+        hx.push(i * CELL + 0.5); hy.push(j * CELL + 0.5);
+        bx.push(i * CELL + 0.5); by.push(j * CELL + 0.5);
+        vx.push(0); vy.push(0); al.push(0.18 + 0.62 * k);
+      }
+    }
+    const n = hx.length;
+    let scale = 1, mx = -9999, my = -9999, raf = 0;
+
+    function resize() {
+      const dpr = window.devicePixelRatio || 1;
+      const w = canvas!.clientWidth;
+      scale = w / W;
+      canvas!.width = Math.round(w * dpr);
+      canvas!.height = Math.round(canvas!.clientHeight * dpr);
+      ctx!.setTransform((w * dpr) / W, 0, 0, (w * dpr) / W, 0, 0);
+      draw();
+    }
+    function draw() {
+      ctx!.clearRect(0, 0, W, H);
+      const rgb = document.documentElement.dataset.theme === 'light' ? '169,159,146' : '255,255,255';
+      const k = rgb === '255,255,255' ? 0.4 : 1; // dark mode reads softer
+      for (let i = 0; i < n; i++) {
+        ctx!.fillStyle = `rgba(${rgb},${(al[i] * k).toFixed(2)})`;
+        ctx!.fillRect(bx[i], by[i], SIZE, SIZE);
+      }
+    }
+    function step() {
+      let moving = false;
+      const REACH = 130; // logical px
+      for (let i = 0; i < n; i++) {
+        const dx = bx[i] + SIZE / 2 - mx, dy = by[i] + SIZE / 2 - my;
+        const d = Math.hypot(dx, dy);
+        if (d < REACH && d > 0.01) {
+          const f = (1 - d / REACH) * 6;
+          vx[i] += (dx / d) * f; vy[i] += (dy / d) * f;
+        }
+        vx[i] += (hx[i] - bx[i]) * 0.06; vy[i] += (hy[i] - by[i]) * 0.06;
+        vx[i] *= 0.82; vy[i] *= 0.82;
+        bx[i] += vx[i]; by[i] += vy[i];
+        if (Math.abs(vx[i]) > 0.02 || Math.abs(vy[i]) > 0.02 || Math.abs(hx[i] - bx[i]) > 0.1 || Math.abs(hy[i] - by[i]) > 0.1) moving = true;
+      }
+      draw();
+      raf = moving ? requestAnimationFrame(step) : 0;
+    }
+    const wake = () => { if (!raf) raf = requestAnimationFrame(step); };
+
+    resize();
+    new ResizeObserver(resize).observe(canvas);
+    new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    if (matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches) {
+      frame.addEventListener('pointermove', (e) => {
+        const r = canvas.getBoundingClientRect();
+        mx = (e.clientX - r.left) / scale; my = (e.clientY - r.top) / scale;
+        wake();
+      });
+      frame.addEventListener('pointerleave', () => { mx = my = -9999; wake(); });
+    }
+  }
+</script>
 
 <style>
   .hero { border-bottom: 1px solid var(--border-subtle); overflow-x: clip; }
@@ -119,7 +196,8 @@ const { stats, company } = Astro.props;
     -webkit-mask: url(/joyce-cutout.png) center / 100% 100% no-repeat; mask: url(/joyce-cutout.png) center / 100% 100% no-repeat;
     opacity: 0.12;
   }
-  .sync__brush { position: absolute; z-index: 0; left: -17%; top: -10%; width: 142.9%; max-width: none; height: auto; aspect-ratio: 1280 / 1200; pointer-events: none; }
+  /* pixel glow is drawn on this canvas (see script) */
+  .sync__brush { display: block; position: absolute; z-index: 0; left: -17%; top: -10%; width: 142.9%; max-width: none; height: auto; aspect-ratio: 1280 / 1200; pointer-events: none; }
   .sync__frame:focus-visible { outline: none; }
 
   @media (max-width: 900px) {
