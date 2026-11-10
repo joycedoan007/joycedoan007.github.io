@@ -27,6 +27,10 @@ const { stats, company } = Astro.props;
         <a href="#book" data-cursor="hover" class="btn btn--primary btn--lg">
           <span data-i18n>Book a call</span>
         </a>
+        <a href="#work" class="hero__scroll" data-cursor="hover">
+          <span data-i18n>Scroll to see my work</span>
+          <i class="ph-bold ph-arrow-down hero__scroll-icon"></i>
+        </a>
       </div>
     </div>
 
@@ -93,6 +97,11 @@ const { stats, company } = Astro.props;
     margin: 0;
   }
   .hero__actions { display: flex; align-items: center; gap: 28px; }
+  .hero__scroll { display: inline-flex; align-items: center; gap: 10px; font: 500 12px/16px 'JetBrains Mono', monospace; color: var(--text-secondary); text-decoration: none; }
+  .hero__scroll:hover { color: var(--text-bright); }
+  .hero__scroll-icon { display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid var(--border-subtle); border-radius: 50%; font-size: 14px; animation: scroll-bob 1.8s ease-in-out infinite; }
+  @keyframes scroll-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+  @media (prefers-reduced-motion: reduce) { .hero__scroll-icon { animation: none; } }
 
   /* Large portrait cropped by the hero's bottom edge; the AI workflow illustration floats behind her head on hover / focus */
   .sync { align-self: end; }
@@ -100,8 +109,9 @@ const { stats, company } = Astro.props;
     position: relative; margin-left: auto; width: min(100%, calc((100svh - 150px) * 0.78)); aspect-ratio: 4 / 5.2;
     clip-path: inset(-200px -200px 0 -200px);
   }
-  .sync__person { position: absolute; z-index: 1; left: 31%; bottom: -58%; height: 165%; transform: translateX(-50%) rotate(9deg); transform-origin: 50% 100%; pointer-events: none; }
+  .sync__person { position: absolute; z-index: 1; left: 31%; bottom: -42%; height: 145%; transform: translateX(-50%) rotate(9deg); transform-origin: 50% 100%; pointer-events: none; }
   .sync__person img { display: block; height: 100%; width: auto; max-width: none; }
+  :global([data-theme="light"]) .sync__person img { filter: brightness(1.12) contrast(0.92); }
   /* film-grain noise, masked to her silhouette so it never spills onto the background */
   .sync__person::after {
     content: ''; position: absolute; inset: 0;
