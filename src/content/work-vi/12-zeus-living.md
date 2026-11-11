@@ -6,7 +6,7 @@ skills: ["BRANDING", "WEB DESIGN", "WEBFLOW", "FIGMA"]
 role: Nhà thiết kế UI/UX
 category: "Thiết kế web"
 year: "2022"
-hasImage: false
+hasImage: true
 order: 12
 ---
 

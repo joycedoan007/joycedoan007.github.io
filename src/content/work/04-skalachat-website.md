@@ -6,7 +6,7 @@ skills: ["BRANDING", "WEB DESIGN", "WEBFLOW", "FIGMA"]
 role: UI/UX Designer
 category: "Web Design"
 year: "2024"
-hasImage: false
+hasImage: true
 order: 8
 ---
 

@@ -6,7 +6,7 @@ skills: ["WEB DESIGN", "BRANDING", "UI/UX", "FIGMA"]
 role: UI/UX Designer
 company: "Personal Project"
 year: "2025"
-hasImage: false
+hasImage: true
 order: 15
 category: "Web Design"
 ---

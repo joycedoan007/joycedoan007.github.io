@@ -6,7 +6,7 @@ skills: ["WEB DESIGN", "BRANDING", "UI/UX", "FIGMA"]
 role: Nhà thiết kế UI/UX
 company: "Personal Project"
 year: "2025"
-hasImage: false
+hasImage: true
 order: 15
 category: "Thiết kế web"
 ---

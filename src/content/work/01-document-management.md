@@ -6,7 +6,7 @@ skills: ["BRANDING", "WEB DESIGN", "WEBFLOW"]
 role: UI/UX Designer
 category: "Product Design"
 year: "2023"
-hasImage: false
+hasImage: true
 url: "https://consortiagroup.co/en/portfolio"
 order: 1
 ---

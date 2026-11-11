@@ -6,7 +6,7 @@ skills: ["BRANDING", "WEB DESIGN", "WEBFLOW"]
 role: Nhà thiết kế UI/UX
 category: "Thiết kế sản phẩm"
 year: "2023"
-hasImage: false
+hasImage: true
 url: "https://consortiagroup.co/en/portfolio"
 order: 1
 ---
