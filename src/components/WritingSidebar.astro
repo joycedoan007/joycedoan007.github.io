@@ -26,6 +26,9 @@ for (const e of entries) {
 <aside style="position: sticky; top: var(--header-h, 48px); height: calc(100vh - var(--header-h, 48px)); overflow-y: auto; border-right: 1px solid var(--border-subtle); padding: 32px 0;">
   {['en', 'vi'].map((lang) => (
   <nav data-lang-block={lang}>
+    <div style="padding: 0 20px 8px; font: 500 11px/16px 'JetBrains Mono', monospace; color: var(--text-disabled); letter-spacing: 0.08em; text-transform: uppercase;">
+      {lang === 'vi' ? 'Phân loại' : 'Category'}
+    </div>
     {categoryOrder.map((cat) => {
       const locale = lang === 'vi' ? 'vi-VN' : 'en-US';
       const tr = (e: (typeof entries)[number]) => (lang === 'vi' ? viEntries.get(e.slug) ?? e : e);
