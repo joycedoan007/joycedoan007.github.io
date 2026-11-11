@@ -4,9 +4,11 @@ interface Props {
   company: string;
 }
 const { stats, company } = Astro.props;
+import HeroSnow from './HeroSnow.astro';
 ---
 
 <section id="top" class="hero">
+  <HeroSnow />
   <div class="hero__inner">
     <!-- Left: message -->
     <div data-reveal class="hero__text">
@@ -45,30 +47,120 @@ const { stats, company } = Astro.props;
 </section>
 
 <script>
-  // Radial pixel glow drawn on a canvas; each block springs away from the cursor and eases back home
+  // Radial pixel glow drawn on a canvas; each block springs away from the cursor and eases back home.
+  // Every few seconds the same blocks regroup into the next shape: circle -> Christmas tree -> UX chart -> circle.
   const canvas = document.querySelector<HTMLCanvasElement>('.sync__brush');
   const frame = document.querySelector<HTMLElement>('.sync__frame');
   const ctx = canvas?.getContext('2d');
   if (canvas && frame && ctx) {
     const W = 1280, H = 1200, CELL = 8, SIZE = 7, CX = 640, CY = 600, R = 580;
+    const GW = W / CELL, GH = H / CELL;
     const BAYER = [[0,32,8,40,2,34,10,42],[48,16,56,24,50,18,58,26],[12,44,4,36,14,46,6,38],[60,28,52,20,62,30,54,22],[3,35,11,43,1,33,9,41],[51,19,59,27,49,17,57,25],[15,47,7,39,13,45,5,37],[63,31,55,23,61,29,53,21]];
-    // x/y = current position, hx/hy = home, vx/vy = velocity, a = opacity
+    const isLight = () => document.documentElement.dataset.theme === 'light';
+    const neutral = () => (isLight() ? [169, 159, 146] : [255, 255, 255]);
+    const GREEN = () => (isLight() ? [0, 150, 104] : [0, 216, 146]);
+
+    // x/y = position, hx/hy = home, vx/vy = velocity, a = opacity, c* = colour (all eased toward their targets)
     const bx: number[] = [], by: number[] = [], hx: number[] = [], hy: number[] = [], vx: number[] = [], vy: number[] = [], al: number[] = [];
-    for (let j = 0; j < H / CELL; j++) {
-      for (let i = 0; i < W / CELL; i++) {
+    const cr: number[] = [], cg: number[] = [], cb: number[] = [], ta: number[] = [], tr: number[] = [], tg: number[] = [], tb: number[] = [];
+    const circleX: number[] = [], circleY: number[] = [], circleA: number[] = [];
+    for (let j = 0; j < GH; j++) {
+      for (let i = 0; i < GW; i++) {
         const x = i * CELL + CELL / 2, y = j * CELL + CELL / 2;
         const d = Math.hypot(x - CX, y - CY) / R;
         if (d > 1) continue;
         const k = 1 - Math.pow(d, 2.2);
         if (k < ((BAYER[j % 8][i % 8] + 0.5) / 64) * 0.95) continue;
-        hx.push(i * CELL + 0.5); hy.push(j * CELL + 0.5);
-        bx.push(i * CELL + 0.5); by.push(j * CELL + 0.5);
-        vx.push(0); vy.push(0); al.push(0.2 + 0.7 * k);
+        circleX.push(i * CELL + 0.5); circleY.push(j * CELL + 0.5); circleA.push(0.2 + 0.7 * k);
       }
     }
-    const n = hx.length;
-    let scale = 1, mx = -9999, my = -9999, raf = 0;
+    const n = circleX.length;
+    for (let i = 0; i < n; i++) {
+      hx.push(circleX[i]); hy.push(circleY[i]); bx.push(circleX[i]); by.push(circleY[i]);
+      vx.push(0); vy.push(0); al.push(0); ta.push(0);
+      const [r, g, b] = neutral(); cr.push(r); cg.push(g); cb.push(b); tr.push(r); tg.push(g); tb.push(b);
+    }
 
+    // Rasterise a shape on a grid the size of the block lattice; every lit cell becomes a target slot.
+    type Slot = { x: number; y: number; a: number; c: number[] };
+    function raster(draw: (g: CanvasRenderingContext2D) => void): Slot[] {
+      const off = document.createElement('canvas');
+      off.width = GW; off.height = GH;
+      const g = off.getContext('2d', { willReadFrequently: true })!;
+      draw(g);
+      const data = g.getImageData(0, 0, GW, GH).data;
+      const out: Slot[] = [];
+      for (let j = 0; j < GH; j++) for (let i = 0; i < GW; i++) {
+        const o = (j * GW + i) * 4;
+        if (data[o + 3] < 128) continue;
+        out.push({ x: i * CELL + 0.5, y: j * CELL + 0.5, a: 0.55 + 0.4 * ((BAYER[j % 8][i % 8] + 0.5) / 64), c: [data[o], data[o + 1], data[o + 2]] });
+      }
+      return out;
+    }
+    const css = (c: number[]) => `rgb(${c[0]},${c[1]},${c[2]})`;
+    function tree(g: CanvasRenderingContext2D) {
+      const green = css(GREEN());
+      const tier = (apexY: number, baseY: number, half: number, shade: string) => {
+        g.fillStyle = shade; g.beginPath(); g.moveTo(80, apexY); g.lineTo(80 + half, baseY); g.lineTo(80 - half, baseY); g.closePath(); g.fill();
+      };
+      g.fillStyle = 'rgb(150,102,62)'; g.fillRect(72, 132, 16, 16);
+      tier(68, 134, 56, isLight() ? 'rgb(0,120,84)' : 'rgb(0,176,120)');
+      tier(36, 100, 44, green);
+      tier(12, 60, 32, isLight() ? 'rgb(0,176,124)' : 'rgb(40,236,170)');
+      g.fillStyle = 'rgb(255,208,80)'; g.beginPath();
+      for (let k = 0; k < 10; k++) { const r = k % 2 ? 4.5 : 10, a = -Math.PI / 2 + (k * Math.PI) / 5; g.lineTo(80 + r * Math.cos(a), 10 + r * Math.sin(a)); }
+      g.closePath(); g.fill();
+      const balls: [number, number, string][] = [[72, 40, 'rgb(255,92,92)'], [88, 52, 'rgb(255,208,80)'], [66, 84, 'rgb(255,255,255)'], [92, 78, 'rgb(255,92,92)'], [78, 96, 'rgb(255,208,80)'], [58, 116, 'rgb(255,92,92)'], [84, 118, 'rgb(255,255,255)'], [104, 124, 'rgb(255,208,80)'], [70, 126, 'rgb(255,208,80)']];
+      for (const [x, y, c] of balls) { g.fillStyle = c; g.beginPath(); g.arc(x, y, 3, 0, 7); g.fill(); }
+    }
+    function chart(g: CanvasRenderingContext2D) {
+      const ink = css(neutral());
+      g.fillStyle = ink; g.fillRect(22, 24, 3, 108); g.fillRect(22, 129, 118, 3);
+      g.fillStyle = css(GREEN());
+      [[34, 25], [56, 40], [78, 34], [100, 62], [122, 84]].forEach(([x, h]) => g.fillRect(x, 128 - h, 14, h));
+      const pts = [[41, 96], [63, 78], [85, 82], [107, 54], [129, 32]];
+      g.strokeStyle = ink; g.lineWidth = 3; g.lineJoin = 'round'; g.beginPath();
+      pts.forEach(([x, y], i) => (i ? g.lineTo(x, y) : g.moveTo(x, y))); g.stroke();
+      g.fillStyle = 'rgb(255,208,80)';
+      pts.forEach(([x, y]) => { g.beginPath(); g.arc(x, y, 4.5, 0, 7); g.fill(); });
+    }
+
+    // Pair blocks to slots in the same left-to-right, top-to-bottom order so a morph flows instead of scrambling.
+    const order = (xs: number[], ys: number[]) => xs.map((_, i) => i).sort((a, b) => Math.round(xs[a] / 48) - Math.round(xs[b] / 48) || ys[a] - ys[b]);
+    const blockOrder = order(circleX, circleY);
+    let targets: { x: number; y: number; a: number; c: number[] }[] = [];
+    const delay: number[] = new Array(n).fill(0);
+    let switchAt: number[] = new Array(n).fill(-1);
+    let pending: { x: number; y: number }[] = [];
+    let morphStart = 0;
+
+    function plan(shape: 'circle' | 'tree' | 'chart') {
+      const now = performance.now();
+      morphStart = now;
+      frame!.dataset.shape = shape; // the portrait only shows over the circle
+      const nc = neutral();
+      if (shape === 'circle') {
+        for (let i = 0; i < n; i++) { pending[i] = { x: circleX[i], y: circleY[i] }; ta[i] = circleA[i] * (isLight() ? 1 : 0.4); [tr[i], tg[i], tb[i]] = nc; }
+      } else {
+        const slots = raster(shape === 'tree' ? tree : chart);
+        const m = slots.length;
+        const sorted = order(slots.map((s) => s.x), slots.map((s) => s.y));
+        let last = -1;
+        for (let r = 0; r < n; r++) {
+          const i = blockOrder[r];
+          const j = Math.min(m - 1, Math.floor((r * m) / n));
+          const s = slots[sorted[j]];
+          pending[i] = { x: s.x, y: s.y };
+          // Surplus blocks share a slot with another: park them there, invisible.
+          ta[i] = j === last ? 0 : s.a * 0.9; last = j;
+          [tr[i], tg[i], tb[i]] = s.c;
+        }
+      }
+      for (let i = 0; i < n; i++) switchAt[i] = now + (bx[i] / W) * 450 + Math.random() * 160;
+      wake();
+    }
+
+    let scale = 1, mx = -9999, my = -9999, raf = 0;
     function resize() {
       const dpr = window.devicePixelRatio || 1;
       const w = canvas!.clientWidth;
@@ -80,17 +172,19 @@ const { stats, company } = Astro.props;
     }
     function draw() {
       ctx!.clearRect(0, 0, W, H);
-      const rgb = document.documentElement.dataset.theme === 'light' ? '169,159,146' : '255,255,255';
-      const k = rgb === '255,255,255' ? 0.4 : 1; // dark mode reads softer
       for (let i = 0; i < n; i++) {
-        ctx!.fillStyle = `rgba(${rgb},${(al[i] * k).toFixed(2)})`;
+        if (al[i] < 0.01) continue;
+        ctx!.fillStyle = `rgba(${cr[i] | 0},${cg[i] | 0},${cb[i] | 0},${al[i].toFixed(2)})`;
         ctx!.fillRect(bx[i], by[i], SIZE, SIZE);
       }
     }
     function step() {
       let moving = false;
       const REACH = 130; // logical px
+      const now = performance.now();
       for (let i = 0; i < n; i++) {
+        if (switchAt[i] >= 0 && now >= switchAt[i]) { hx[i] = pending[i].x; hy[i] = pending[i].y; switchAt[i] = -1; }
+        else if (switchAt[i] >= 0) moving = true;
         const dx = bx[i] + SIZE / 2 - mx, dy = by[i] + SIZE / 2 - my;
         const d = Math.hypot(dx, dy);
         if (d < REACH && d > 0.01) {
@@ -100,16 +194,33 @@ const { stats, company } = Astro.props;
         vx[i] += (hx[i] - bx[i]) * 0.06; vy[i] += (hy[i] - by[i]) * 0.06;
         vx[i] *= 0.82; vy[i] *= 0.82;
         bx[i] += vx[i]; by[i] += vy[i];
-        if (Math.abs(vx[i]) > 0.02 || Math.abs(vy[i]) > 0.02 || Math.abs(hx[i] - bx[i]) > 0.1 || Math.abs(hy[i] - by[i]) > 0.1) moving = true;
+        al[i] += (ta[i] - al[i]) * 0.1; cr[i] += (tr[i] - cr[i]) * 0.12; cg[i] += (tg[i] - cg[i]) * 0.12; cb[i] += (tb[i] - cb[i]) * 0.12;
+        if (Math.abs(vx[i]) > 0.02 || Math.abs(vy[i]) > 0.02 || Math.abs(hx[i] - bx[i]) > 0.1 || Math.abs(hy[i] - by[i]) > 0.1
+          || Math.abs(ta[i] - al[i]) > 0.01 || Math.abs(tr[i] - cr[i]) > 1 || Math.abs(tg[i] - cg[i]) > 1 || Math.abs(tb[i] - cb[i]) > 1) moving = true;
       }
       draw();
       raf = moving ? requestAnimationFrame(step) : 0;
     }
     const wake = () => { if (!raf) raf = requestAnimationFrame(step); };
 
+    const SHAPES = ['circle', 'tree', 'chart'] as const;
+    const HOLD = [3500, 5500, 5500];
+    let shapeIdx = 0;
+    let cycle = 0;
+    plan('circle');
+    for (let i = 0; i < n; i++) al[i] = ta[i]; // first paint is the circle, no fade-in from nothing
     resize();
     new ResizeObserver(resize).observe(canvas);
-    new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    new MutationObserver(() => { plan(SHAPES[shapeIdx]); draw(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+      const next = () => {
+        cycle = window.setTimeout(() => {
+          if (!document.hidden) { shapeIdx = (shapeIdx + 1) % SHAPES.length; plan(SHAPES[shapeIdx]); }
+          next();
+        }, HOLD[shapeIdx]);
+      };
+      next();
+    }
     if (matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches) {
       // listen on the whole document: the glow extends well beyond the portrait frame
       document.addEventListener('pointermove', (e) => {
@@ -123,7 +234,7 @@ const { stats, company } = Astro.props;
 </script>
 
 <style>
-  .hero { border-bottom: 1px solid var(--border-subtle); overflow-x: clip; }
+  .hero { position: relative; border-bottom: 1px solid var(--border-subtle); overflow-x: clip; }
   .hero__inner {
     max-width: 1320px;
     margin: 0 auto;
@@ -188,6 +299,9 @@ const { stats, company } = Astro.props;
     clip-path: inset(-200px -200px 0 -200px);
   }
   .sync__person { position: absolute; z-index: 1; left: 31%; bottom: -42%; height: 145%; transform: translateX(-50%) rotate(9deg); transform-origin: 50% 100%; pointer-events: none; }
+  .sync__person { transition: opacity 700ms ease; }
+  .sync__frame[data-shape='tree'] .sync__person,
+  .sync__frame[data-shape='chart'] .sync__person { opacity: 0; }
   .sync__person img { display: block; height: 100%; width: auto; max-width: none; }
   :global([data-theme="light"]) .sync__person img { filter: brightness(1.12) contrast(0.92); }
   /* film-grain noise, masked to her silhouette so it never spills onto the background */
