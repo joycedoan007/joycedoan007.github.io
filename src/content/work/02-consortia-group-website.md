@@ -1,11 +1,11 @@
 ---
-title: Consortia Group Website Redesign
+title: Consortia Group Website
 subtitle: Digital Transformation Partner
-description: Redesigned the full Consortia Group web ecosystem, 10+ pages spanning marketing, service discovery, portfolio storytelling, hiring, and legal, as a conversion-driven, trust-building experience.
+description: Designed the full Consortia Group web ecosystem, 10+ pages spanning marketing, service discovery, portfolio storytelling, hiring, and legal, as a conversion-driven, trust-building experience.
 skills: ["BRANDING", "WEB DESIGN", "WEBFLOW", "FIGMA"]
 role: UI/UX Designer
 category: "Web Design"
-year: "2025"
+year: "2023"
 hasImage: true
 order: 7
 ---
@@ -17,7 +17,7 @@ order: 7
 
 Consortia Group is a digital transformation partner focused on technology, marketing, and scalable business solutions. Despite strong service delivery, the company lacked a web presence that matched its positioning, no clear digital identity, weak service communication, and no conversion architecture to turn visitors into qualified leads.
 
-The redesign needed to serve four very different audiences simultaneously: business owners evaluating fit, prospects comparing services, job candidates exploring culture, and compliance-conscious users verifying legal terms. Every page had a distinct job, and the system had to hold together as a unified brand.
+The website needed to serve four very different audiences simultaneously: business owners evaluating fit, prospects comparing services, job candidates exploring culture, and compliance-conscious users verifying legal terms. Every page had a distinct job, and the system had to hold together as a unified brand.
 
 <div style="background: var(--bg-surface); border-left: 2px solid var(--primary-500); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: 20px 24px; margin: 28px 0 56px;">
   <div class="overline" style="color: var(--text-accent); margin-bottom: 8px;">My Role</div>

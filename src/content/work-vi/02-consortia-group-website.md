@@ -1,11 +1,11 @@
 ---
-title: Thiết kế lại Website Consortia Group
+title: Website Consortia Group
 subtitle: Đối tác chuyển đổi số
-description: Thiết kế lại toàn bộ hệ sinh thái web của Consortia Group, hơn 10 trang gồm marketing, khám phá dịch vụ, kể chuyện portfolio, tuyển dụng và pháp lý, thành một trải nghiệm hướng đến chuyển đổi và xây dựng niềm tin.
+description: Thiết kế toàn bộ hệ sinh thái web của Consortia Group, hơn 10 trang gồm marketing, khám phá dịch vụ, kể chuyện portfolio, tuyển dụng và pháp lý, thành một trải nghiệm hướng đến chuyển đổi và xây dựng niềm tin.
 skills: ["BRANDING", "WEB DESIGN", "WEBFLOW", "FIGMA"]
 role: Nhà thiết kế UI/UX
 category: "Thiết kế web"
-year: "2025"
+year: "2023"
 hasImage: true
 order: 7
 ---
@@ -17,7 +17,7 @@ order: 7
 
 Consortia Group là đối tác chuyển đổi số tập trung vào công nghệ, marketing và các giải pháp kinh doanh có thể mở rộng. Dù chất lượng dịch vụ rất tốt, công ty lại chưa có hiện diện web tương xứng với định vị của mình, không có bản sắc số rõ ràng, thông điệp dịch vụ yếu, và không có cấu trúc chuyển đổi để biến khách truy cập thành khách hàng tiềm năng chất lượng.
 
-Bản thiết kế lại phải phục vụ cùng lúc bốn nhóm đối tượng rất khác nhau: chủ doanh nghiệp đang đánh giá mức độ phù hợp, khách hàng tiềm năng đang so sánh dịch vụ, ứng viên đang tìm hiểu văn hóa công ty, và người dùng quan tâm đến tuân thủ đang kiểm tra các điều khoản pháp lý. Mỗi trang có một nhiệm vụ riêng, và cả hệ thống vẫn phải thống nhất như một thương hiệu.
+Website phải phục vụ cùng lúc bốn nhóm đối tượng rất khác nhau: chủ doanh nghiệp đang đánh giá mức độ phù hợp, khách hàng tiềm năng đang so sánh dịch vụ, ứng viên đang tìm hiểu văn hóa công ty, và người dùng quan tâm đến tuân thủ đang kiểm tra các điều khoản pháp lý. Mỗi trang có một nhiệm vụ riêng, và cả hệ thống vẫn phải thống nhất như một thương hiệu.
 
 <div style="background: var(--bg-surface); border-left: 2px solid var(--primary-500); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: 20px 24px; margin: 28px 0 56px;">
   <div class="overline" style="color: var(--text-accent); margin-bottom: 8px;">Vai trò của tôi</div>
