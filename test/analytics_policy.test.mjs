@@ -40,6 +40,8 @@ test("forces the portfolio site on every event and keeps the ingestion token", (
     email: "person@example.com",
     question: "hello",
     slug: "consortia",
+    distinct_id: "0190anonymous",
+    $session_id: "session-1",
   })
   assert.equal(properties.site, "joyce_portfolio")
   assert.equal(properties.environment, "production")
@@ -48,6 +50,8 @@ test("forces the portfolio site on every event and keeps the ingestion token", (
   assert.equal(properties.$pathname, "/contact")
   assert.equal(properties.token, "phc_example")
   assert.equal(properties.slug, "consortia")
+  assert.equal(properties.distinct_id, "0190anonymous")
+  assert.equal(properties.$session_id, "session-1")
   assert.equal("email" in properties, false)
   assert.equal("question" in properties, false)
 })

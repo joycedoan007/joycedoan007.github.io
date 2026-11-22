@@ -49,9 +49,19 @@ export function sanitizeProperties(properties = {}) {
   if (next.$current_url) next.$pathname = new URL(next.$current_url).pathname
   delete next.$ip
   delete next.$search
-  const allowed = new Set(["slug", "locale", "placement", "site", "environment", "hostname", "token"])
+  const allowed = new Set([
+    "slug",
+    "locale",
+    "placement",
+    "site",
+    "environment",
+    "hostname",
+    "token",
+    "distinct_id",
+    "$device_id",
+  ])
   for (const key of Object.keys(next)) {
-    if (key.startsWith("$")) continue
+    if (key.startsWith("$") && key !== "$ip" && key !== "$search") continue
     if (key !== "token" && /email|prompt|question|password|secret|access_token|refresh_token/i.test(key)) {
       delete next[key]
       continue
