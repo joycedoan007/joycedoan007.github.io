@@ -2,7 +2,9 @@ import { posthogApiHost, posthogProjectToken } from "./posthog_public_config.js"
 import {
   customEvent,
   eventProperties,
+  EXCEPTION_CAPTURE,
   sanitizedUrl,
+  sessionRecordingConfig,
   SITE_PROPERTIES,
   trackingAllowed,
 } from "./analytics_policy.js"
@@ -104,7 +106,12 @@ export function startPortfolioAnalytics() {
   starting = true
   window.__joyceAnalytics = true
   bind()
-  import("posthog-js").then(({ default: posthog }) => {
+  Promise.all([
+    import("posthog-js/dist/posthog-recorder"),
+    import("posthog-js/dist/exception-autocapture"),
+    import("posthog-js/dist/module.no-external"),
+  ]).then(([, , posthogModule]) => {
+    const posthog = posthogModule.default
     posthog.init(posthogProjectToken, {
       api_host: posthogApiHost,
       ui_host: "https://eu.posthog.com",
@@ -113,15 +120,20 @@ export function startPortfolioAnalytics() {
       capture_pageview: false,
       capture_pageleave: false,
       capture_dead_clicks: false,
-      capture_exceptions: false,
+      capture_exceptions: EXCEPTION_CAPTURE,
       capture_heatmaps: false,
-      disable_session_recording: true,
+      capture_performance: false,
+      disable_session_recording: false,
       disable_surveys: true,
+      disable_external_dependency_loading: true,
+      enable_recording_console_log: false,
+      session_recording: sessionRecordingConfig(),
       rageclick: false,
       person_profiles: "identified_only",
       persistence: "memory",
       cross_subdomain_cookie: false,
-      advanced_disable_flags: true,
+      advanced_disable_flags: false,
+      advanced_disable_feature_flags: true,
       respect_dnt: true,
       before_send(event) {
         if (!event) return event

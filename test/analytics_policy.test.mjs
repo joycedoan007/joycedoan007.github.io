@@ -4,7 +4,11 @@ import test from "node:test"
 import {
   customEvent,
   eventProperties,
+  EXCEPTION_CAPTURE,
+  maskReplayInput,
+  maskReplayText,
   sanitizedUrl,
+  sessionRecordingConfig,
   trackingAllowed,
 } from "../src/scripts/analytics_policy.js"
 
@@ -68,11 +72,71 @@ test("accepts only explicit portfolio events with safe ids", () => {
   assert.equal(customEvent("$pageview", {}), null)
 })
 
+test("keeps exception and snapshot protocol fields and redacts messages", () => {
+  const properties = eventProperties({
+    token: "phc_example",
+    distinct_id: "anon",
+    $session_id: "session-1",
+    $window_id: "window-1",
+    $snapshot_data: [{ type: 2, text: "person@example.com" }],
+    $snapshot_bytes: 12,
+    $exception_list: [{ type: "Error", value: "failed for person@example.com?token=secret", stacktrace: { frames: [{ filename: "app.js" }] } }],
+    $exception_message: "person@example.com failed",
+    synthetic_test: "synthetic_test",
+    $current_url: "https://joycedoan.id.vn/contact?email=person@example.com",
+  })
+  assert.equal(properties.site, "joyce_portfolio")
+  assert.equal(properties.token, "phc_example")
+  assert.equal(properties.distinct_id, "anon")
+  assert.equal(properties.$session_id, "session-1")
+  assert.equal(properties.$window_id, "window-1")
+  assert.equal(properties.$snapshot_bytes, 12)
+  assert.equal(properties.$snapshot_data[0].text, "person@example.com")
+  assert.equal(properties.$exception_list[0].type, "Error")
+  assert.equal(properties.$exception_list[0].value, "failed for [redacted]")
+  assert.equal(properties.$exception_list[0].stacktrace.frames[0].filename, "app.js")
+  assert.equal(properties.$exception_message.includes("@"), false)
+  assert.equal(properties.synthetic_test, "synthetic_test")
+  assert.equal(eventProperties({ synthetic_test: "person@example.com" }).synthetic_test, undefined)
+})
+
+test("replay masks text and inputs and samples conservatively", () => {
+  const recording = sessionRecordingConfig()
+  assert.equal(recording.maskAllInputs, true)
+  assert.equal(recording.maskTextSelector, "*")
+  assert.equal(recording.maskAllElementAttributes, true)
+  assert.equal(recording.recordHeaders, false)
+  assert.equal(recording.recordBody, false)
+  assert.equal(recording.streamNetworkBody, false)
+  assert.equal(recording.captureCanvas.recordCanvas, false)
+  assert.equal(recording.sampleRate, 0.2)
+  assert.match(recording.blockSelector, /iframe/)
+  assert.match(recording.blockSelector, /#book/)
+  assert.equal(recording.maskTextFn("  hello  "), "*****")
+  assert.equal(recording.maskTextFn("   "), "   ")
+  assert.equal(maskReplayText("hello"), "*****")
+  assert.equal(maskReplayInput("secret"), "******")
+  assert.deepEqual(EXCEPTION_CAPTURE, {
+    capture_unhandled_errors: true,
+    capture_unhandled_rejections: true,
+    capture_console_errors: false,
+  })
+})
+
 test("layout initializes once and admin is not instrumented", () => {
   const layout = readFileSync(new URL("../src/layouts/Layout.astro", import.meta.url), "utf8")
   const admin = readFileSync(new URL("../src/pages/admin/index.astro", import.meta.url), "utf8")
   const workflow = readFileSync(new URL("../public/ai-workflow.html", import.meta.url), "utf8")
+  const analytics = readFileSync(new URL("../src/scripts/analytics.js", import.meta.url), "utf8")
   assert.equal(layout.match(/startPortfolioAnalytics\(\)/g).length, 1)
+  assert.match(analytics, /posthog-js\/dist\/posthog-recorder/)
+  assert.match(analytics, /posthog-js\/dist\/exception-autocapture/)
+  assert.match(analytics, /posthog-js\/dist\/module\.no-external/)
+  assert.match(analytics, /disable_session_recording: false/)
+  assert.match(analytics, /disable_external_dependency_loading: true/)
+  assert.match(analytics, /advanced_disable_feature_flags: true/)
+  assert.match(analytics, /persistence: "memory"/)
+  assert.match(analytics, /cross_subdomain_cookie: false/)
   assert.doesNotMatch(admin, /posthog|startPortfolioAnalytics/)
   assert.doesNotMatch(workflow, /posthog|startPortfolioAnalytics/)
 })
