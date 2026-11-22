@@ -87,6 +87,7 @@ export default function Contact({ email, socials }: Props) {
                   {t('Email · click to copy')}
                 </div>
                 <div
+                  className="ph-mask"
                   style={{
                     font: "500 18px/24px 'Poppins', sans-serif",
                     color: 'var(--text-bright)',

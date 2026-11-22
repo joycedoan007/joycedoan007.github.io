@@ -16,19 +16,28 @@ const CUSTOM_EVENTS = new Set([
 
 export const REPLAY_SAMPLE_RATE = 0.2
 
+// Block the Cal embed and other third-party frames. Public icons, logos, and photos stay.
 export const REPLAY_BLOCK_SELECTOR = [
-  "img",
   "video",
   "audio",
   "canvas",
   "iframe",
   "embed",
   "object",
-  "picture",
-  "svg",
-  "#book",
   "#my-cal-inline-30min",
-  "[data-analytics='booking']",
+  "cal-inline",
+].join(", ")
+
+// Public editorial text stays. Contact email, inputs, and booking widgets are masked.
+export const REPLAY_MASK_TEXT_SELECTOR = [
+  "input",
+  "textarea",
+  "select",
+  "option",
+  "[contenteditable]",
+  ".ph-mask",
+  "[data-ph-mask]",
+  "[data-analytics='copy-email']",
 ].join(", ")
 
 export const EXCEPTION_CAPTURE = Object.freeze({
@@ -50,14 +59,80 @@ export function maskReplayInput(text) {
   return "*".repeat(Math.min(value.length, 12))
 }
 
+function maskStars(value) {
+  return "*".repeat(Math.min(String(value).length, 12))
+}
+
+function tagName(element) {
+  return String(element?.tagName || "").toLowerCase()
+}
+
+export function stripReplayQuery(value) {
+  const text = String(value ?? "")
+  const trimmed = text.trim()
+  if (!trimmed || trimmed.startsWith("#") || /^data:image\//i.test(trimmed)) return text
+  if (/^(javascript|blob|mailto):/i.test(trimmed)) return maskStars(trimmed)
+  if (/^[a-z][a-z0-9+.-]*:/i.test(trimmed) || trimmed.startsWith("//") || trimmed.startsWith("/")) {
+    try {
+      const url = new URL(trimmed, "https://assets.invalid")
+      url.search = ""
+      url.hash = ""
+      if (trimmed.startsWith("/") && !trimmed.startsWith("//")) return url.pathname
+      return url.toString()
+    } catch (_error) {
+      return trimmed.split(/[?#]/)[0]
+    }
+  }
+  return trimmed.split(/[?#]/)[0]
+}
+
+function maskStyleValue(value) {
+  return String(value).replace(EMAIL, "[redacted]").replace(/url\(([^)]+)\)/gi, (all, inner) => {
+    const cleaned = String(inner).trim().replace(/^['"]|['"]$/g, "")
+    if (cleaned.startsWith("#") || /^data:image\//i.test(cleaned)) return all
+    return `url("${stripReplayQuery(cleaned)}")`
+  })
+}
+
+function maskSrcSet(value) {
+  return String(value).split(",").map((part) => {
+    const bits = part.trim().split(/\s+/)
+    if (!bits[0]) return part.trim()
+    bits[0] = stripReplayQuery(bits[0])
+    return bits.join(" ")
+  }).join(", ")
+}
+
+export function maskReplayAttribute(name, value, element) {
+  const attr = String(name || "").toLowerCase()
+  const text = value == null ? "" : String(value)
+  if (!text) return text
+  const tag = tagName(element)
+  if (attr === "value" && (tag === "input" || tag === "textarea" || tag === "select" || tag === "option")) {
+    return maskStars(text)
+  }
+  if (attr === "srcdoc") return maskStars(text)
+  if ((attr === "src" || attr === "rr_src") && (tag === "iframe" || tag === "embed" || tag === "object")) return maskStars(text)
+  if (attr === "href" && (tag === "link" || tag === "style")) return text
+  if (attr === "href" || attr === "src" || attr === "poster" || attr === "action" || attr === "formaction") {
+    return stripReplayQuery(text)
+  }
+  if (attr === "srcset") return maskSrcSet(text)
+  if (attr === "style" || attr === "_csstext") return maskStyleValue(text)
+  if (attr.startsWith("data-") && (/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/.test(text) || /[?#].+/.test(text))) return maskStars(text)
+  return text
+}
+
 export function sessionRecordingConfig() {
   return {
     maskAllInputs: true,
-    maskTextSelector: "*",
+    maskTextClass: "ph-mask",
+    maskTextSelector: REPLAY_MASK_TEXT_SELECTOR,
     maskTextFn: maskReplayText,
     maskInputFn: maskReplayInput,
     blockSelector: REPLAY_BLOCK_SELECTOR,
-    maskAllElementAttributes: true,
+    maskAllElementAttributes: false,
+    maskAttributeFn: maskReplayAttribute,
     recordHeaders: false,
     recordBody: false,
     streamNetworkBody: false,

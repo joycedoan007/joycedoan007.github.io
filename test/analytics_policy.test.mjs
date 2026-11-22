@@ -1,10 +1,15 @@
 import assert from "node:assert/strict"
-import { readFileSync } from "node:fs"
+import { spawn } from "node:child_process"
+import { createServer } from "node:http"
+import { existsSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs"
+import { tmpdir } from "node:os"
+import { join } from "node:path"
 import test from "node:test"
 import {
   customEvent,
   eventProperties,
   EXCEPTION_CAPTURE,
+  maskReplayAttribute,
   maskReplayInput,
   maskReplayText,
   sanitizedUrl,
@@ -100,18 +105,38 @@ test("keeps exception and snapshot protocol fields and redacts messages", () => 
   assert.equal(eventProperties({ synthetic_test: "person@example.com" }).synthetic_test, undefined)
 })
 
-test("replay masks text and inputs and samples conservatively", () => {
+test("replay keeps public layout and masks private fields", () => {
   const recording = sessionRecordingConfig()
+  const style = { tagName: "STYLE" }
+  const heading = { tagName: "H1" }
+  const input = { tagName: "INPUT" }
+  const image = { tagName: "IMG" }
+  const link = { tagName: "A" }
+  const font = { tagName: "LINK" }
+  const frame = { tagName: "IFRAME" }
   assert.equal(recording.maskAllInputs, true)
-  assert.equal(recording.maskTextSelector, "*")
-  assert.equal(recording.maskAllElementAttributes, true)
+  assert.equal(recording.maskTextSelector.includes("input"), true)
+  assert.equal(recording.maskTextSelector.includes("*"), false)
+  assert.match(recording.maskTextSelector, /copy-email/)
+  assert.equal(recording.maskAllElementAttributes, false)
   assert.equal(recording.recordHeaders, false)
   assert.equal(recording.recordBody, false)
   assert.equal(recording.streamNetworkBody, false)
   assert.equal(recording.captureCanvas.recordCanvas, false)
   assert.equal(recording.sampleRate, 0.2)
+  assert.doesNotMatch(recording.blockSelector, /(^|,\s*)img(,|$)/)
+  assert.doesNotMatch(recording.blockSelector, /(^|,\s*)svg(,|$)/)
   assert.match(recording.blockSelector, /iframe/)
-  assert.match(recording.blockSelector, /#book/)
+  assert.match(recording.blockSelector, /#my-cal-inline-30min/)
+  assert.equal(recording.maskAttributeFn("type", "text/css", style), "text/css")
+  assert.equal(recording.maskAttributeFn("id", "stage", heading), "stage")
+  assert.equal(maskReplayAttribute("style", "transform:rotate(-2deg)", heading), "transform:rotate(-2deg)")
+  assert.equal(recording.maskAttributeFn("src", "/joyce.jpg", image), "/joyce.jpg")
+  assert.equal(recording.maskAttributeFn("src", "data:image/svg+xml;base64,abcd", image).startsWith("data:image/"), true)
+  assert.equal(recording.maskAttributeFn("value", "secret-prompt", input).includes("secret"), false)
+  assert.equal(recording.maskAttributeFn("src", "https://app.cal.com/embed?email=person@example.com", frame).includes("cal.com"), false)
+  assert.equal(recording.maskAttributeFn("href", "https://joycedoan.id.vn/contact?email=person@example.com", link).includes("email"), false)
+  assert.equal(recording.maskAttributeFn("href", "https://fonts.googleapis.com/css2?family=Poppins&display=swap", font).includes("family=Poppins"), true)
   assert.equal(recording.maskTextFn("  hello  "), "*****")
   assert.equal(recording.maskTextFn("   "), "   ")
   assert.equal(maskReplayText("hello"), "*****")
@@ -121,6 +146,29 @@ test("replay masks text and inputs and samples conservatively", () => {
     capture_unhandled_rejections: true,
     capture_console_errors: false,
   })
+})
+
+test("installed recorder keeps css attributes and masks private text", async (t) => {
+  const chrome = ["/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", "/Applications/Chromium.app/Contents/MacOS/Chromium"].find((path) => existsSync(path))
+  const recorderPath = new URL("../node_modules/posthog-js/dist/posthog-recorder.js", import.meta.url)
+  if (!chrome || !existsSync(recorderPath)) {
+    t.skip("Chrome and the installed PostHog recorder are required")
+    return
+  }
+  const policyPath = new URL("../src/scripts/analytics_policy.js", import.meta.url)
+  const summary = await recordFixture(chrome, readFileSync(recorderPath), readFileSync(policyPath))
+  assert.equal(summary.styleType, "text/css")
+  assert.equal(summary.stageId, "stage")
+  assert.match(summary.stageStyle, /rotate/)
+  assert.equal(summary.heading, "Joyce Doan")
+  assert.match(summary.imageSrc, /joyce\.jpg$/)
+  assert.doesNotMatch(summary.imageSrc, /\*/)
+  assert.equal(summary.svgPresent, true)
+  assert.equal(summary.inputLeaked, false)
+  assert.equal(summary.emailLeaked, false)
+  assert.equal(summary.queryLeaked, false)
+  assert.equal(summary.iframeChildCount, 0)
+  assert.match(summary.cssText, /position:\s*absolute/)
 })
 
 test("layout initializes once and admin is not instrumented", () => {
@@ -140,3 +188,117 @@ test("layout initializes once and admin is not instrumented", () => {
   assert.doesNotMatch(admin, /posthog|startPortfolioAnalytics/)
   assert.doesNotMatch(workflow, /posthog|startPortfolioAnalytics/)
 })
+
+function recordFixture(chrome, recorderSource, policySource) {
+  const dir = mkdtempSync(join(tmpdir(), "replay-recorder-"))
+  writeFileSync(join(dir, "recorder.js"), recorderSource)
+  writeFileSync(join(dir, "policy.js"), policySource)
+  writeFileSync(join(dir, "fixture.html"), `<!doctype html><meta charset="utf-8"><title>fixture</title>
+<style id="page-css" type="text/css">#stage{position:absolute;width:1920px}</style>
+<div id="stage" style="transform:rotate(-2deg)">
+  <h1>Joyce Doan</h1>
+  <img alt="" src="/joyce.jpg">
+  <svg viewBox="0 0 10 10"><path d="M0 0"/></svg>
+  <input value="secret-prompt">
+  <p class="ph-mask">person@example.com</p>
+  <a href="https://joycedoan.id.vn/contact?observe=1">Public</a>
+  <iframe src="https://app.cal.com/embed"><p>booking-widget-secret</p></iframe>
+</div>
+<script src="/recorder.js"></script>
+<script type="module">
+  import { sessionRecordingConfig } from "/policy.js"
+  const publish = (value) => { document.body.textContent = "REPLAY_SUMMARY " + JSON.stringify(value) }
+  try {
+  const cfg = sessionRecordingConfig()
+  const events = []
+  const stop = window.__PosthogExtensions__.rrweb.record({
+    emit(event) { events.push(event) },
+    checkoutEveryNms: 0,
+    maskAllInputs: cfg.maskAllInputs,
+    maskTextClass: cfg.maskTextClass,
+    maskTextSelector: cfg.maskTextSelector,
+    maskTextFn: cfg.maskTextFn,
+    maskInputFn: cfg.maskInputFn,
+    blockSelector: cfg.blockSelector,
+    maskAllElementAttributes: cfg.maskAllElementAttributes,
+    maskAttributeFn: cfg.maskAttributeFn,
+    inlineStylesheet: true,
+    recordCanvas: false,
+  })
+  const snapshot = events.find((event) => event.type === 2)
+  const found = { styleType: null, stageId: null, stageStyle: null, heading: null, imageSrc: "", svgPresent: false, inputLeaked: false, emailLeaked: false, queryLeaked: false, iframeChildCount: -1, cssText: "" }
+  const walk = (node, parent) => {
+    if (!node || typeof node !== "object") return
+    if (node.type === 3 && typeof node.textContent === "string") {
+      if (node.textContent.includes("secret")) found.inputLeaked = true
+      if (node.textContent.includes("@")) found.emailLeaked = true
+      if (node.textContent.includes("observe=1")) found.queryLeaked = true
+      if (parent && parent.tagName === "h1") found.heading = node.textContent
+      if (node.isStyle) found.cssText += node.textContent
+    }
+    if (node.type === 2) {
+      const attrs = node.attributes || {}
+      const blob = JSON.stringify(attrs)
+      if (blob.includes("secret") || blob.includes("observe=1") || blob.includes("person@")) {
+        if (blob.includes("secret")) found.inputLeaked = true
+        if (blob.includes("observe=1")) found.queryLeaked = true
+        if (blob.includes("person@")) found.emailLeaked = true
+      }
+      if (node.tagName === "style") found.styleType = attrs.type || ""
+      if (attrs.id === "stage") { found.stageId = attrs.id; found.stageStyle = attrs.style || "" }
+      if (node.tagName === "img") found.imageSrc = String(attrs.src || "").slice(0, 120)
+      if (node.tagName === "svg") found.svgPresent = true
+      if (node.tagName === "iframe") {
+        found.iframeChildCount = (node.childNodes || []).length
+        if (String(attrs.src || attrs.rr_src || "").includes("cal.com")) found.queryLeaked = true
+      }
+    }
+    for (const child of node.childNodes || []) walk(child, node)
+  }
+  walk(snapshot && snapshot.data && snapshot.data.node, null)
+  if (typeof stop === "function") stop()
+  publish(found)
+  } catch (error) {
+    publish({ error: String(error && error.message || error) })
+  }
+</script>`)
+  return new Promise((resolve, reject) => {
+    const server = createServer((req, res) => {
+      const file = req.url === "/recorder.js" ? "recorder.js" : req.url === "/policy.js" ? "policy.js" : "fixture.html"
+      res.setHeader("content-type", file.endsWith(".js") ? "text/javascript" : "text/html")
+      res.end(readFileSync(join(dir, file)))
+    })
+    server.listen(0, "127.0.0.1", () => {
+      const { port } = server.address()
+      const child = spawn(chrome, [
+        "--headless=new",
+        "--disable-gpu",
+        "--no-first-run",
+        "--no-default-browser-check",
+        `--user-data-dir=${join(dir, "profile")}`,
+        "--virtual-time-budget=4000",
+        "--dump-dom",
+        `http://127.0.0.1:${port}/fixture.html`,
+      ])
+      let stdout = ""
+      let stderr = ""
+      const timer = setTimeout(() => child.kill("SIGKILL"), 20000)
+      child.stdout.setEncoding("utf8")
+      child.stderr.setEncoding("utf8")
+      child.stdout.on("data", (chunk) => { stdout += chunk })
+      child.stderr.on("data", (chunk) => { stderr += chunk })
+      child.on("error", (error) => {
+        clearTimeout(timer)
+        server.close()
+        reject(error)
+      })
+      child.on("close", () => {
+        clearTimeout(timer)
+        server.close()
+        const match = stdout.match(/REPLAY_SUMMARY (\{.*\})/)
+        if (!match) return reject(new Error(`recorder fixture produced no summary: ${stderr.slice(0, 400)} :: ${stdout.slice(0, 400)}`))
+        try { resolve(JSON.parse(match[1])) } catch (error) { reject(error) }
+      })
+    })
+  })
+}
