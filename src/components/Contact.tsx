@@ -65,6 +65,7 @@ export default function Contact({ email, socials }: Props) {
             {/* Copy email */}
             <button
               onClick={handleCopy}
+              data-analytics="copy-email"
               data-cursor="hover"
               style={{
                 width: '100%',

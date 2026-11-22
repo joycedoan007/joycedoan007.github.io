@@ -59,6 +59,10 @@ const xShareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(entry.da
 ---
 
 <Layout title={`${entry.data.title} - Joyce Doan`} description={entry.data.description}>
+  <script>
+    import { queueTrack } from '../../scripts/track.js';
+    queueTrack('portfolio_article_viewed', { slug: entry.slug });
+  </script>
   <Header />
 
   <!-- ── Three-column layout ── -->

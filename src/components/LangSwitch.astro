@@ -78,6 +78,7 @@
     menu.querySelectorAll('.lang-option').forEach(function (opt) {
       opt.addEventListener('click', function () {
         apply(opt.getAttribute('data-lang'), opt.getAttribute('data-code'));
+        window.dispatchEvent(new CustomEvent('portfolio-lang', { detail: opt.getAttribute('data-lang') }));
         close();
       });
       opt.addEventListener('mouseenter', function () {

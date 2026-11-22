@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "test": "node --test test/analytics_policy.test.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^3.1.0",
@@ -13,6 +14,7 @@
     "@astrojs/tailwind": "^5.1.0",
     "astro": "^4.16.0",
     "decap-cms": "^3.12.2",
+    "posthog-js": "1.453.2",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
     "tailwindcss": "^3.4.0"

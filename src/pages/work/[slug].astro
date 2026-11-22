@@ -32,6 +32,10 @@ const catVi: Record<string, string> = { 'Branding': 'Thương hiệu', 'Product 
 ---
 
 <Layout title={`${w.title} - Joyce Doan`} description={w.description}>
+  <script>
+    import { queueTrack } from '../../scripts/track.js';
+    queueTrack('portfolio_project_opened', { slug: entry.slug });
+  </script>
   <Header />
 
   <main class="case">
@@ -46,7 +50,7 @@ const catVi: Record<string, string> = { 'Branding': 'Thương hiệu', 'Product 
       <h1 class="case__title"><L en={w.title} vi={wv.title} /></h1>
       <p class="case__lede"><L en={w.description} vi={wv.description} /></p>
       <div class="case__actions">
-        <a href="/contact" class="btn btn--primary btn--lg" data-cursor="hover"><L en="Book a call" vi="Đặt lịch gọi" /></a>
+        <a href="/contact" data-analytics="booking" class="btn btn--primary btn--lg" data-cursor="hover"><L en="Book a call" vi="Đặt lịch gọi" /></a>
         {w.url && (
           <a href={w.url} target="_blank" rel="noopener noreferrer" class="btn btn--secondary btn--lg" data-cursor="hover">
             <L en="Visit website" vi="Truy cập website" />

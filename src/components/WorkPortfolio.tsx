@@ -257,6 +257,7 @@ function WorkRow({
       onMouseEnter={() => onHover(item)}
       onMouseLeave={() => onHover(null)}
       onClick={() => onOpen(item)}
+      data-analytics-project={item.id}
       data-cursor="hover"
       style={rowStyle}
     >

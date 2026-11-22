@@ -48,6 +48,10 @@ const {
   <slot />
 
   <I18nRuntime />
+  <script>
+    import { startPortfolioAnalytics } from '../scripts/analytics.js';
+    startPortfolioAnalytics();
+  </script>
 
   <!-- Theme persistence: runs before React hydrates -->
   <script is:inline>
